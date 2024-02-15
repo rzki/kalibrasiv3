@@ -307,14 +307,40 @@ return [
         //     'type' => 'sidebar-menu-search',
         //     'text' => 'search',
         // ],
+        [
+            'text'  => 'Dashboard',
+            'url'   => 'home',
+            'icon'  => 'fas fa-house',
+        ],
         // Employee Menu
         [
-            'header' => 'Employees'
+            'text'  => 'Employees',
+            'url'   => 'employees',
+            'icon'  => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text'  => 'All Employees',
+                    'url'   => 'employees',
+                ],
+                [
+                    'text'  => 'Departments',
+                    'url'   => 'employee-depts',
+                ],
+                [
+                    'text'  => 'Positions',
+                    'url'   => 'employee-depts',
+                ],
+            ]
         ],
         [
-            'text'  => 'Employee',
-            'url'   => 'employee',
-            'icon'  => 'fas fa-fw fa-users'
+            'text'  => 'Work Orders',
+            'url'   => 'work-orders',
+            'icon'  => 'fas fa-fw fa-clipboard-check'
+        ],
+        [
+            'text'  => 'Devices',
+            'url'   => 'devices',
+            'icon'  => 'fas fa-fw fa-screwdriver-wrench'
         ],
         // [
         //     'text' => 'blog',
@@ -328,12 +354,12 @@ return [
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'profile',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',
