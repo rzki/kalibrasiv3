@@ -314,9 +314,12 @@ return [
         ],
         // Employee Menu
         [
+            'header' => 'EMPLOYEES',
+            'classes' => 'text-bold'],
+        [
             'text'  => 'Employees',
             'url'   => 'employees',
-            'icon'  => 'fas fa-fw fa-users',
+            'icon'  => 'fas fa-fw fa-user-group',
             'submenu' => [
                 [
                     'text'  => 'All Employees',
@@ -333,14 +336,69 @@ return [
             ]
         ],
         [
+            'header' => 'WORK ORDERS',
+            'classes' => 'text-bold'
+        ],
+        [
             'text'  => 'Work Orders',
             'url'   => 'work-orders',
             'icon'  => 'fas fa-fw fa-clipboard-check'
         ],
         [
+            'header' => 'INVENTORY',
+            'classes' => 'text-bold'
+        ],
+        [
             'text'  => 'Devices',
             'url'   => 'devices',
             'icon'  => 'fas fa-fw fa-screwdriver-wrench'
+        ],
+        [
+            'text'  => 'Spare Parts',
+            'url'   => 'spare-parts',
+            'icon'  => 'fas fa-fw fa-puzzle-piece'
+        ],
+        [
+            'header' => 'FINANCE',
+            'classes' => 'text-bold'
+        ],
+        [
+            'text'  => 'Depreciations',
+            'url'   => 'depreciations',
+            'icon'  => 'fas fa-fw fa-arrow-trend-down'
+        ],
+        [
+            'header' => 'DATA',
+            'classes' => 'text-bold'
+        ],
+        [
+            'text'  => 'Item Units',
+            'url'   => 'item-units',
+            'icon'  => 'fas fa-fw fa-list'
+        ],
+        [
+            'text'  => 'Partners',
+            'url'   => 'partners',
+            'icon'  => 'fas fa-fw fa-users'
+        ],
+        [
+            'header' => 'SYSTEM SETTINGS',
+            'classes' => 'text-bold'
+        ],
+        [
+            'text'  => 'Companies',
+            'url'   => 'companies',
+            'icon'  => 'fas fa-fw fa-building'
+        ],
+        [
+            'text'  => 'References',
+            'url'   => 'references',
+            'icon'  => 'fas fa-fw fa-file-lines'
+        ],
+        [
+            'text'  => 'Users',
+            'url'   => 'users',
+            'icon'  => 'fas fa-fw fa-users'
         ],
         // [
         //     'text' => 'blog',
