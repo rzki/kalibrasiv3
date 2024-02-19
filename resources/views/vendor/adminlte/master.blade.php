@@ -105,6 +105,8 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
+    {{-- Font Awesome --}}
+    <script src="https://kit.fontawesome.com/70f3726b28.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
