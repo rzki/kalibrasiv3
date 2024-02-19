@@ -7,15 +7,18 @@
 @stop
 
 @section('content')
+<div class="container">
+    <div class="row d-flex justify-content-end">
+        <a href="{{ route('employees.create') }}" class="btn btn-primary text-right">Create New Employee</a>
+    </div>
+</div>
 
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-<script>
-    console.log('Hi!');
-</script>
+
 @stop
