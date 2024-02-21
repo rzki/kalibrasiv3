@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\EmployeeDeptDataTable;
 use App\Models\EmployeeDept;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class EmployeeDeptController extends Controller
      */
     public function index()
     {
-        //
+        $employeeDept = EmployeeDept::latest()->get();
+
+        return view('employees.depts.index', compact('employeeDept'));
     }
 
     /**
@@ -20,7 +23,7 @@ class EmployeeDeptController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.depts.create');
     }
 
     /**
@@ -28,13 +31,21 @@ class EmployeeDeptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|min:2|max:6',
+            'name' => 'required|min:3|max:50',
+            'status' => 'required'
+        ]);
+
+        EmployeeDept::create($request->all());
+
+        return to_route('employee_depts.index')->with(['success', 'Employee Department successfully created!']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(EmployeeDept $employeeDept)
+    public function show($employeeDept)
     {
         //
     }
@@ -42,24 +53,40 @@ class EmployeeDeptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(EmployeeDept $employeeDept)
+    public function edit($dept)
     {
-        //
+        $employeeDept = EmployeeDept::findOrFail($dept);
+
+        // return dd($employeeDept);
+        return view('employees.depts.edit', compact('employeeDept'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EmployeeDept $employeeDept)
+    public function update(Request $request, $dept)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|min:2|max:6',
+            'name' => 'required|min:3|max:50',
+            'status' => 'required'
+        ]);
+
+        $employeeDept = EmployeeDept::findOrFail($dept);
+
+        $employeeDept->update($request->all());
+
+        return to_route('employee_depts.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EmployeeDept $employeeDept)
+    public function destroy($dept)
     {
-        //
+        $employeeDept = EmployeeDept::find($dept);
+        $employeeDept->delete();
+
+        return to_route('employee_depts.index');
     }
 }

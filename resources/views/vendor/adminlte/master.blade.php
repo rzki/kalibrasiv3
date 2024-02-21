@@ -49,6 +49,8 @@
 
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.css" rel="stylesheet">
+
 
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
@@ -107,6 +109,11 @@
 
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/70f3726b28.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.js">
+    </script>
+
 </body>
 
 </html>

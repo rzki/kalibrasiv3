@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeDeptController;
+use App\Http\Controllers\EmployeePositionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,7 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::controller(EmployeeController::class)->group(function() {
-    Route::resource('employees', EmployeeController::class);
-
+    Route::resource('employees/all', EmployeeController::class)->names('employees');
 });
+Route::resource('employees/depts', EmployeeDeptController::class)->names('employee_depts');
+Route::resource('employees/positions', EmployeePositionController::class)->names('employee_positions');

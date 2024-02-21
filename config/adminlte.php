@@ -323,15 +323,15 @@ return [
             'submenu' => [
                 [
                     'text'  => 'All Employees',
-                    'url'   => 'employees',
+                    'url'   => 'employees/all',
                 ],
                 [
                     'text'  => 'Departments',
-                    'url'   => 'employee-depts',
+                    'url'   => 'employees/depts',
                 ],
                 [
                     'text'  => 'Positions',
-                    'url'   => 'employee-depts',
+                    'url'   => 'employees/positions',
                 ],
             ]
         ],

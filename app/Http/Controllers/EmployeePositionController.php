@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\EmployeePositionDataTable;
 use App\Models\EmployeePosition;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class EmployeePositionController extends Controller
      */
     public function index()
     {
-        //
+        $employeePosition = EmployeePosition::latest()->get();
+
+        return view('employees.positions.index', compact('employeePosition'));
     }
 
     /**
@@ -20,7 +23,7 @@ class EmployeePositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.positions.create');
     }
 
     /**
@@ -28,13 +31,26 @@ class EmployeePositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|min:3|max:6',
+            'name' => 'required|min:3|max:50',
+            'status' => 'required'
+        ]);
+
+        EmployeePosition::create([
+            'code' => $request['code'],
+            'name' => $request['name'],
+            'status' => $request['status'],
+
+        ]);
+
+        return to_route('employee_positions.index')->with(['success' => 'Employee Position successfully created!']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(EmployeePosition $employeePosition)
+    public function show($position)
     {
         //
     }
@@ -42,24 +58,38 @@ class EmployeePositionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(EmployeePosition $employeePosition)
+    public function edit($position)
     {
-        //
+        $employeePositions = EmployeePosition::findOrFail($position);
+        return view('employees.positions.edit', compact('employeePositions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EmployeePosition $employeePosition)
+    public function update(Request $request, $position)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|min:2|max:6',
+            'name' => 'required|min:3|max:50',
+            'status' => 'required'
+        ]);
+
+        $employeePosition = EmployeePosition::findOrFail($position);
+
+        $employeePosition->update($request->all());
+
+        return to_route('employee_positions.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EmployeePosition $employeePosition)
+    public function destroy($position)
     {
-        //
+        $employeePositions = EmployeePosition::find($position);
+        $employeePositions->delete();
+
+        return to_route('employee_positions.index');
     }
 }
