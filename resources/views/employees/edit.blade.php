@@ -17,49 +17,61 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('employees.update', $employees->id) }}" method=" " class="pt-5">
+        <form action="{{ route('employees.update', $employees->id) }}" method="POST" class="pt-5">
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" value="{{ old('name', $employees->name) }}">
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value="{{ old('name', $employees->name) }}">
                     </div>
                     <div class="mb-3">
-                        <label for="depts" class="form-label">Department</label>
-                        <select class="form-control" id="depts" aria-describedby="depts">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" aria-describedby="email"value="{{ old('email', $employees->email) }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employee_dept_id" class="form-label">Department</label>
+                        <select class="form-control" id="employee_dept_id" name="employee_dept_id" aria-describedby="employee_dept_id">
                             <option value="">....</option>
-                            <option value="Pegawai Tetap">Pegawai Tetap</option>
-                            <option value="Pegawai Kontrak">Pegawai Kontrak</option>
+                            @foreach ($depts as $dept)
+                                <option value="{{ $dept->id }}"{{ old('depts', $employees->employee_dept_id) == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
-                        <select class="form-control" id="type" aria-describedby="type">
-                            <option value="Pegawai Tetap">Pegawai Tetap</option>
-                            <option value="Pegawai Kontrak">Pegawai Kontrak</option>
+                        <select class="form-control" name="type" id="type" aria-describedby="type">
+                            <option value="">...</option>
+                            <option value="Pegawai Tetap" @if(old('type', $employees->type) == "Pegawai Tetap") {{ 'selected' }} @endif>Pegawai Tetap</option>
+                            <option value="Pegawai Kontrak" @if(old('type', $employees->type) == "Pegawai Kontrak") {{ 'selected' }} @endif>Pegawai Kontrak</option>
                         </select>
                     </div>
                 </div>
                 <div class="col">
                     <div class="mb-3">
                         <label for="nid" class="form-label">NID</label>
-                        <input type="text" class="form-control" id="nid">
+                        <input type="text" class="form-control" name="nid" id="nid" value="{{ old('nid', $employees->nid) }}">
                     </div>
                     <div class="mb-3">
-                        <label for="positions" class="form-label">Positions</label>
-                        <select class="form-control" id="positions" aria-describedby="positions">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone_number" id="phone_number" aria-describedby="phone_number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employee_position_id" class="form-label">Positions</label>
+                        <select class="form-control" name="employee_position_id" id="employee_position_id" aria-describedby="employee_position_id">
                             <option value="">....</option>
-                            <option value="Pegawai Tetap">Pegawai Tetap</option>
-                            <option value="Pegawai Kontrak">Pegawai Kontrak</option>
+                            @foreach ($positions as $position)
+                                <option value="{{ $position->id }}"{{ old('positions', $employees->employee_position_id) == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select class="form-control" id="status" aria-describedby="status">
-                            <option value="Active">Active</option>
-                            <option value="Non Active">Non Active</option>
+                        <select class="form-control" name="status" id="status" aria-describedby="status">
+                            <option value="Active" @if(old('status', $employees->status) == "Active") {{ 'selected' }} @endif>Active</option>
+                            <option value="Non Active" @if(old('status', $employees->status) == "Non Active") {{ 'selected' }} @endif>Non Active</option>
                         </select>
                     </div>
                 </div>

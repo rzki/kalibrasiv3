@@ -31,7 +31,7 @@
                         <input type="text" class="form-control" name="email" id="email" aria-describedby="email">
                     </div>
                     <div class="mb-3">
-                        <label for="employee_position_id" class="form-label">Department</label>
+                        <label for="employee_position_id" class="form-label">Positions</label>
                         <select class="form-control" name="employee_position_id" id="employee_position_id" aria-describedby="employee_position_id">
                             @foreach ($positions as $position)
                                 <option value="{{ $position->id }}">{{ $position->name }}</option>
@@ -56,7 +56,7 @@
                         <input type="text" class="form-control" name="phone_number" id="phone_number" aria-describedby="phone_number">
                     </div>
                     <div class="mb-3">
-                        <label for="employee_dept_id" class="form-label">Positions</label>
+                        <label for="employee_dept_id" class="form-label">Department</label>
                         <select class="form-control" name="employee_dept_id" id="employee_dept_id" aria-describedby="employee_dept_id">
                             @foreach ($depts as $dept)
                                 <option value="{{ $dept->id }}">{{ $dept->name }}</option>

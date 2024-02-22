@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\EmployeePositionController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
+Route::resource('users', UserController::class)->names('users');
 Route::controller(EmployeeController::class)->group(function() {
     Route::resource('employees/all', EmployeeController::class)->names('employees');
 });
