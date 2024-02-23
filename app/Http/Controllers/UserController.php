@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -68,7 +68,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required|max:16',
+            'email' => 'required|email'
+        ]);
+
+        $users = User::find($user);
+        $users->update($request->all());
+
+        return to_route('users.update');
     }
 
     /**

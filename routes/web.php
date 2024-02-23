@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\EmployeePositionController;
 
@@ -32,3 +33,4 @@ Route::controller(EmployeeController::class)->group(function() {
 });
 Route::resource('employees/depts', EmployeeDeptController::class)->names('employee_depts');
 Route::resource('employees/positions', EmployeePositionController::class)->names('employee_positions');
+Route::resource('references', ReferenceController::class)->names('references');
