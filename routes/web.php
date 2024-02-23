@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -34,3 +35,4 @@ Route::controller(EmployeeController::class)->group(function() {
 Route::resource('employees/depts', EmployeeDeptController::class)->names('employee_depts');
 Route::resource('employees/positions', EmployeePositionController::class)->names('employee_positions');
 Route::resource('references', ReferenceController::class)->names('references');
+Route::resource('companies', CompanyController::class)->names('companies');
