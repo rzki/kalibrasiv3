@@ -373,7 +373,7 @@ return [
         ],
         [
             'text'  => 'Item Units',
-            'url'   => 'item-units',
+            'url'   => 'item_units',
             'icon'  => 'fas fa-fw fa-list'
         ],
         [

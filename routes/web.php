@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\EmployeePositionController;
@@ -36,3 +37,4 @@ Route::resource('employees/depts', EmployeeDeptController::class)->names('employ
 Route::resource('employees/positions', EmployeePositionController::class)->names('employee_positions');
 Route::resource('references', ReferenceController::class)->names('references');
 Route::resource('companies', CompanyController::class)->names('companies');
+Route::resource('item_units', ItemUnitController::class)->names('item_units');
