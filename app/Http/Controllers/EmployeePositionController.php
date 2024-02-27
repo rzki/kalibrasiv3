@@ -31,18 +31,13 @@ class EmployeePositionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'code' => 'required|min:3|max:6',
-            'name' => 'required|min:3|max:50',
+        $validation = $this->validate($request, [
+            'code' => 'required|max:6',
+            'name' => 'required|max:50',
             'status' => 'required'
         ]);
 
-        EmployeePosition::create([
-            'code' => $request['code'],
-            'name' => $request['name'],
-            'status' => $request['status'],
-
-        ]);
+        EmployeePosition::create($validation);
 
         return to_route('employee_positions.index')->with(['success' => 'Employee Position successfully created!']);
     }
@@ -58,26 +53,23 @@ class EmployeePositionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($position)
+    public function edit(EmployeePosition $position)
     {
-        $employeePositions = EmployeePosition::findOrFail($position);
-        return view('employees.positions.edit', compact('employeePositions'));
+        return view('employees.positions.edit', compact('position'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $position)
+    public function update(Request $request, EmployeePosition $position)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required|min:2|max:6',
             'name' => 'required|min:3|max:50',
             'status' => 'required'
         ]);
 
-        $employeePosition = EmployeePosition::findOrFail($position);
-
-        $employeePosition->update($request->all());
+        $position->where('id', $position->id)->update($validation);
 
         return to_route('employee_positions.index');
     }
@@ -85,10 +77,9 @@ class EmployeePositionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($position)
+    public function destroy(EmployeePosition $position)
     {
-        $employeePositions = EmployeePosition::find($position);
-        $employeePositions->delete();
+        $position->where('id', $position->id)->delete();
 
         return to_route('employee_positions.index');
     }

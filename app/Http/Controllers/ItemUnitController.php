@@ -29,12 +29,12 @@ class ItemUnitController extends Controller
      */
     public function store(Request $request)
     {
-        $all = $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required',
             'name' => 'required'
         ]);
 
-        ItemUnit::create($all);
+        ItemUnit::create($validation);
 
         return to_route('item_units.index');
     }
@@ -60,12 +60,12 @@ class ItemUnitController extends Controller
      */
     public function update(Request $request, ItemUnit $itemUnit)
     {
-        $all = $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required',
             'name' => 'required'
         ]);
 
-        $itemUnit->update($all);
+        $itemUnit->where('id', $itemUnit->id)->update($validation);
 
         return to_route('item_units.index');
     }
@@ -75,7 +75,7 @@ class ItemUnitController extends Controller
      */
     public function destroy(ItemUnit $itemUnit)
     {
-        $itemUnit->delete();
+        $itemUnit->where('id', $itemUnit->id)->delete();
 
         return to_route('item_units.index');
     }

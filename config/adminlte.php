@@ -309,7 +309,7 @@ return [
         // ],
         [
             'text'  => 'Dashboard',
-            'url'   => 'home',
+            'url'   => 'dashboard',
             'icon'  => 'fas fa-house',
         ],
         // Employee Menu
@@ -379,7 +379,17 @@ return [
         [
             'text'  => 'Partners',
             'url'   => 'partners',
-            'icon'  => 'fas fa-fw fa-users'
+            'icon'  => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text' => 'All Partners',
+                    'url' => 'partners/all',
+                ],
+                [
+                    'text' => 'Categories',
+                    'url' => 'partners/categories',
+                ]
+            ]
         ],
         [
             'header' => 'SYSTEM SETTINGS',

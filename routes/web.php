@@ -9,6 +9,8 @@ use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\EmployeePositionController;
+use App\Http\Controllers\PartnerCategoryController;
+use App\Http\Controllers\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,5 @@ Route::resource('employees/positions', EmployeePositionController::class)->names
 Route::resource('references', ReferenceController::class)->names('references');
 Route::resource('companies', CompanyController::class)->names('companies');
 Route::resource('item_units', ItemUnitController::class)->names('item_units');
+Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
+Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');

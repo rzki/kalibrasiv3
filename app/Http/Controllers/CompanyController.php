@@ -29,7 +29,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required',
             'name' => 'required',
             'email' => 'required|email',
@@ -38,7 +38,7 @@ class CompanyController extends Controller
             'plan' => 'required'
         ]);
 
-        Company::create($request->all());
+        Company::create($validation);
 
         return to_route('companies.index');
     }
@@ -62,9 +62,9 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $company)
+    public function update(Request $request, Company $company)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required',
             'name' => 'required',
             'email' => 'required|email',
@@ -73,8 +73,7 @@ class CompanyController extends Controller
             'plan' => 'required'
         ]);
 
-        $companies = Company::findOrFail($company);
-        $companies->update($request->all());
+        $company->where('id', $company->id)->update($validation);
 
         return to_route('companies.index');
     }

@@ -17,26 +17,26 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('employee_positions.update', $employeePositions->id) }}" method="POST" class="pt-5">
+        <form action="{{ route('employee_positions.update', $position->id) }}" method="POST" class="pt-5">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="code" class="form-label">Code</label>
-                <input type="text" class="form-control" id="code" name="code" value="{{ old('code', $employeePositions->code)  }}"
+                <input type="text" class="form-control" id="code" name="code" value="{{ old('code', $position->code)  }}"
                     aria-describedby="code">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $employeePositions->name)  }}"
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $position->name)  }}"
                     aria-describedby="name">
             </div>
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-control" name="status" id="status">
-                    <option value="Active" @if (old('status', $employeePositions->status) == "Active") {{ 'selected' }} @endif>Active
+                    <option value="Active" @if (old('status', $position->status) == "Active") {{ 'selected' }} @endif>Active
                     </option>
-                    <option value="Inactive" @if (old('status', $employeePositions->status) == "Inactive") {{ 'selected' }}
+                    <option value="Inactive" @if (old('status', $position->status) == "Inactive") {{ 'selected' }}
                         @endif>Inactive</option>
                 </select>
             </div>

@@ -37,7 +37,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'name' => 'required',
             'nid' => 'required',
             'type' => 'required',
@@ -48,8 +48,8 @@ class EmployeeController extends Controller
             'employee_position_id' => 'required|integer'
         ]);
 
-        Employee::create($request->all());
-        // return dd($employee);
+        Employee::create($validation);
+
         return to_route('employees.index')->with(['success', 'Employee successfully created!']);
     }
 
@@ -64,21 +64,20 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($employee)
+    public function edit(Employee $employee)
     {
-        $employees = Employee::find($employee);
         $depts = EmployeeDept::all();
         $positions = EmployeePosition::all();
 
-        return view('employees.edit', compact('employees', 'depts', 'positions'));
+        return view('employees.edit', compact('employee', 'depts', 'positions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $employee)
+    public function update(Request $request, Employee $employee)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'name' => 'required',
             'nid' => 'required',
             'type' => 'required',
@@ -89,8 +88,7 @@ class EmployeeController extends Controller
             'phone_number' => 'required',
         ]);
 
-        $employees = Employee::find($employee);
-        $employees->update($request->all());
+        $employee->where('id', $employee->id)->update($validation);
 
         // dd($employees);
         return to_route('employees.index')->with(['success', 'Employee successfully updated!']);
@@ -99,10 +97,9 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($employee)
+    public function destroy(Employee $employee)
     {
-        $employees = Employee::find($employee);
-        $employees->delete();
+        $employee->where('id', $employee->id)->delete();
 
         return to_route('employees.index');
     }

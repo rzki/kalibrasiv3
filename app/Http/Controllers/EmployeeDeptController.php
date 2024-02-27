@@ -31,13 +31,13 @@ class EmployeeDeptController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required|min:2|max:6',
             'name' => 'required|min:3|max:50',
             'status' => 'required'
         ]);
 
-        EmployeeDept::create($request->all());
+        EmployeeDept::create($validation);
 
         return to_route('employee_depts.index')->with(['success', 'Employee Department successfully created!']);
     }
@@ -53,28 +53,23 @@ class EmployeeDeptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($dept)
+    public function edit(EmployeeDept $dept)
     {
-        $employeeDept = EmployeeDept::findOrFail($dept);
-
-        // return dd($employeeDept);
-        return view('employees.depts.edit', compact('employeeDept'));
+        return view('employees.depts.edit', compact('dept'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $dept)
+    public function update(Request $request, EmployeeDept $dept)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'code' => 'required|min:2|max:6',
             'name' => 'required|min:3|max:50',
             'status' => 'required'
         ]);
 
-        $employeeDept = EmployeeDept::findOrFail($dept);
-
-        $employeeDept->update($request->all());
+        $dept->where('id', $dept->id)->update($validation);
 
         return to_route('employee_depts.index');
     }
@@ -82,10 +77,9 @@ class EmployeeDeptController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($dept)
+    public function destroy(EmployeeDept $dept)
     {
-        $employeeDept = EmployeeDept::find($dept);
-        $employeeDept->delete();
+        $dept->where('id', $dept->id)->delete();
 
         return to_route('employee_depts.index');
     }
