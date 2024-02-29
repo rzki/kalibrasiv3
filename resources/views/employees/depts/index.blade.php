@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row d-flex justify-content-end pb-3">
-        <a href="{{ route('employee_depts.create') }}" class="btn btn-primary text-right">Create New Departments</a>
+        <a href="{{ route('employee_depts.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
     </div>
     <table class="table table-bordered" id="employeeDeptTable">
         <thead>

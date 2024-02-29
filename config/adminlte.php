@@ -351,7 +351,21 @@ return [
         [
             'text'  => 'Devices',
             'url'   => 'devices',
-            'icon'  => 'fas fa-fw fa-screwdriver-wrench'
+            'icon'  => 'fas fa-fw fa-screwdriver-wrench',
+            'submenu' => [
+                [
+                    'text' => 'All Devices',
+                    'url' => 'devices/all'
+                ],
+                [
+                    'text' => 'Device Location',
+                    'url' => 'devices/locations'
+                ],
+                [
+                    'text' => 'Device Categories',
+                    'url' => 'devices/categories'
+                ]
+            ]
         ],
         [
             'text'  => 'Spare Parts',

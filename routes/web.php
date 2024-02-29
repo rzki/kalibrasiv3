@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DeviceCategoryController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DeviceLocationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
@@ -44,4 +46,6 @@ Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class)->names('devices');
+Route::resource('devices/locations', DeviceLocationController::class)->names('device_locations');
+Route::resource('devices/categories', DeviceCategoryController::class)->names('device_categories');
 
