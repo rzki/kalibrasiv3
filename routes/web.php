@@ -47,5 +47,5 @@ Route::resource('partners/all', PartnerController::class, ['parameters' => ['all
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
-Route::resource('devices/brands/types', DeviceTypeController::class)->names('device_types');
+Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
 

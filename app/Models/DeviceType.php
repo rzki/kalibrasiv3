@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DeviceType extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+    public function brands()
+    {
+        return $this->belongsTo(DeviceBrand::class);
+    }
 }

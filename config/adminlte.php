@@ -363,7 +363,7 @@ return [
                 ],
                 [
                     'text' => 'Device Types',
-                    'url' => 'devices/brands/types'
+                    'url' => 'devices/types'
                 ]
             ]
         ],

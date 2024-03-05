@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row pt-3">
-        <a href="{{ route('device_locations.index') }}" class="btn btn-info text-right">
+        <a href="{{ route('device_types.index') }}" class="btn btn-info text-right">
             <i class="fas fa-arrow-left pr-2"></i>
             Back
         </a>
@@ -17,9 +17,17 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('device_locations.store') }}" method="post" class="pt-5">
+        <form action="{{ route('device_types.store') }}" method="post" class="pt-5">
             @csrf
 
+            <div class="mb-3">
+                <label for="brands_id" class="form-label">Brands</label>
+                <select name="brands_id" id="brands_id" class="form-control">
+                    @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="code" class="form-label">Code</label>
                 <input type="text" class="form-control" id="code" name="code" aria-describedby="code">

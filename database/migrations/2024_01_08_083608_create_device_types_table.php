@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('device_types', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('brand_id')->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('code');
             $table->string('name');
             $table->timestamps();
