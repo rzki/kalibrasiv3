@@ -12,7 +12,8 @@ class DeviceBrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = DeviceBrand::all();
+        return view('devices.brands.index', compact('brands'));
     }
 
     /**
@@ -20,7 +21,7 @@ class DeviceBrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('devices.brands.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class DeviceBrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $this->validate($request, [
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        DeviceBrand::create($validation);
+
+        return to_route('device_brands.index');
     }
 
     /**
@@ -42,24 +50,32 @@ class DeviceBrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeviceBrand $deviceBrand)
+    public function edit(DeviceBrand $brand)
     {
-        //
+        return view('devices.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DeviceBrand $deviceBrand)
+    public function update(Request $request, DeviceBrand $brand)
     {
-        //
+        $validation = $this->validate($request, [
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $brand->where('id', $brand->id)->update($validation);
+
+        return to_route('device_brands.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeviceBrand $deviceBrand)
+    public function destroy(DeviceBrand $brand)
     {
-        //
+        $brand->where('id', $brand->id)->delete();
+        return to_route('device_brands.index');
     }
 }

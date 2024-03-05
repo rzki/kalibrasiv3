@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row pt-3">
-        <a href="{{ route('device_categories.index') }}" class="btn btn-info text-right">
+        <a href="{{ route('device_brands.index') }}" class="btn btn-info text-right">
             <i class="fas fa-arrow-left pr-2"></i>
             Back
         </a>
@@ -17,7 +17,7 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('device_categories.store') }}" method="post" class="pt-5">
+        <form action="{{ route('device_brands.store') }}" method="post" class="pt-5">
             @csrf
 
             <div class="mb-3">

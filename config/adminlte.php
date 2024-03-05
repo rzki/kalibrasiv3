@@ -358,12 +358,12 @@ return [
                     'url' => 'devices/all'
                 ],
                 [
-                    'text' => 'Device Location',
-                    'url' => 'devices/locations'
+                    'text' => 'Device Brands',
+                    'url' => 'devices/brands',
                 ],
                 [
-                    'text' => 'Device Categories',
-                    'url' => 'devices/categories'
+                    'text' => 'Device Types',
+                    'url' => 'devices/brands/types'
                 ]
             ]
         ],

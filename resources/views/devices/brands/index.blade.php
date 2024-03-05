@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row d-flex justify-content-end pb-3">
-        <a href="{{ route('device_categories.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+        <a href="{{ route('device_brands.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
     </div>
     <table class="table table-bordered" id="deviceBrandsTable">
         <thead>
@@ -28,9 +28,9 @@
                 <td>{{ $brand->name }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('device_categories.edit', $category->id) }}" class="btn btn-primary mr-lg-2"><i
+                        <a href="{{ route('device_brands.edit', $brand->id) }}" class="btn btn-primary mr-lg-2"><i
                                 class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <form action="{{ route('device_categories.destroy', $category->id) }}" method="post"
+                        <form action="{{ route('device_brands.destroy', $brand->id) }}" method="post"
                             class="delete-form">
                             @csrf
                             @method('DELETE')
