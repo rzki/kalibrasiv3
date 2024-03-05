@@ -319,7 +319,7 @@ return [
         [
             'text'  => 'Employees',
             'url'   => 'employees',
-            'icon'  => 'fas fa-fw fa-user-group',
+            'icon'  => 'fas fa-fw fa-address-card',
             'submenu' => [
                 [
                     'text'  => 'All Employees',

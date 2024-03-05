@@ -13,18 +13,23 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('barcode');
+            // $table->string('barcode');
+            // $table->string('name');
+            // $table->string('type');
+            // $table->string('manufacturer');
+            // $table->foreignId('device_category_id')->constrained('device_categories', 'id', 'device_category_id')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('device_location_id')->constrained('device_locations', 'id', 'device_location_id')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->string('condition');
+            // $table->string('risk_level');
+            // $table->string('vendor');
+            // $table->string('status');
+            // $table->string('image');
             $table->string('name');
+            $table->string('brand');
             $table->string('type');
-            $table->string('manufacturer');
             $table->string('serial_number');
-            $table->foreignId('device_category_id')->constrained('device_categories', 'id', 'device_category_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('device_location_id')->constrained('device_locations', 'id', 'device_location_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('condition');
-            $table->string('risk_level');
-            $table->string('vendor');
-            $table->string('status');
-            $table->string('image');
+            $table->date('calibration_date');
+            $table->date('next_calibration_date');
             $table->timestamps();
         });
     }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Device;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $devices = Device::all();
+        $employees = Employee::all();
+        $users = User::where('name', '!=', 'Superadmin')->get();
+        return view('home', compact('devices', 'employees', 'users'));
     }
 }
