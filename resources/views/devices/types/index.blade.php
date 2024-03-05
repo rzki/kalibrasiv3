@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'All Device Categories')
+@section('title', 'All Device Types')
 
 @section('content_header')
-<h1>All Device Categories</h1>
+<h1>All Device Types</h1>
 @stop
 
 @section('content')
 <div class="container-fluid px-3">
     <div class="row d-flex justify-content-end pb-3">
-        <a href="{{ route('device_categories.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+        <a href="{{ route('device_locations.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
     </div>
-    <table class="table table-bordered" id="deviceCategoriesTable">
+    <table class="table table-bordered" id="deviceLocationsTable">
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
@@ -21,16 +21,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $category)
+            @foreach ($locations as $location)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $category->code }}</td>
-                <td>{{ $category->name }}</td>
+                <td>{{ $location->code }}</td>
+                <td>{{ $location->name }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('device_categories.edit', $category->id) }}" class="btn btn-primary mr-lg-2"><i
+                        <a href="{{ route('device_locations.edit', $location->id) }}" class="btn btn-primary mr-lg-2"><i
                                 class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <form action="{{ route('device_categories.destroy', $category->id) }}" method="post"
+                        <form action="{{ route('device_locations.destroy', $location->id) }}" method="post"
                             class="delete-form">
                             @csrf
                             @method('DELETE')
@@ -53,7 +53,7 @@
 @section('js')
 <script>
     $(document).ready( function () {
-        $('#deviceCategoriesTable').DataTable({
+        $('#deviceLocationsTable').DataTable({
             columnDefs: [
                 {className : 'text-center', targets: '_all'
             }]

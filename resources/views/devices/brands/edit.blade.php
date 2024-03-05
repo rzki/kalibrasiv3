@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New Device Category')
+@section('title', 'Create New Device Brand')
 
 @section('content_header')
-<h1>Create New Device Category</h1>
+<h1>Create New Device Brand</h1>
 @stop
 
 @section('content')
@@ -17,16 +17,17 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('device_categories.store') }}" method="post" class="pt-5">
+        <form action="{{ route('device_categories.update', $category->id) }}" method="post" class="pt-5">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="code" class="form-label">Code</label>
-                <input type="text" class="form-control" id="code" name="code" aria-describedby="code">
+                <input type="text" class="form-control" id="code" name="code" aria-describedby="code" value="{{ old('code', $category->code) }}">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value="{{ old('name', $category->name) }}">
             </div>
             <button type="submit" class="btn btn-block btn-primary text-center">Submit</button>
         </form>
