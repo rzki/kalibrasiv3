@@ -46,6 +46,7 @@ Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
+Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
 Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
 

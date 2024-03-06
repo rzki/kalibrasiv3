@@ -18,6 +18,7 @@
         <div class="col-lg-4">
             <x-adminlte-card>
                 <div class="text-center font-weight-bolder">
+                    {!! DNS2D::getBarcodeSVG(route('devices.show', $device->serial_number), 'QRCODE') !!}
                     <h2>{{ $device->name }}</h2>
                 </div>
             </x-adminlte-card>
@@ -25,55 +26,32 @@
         <div class="col-lg-8">
             <x-adminlte-card>
                 <div class="row">
-                    <div class="col-lg-4 text-center">
+                    <div class="col-lg-6 text-center">
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Code</h5>
-                            <p>{{ $device->barcode }}</p>
-                        </div>
-                        <div class="mb-4">
-                            <h5 class="font-weight-bolder">Manufacturer</h5>
-                            <p>{{ $device->manufacturer }}</p>
-                        </div>
-                        <div class="mb-4">
-                            <h5 class="font-weight-bolder">Category</h5>
-                            <p>{{ $device->categories->name }}</p>
-                        </div>
-                        <div class="mb-4">
-                            <h5 class="font-weight-bolder">Risk Level</h5>
-                            <p>{{ $device->risk_level }}</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <div class="mb-4">
-                            <h5 class="font-weight-bolder">Name</h5>
+                            <h4 class="font-weight-bolder">Name</h4>
                             <p>{{ $device->name }}</p>
                         </div>
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Serial Number</h5>
+                            <h4 class="font-weight-bolder">Serial Number</h4>
                             <p>{{ $device->serial_number }}</p>
                         </div>
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Location</h5>
-                            <p>{{ $device->locations->name }}</p>
+                            <h4 class="font-weight-bolder">Last Calibration Date</h4>
+                            <p>{{ $device->calibration_date }}</p>
                         </div>
-                        <div class="mb-4">
-                            <h5 class="font-weight-bolder">Status</h5>
-                            <p>{{ $device->status }}</p>
-                        </div>
-
                     </div>
-                    <div class="col-lg-4 text-center">
+                    <div class="col-lg-6 text-center">
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Type</h5>
-                            <p>{{ $device->type }}</p>
+                            <h4 class="font-weight-bolder">Brand</h4>
+                            <p>{{ $device->brands->name }}</p>
                         </div>
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Vendor</h5>
-                            <p>{{ $device->vendor }}</p>
+                            <h4 class="font-weight-bolder">Type</h4>
+                            <p>{{ $device->types->name }}</p>
                         </div>
                         <div class="mb-4">
-                            <h5 class="font-weight-bolder">Condition</h5>
-                            <p>{{ $device->condition }}</p>
+                            <h4 class="font-weight-bolder">Next Calibration Date</h4>
+                            <p>{{ $device->next_calibration_date }}</p>
                         </div>
                     </div>
                 </div>

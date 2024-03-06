@@ -46,13 +46,27 @@
                         <label for="serial_number" class="form-label">Serial Number</label>
                         <input type="text" name="serial_number" id="serial_number" class="form-control">
                     </div>
-                    <div class="mb-3">
-                        <label for="calibration_date" class="form-label">Last Calibration Date</label>
-                        <input type="date" name="calibration_date" id="calibration_date" class="form-control">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="calibration_date" class="form-label">Last Calibration Date</label>
+                                <input type="date" name="calibration_date" id="calibration_date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="next_calibration_date" class="form-label">Next Calibration Date</label>
+                                <input type="date" name="next_calibration_date" id="next_calibration_date" class="form-control">
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="next_calibration_date" class="form-label">Last Calibration Date</label>
-                        <input type="date" name="next_calibration_date" id="next_calibration_date" class="form-control">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            @foreach ($status as $st)
+                                <option value="{{ $st }}">{{ $st }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

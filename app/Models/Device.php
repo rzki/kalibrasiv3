@@ -10,12 +10,16 @@ class Device extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    public function getRouteKeyName()
+    {
+        return 'serial_number';
+    }
     public function brands()
     {
-        return $this->belongsTo(DeviceBrand::class, 'device_brand_id');
+        return $this->belongsTo(DeviceBrand::class, 'brand_id');
     }
     public function types()
     {
-        return $this->belongsTo(DeviceType::class,'device_type_id');
+        return $this->belongsTo(DeviceType::class,'type_id');
     }
 }

@@ -16,6 +16,7 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
+                <th scope="col">QR Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Type</th>
@@ -29,19 +30,20 @@
             @foreach ($devices as $device)
             <tr>
                 <td>{{ $loop->iteration }}</td>
+                <td>{!! DNS2D::getBarcodeSVG(route('devices.show', $device->serial_number), 'QRCODE') !!}</td>
                 <td>{{ $device->name }}</td>
-                <td>{{ $device->brand }}</td>
-                <td>{{ $device->type }}</td>
+                <td>{{ $device->brands->name }}</td>
+                <td>{{ $device->types->name }}</td>
                 <td>{{ $device->serial_number }}</td>
                 <td>{{ $device->calibration_date }}</td>
                 <td>{{ $device->next_calibration_date }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('devices.show', $device->id) }}"
+                        <a href="{{ route('devices.show', $device->serial_number) }}"
                             class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
-                        <a href="{{ route('devices.edit', $device->id) }}"
+                        <a href="{{ route('devices.edit', $device->serial_number) }}"
                             class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <form action="{{ route('devices.destroy', $device->id) }}" method="post"
+                        <form action="{{ route('devices.destroy', $device->serial_number) }}" method="post"
                             class="delete-form">
                             @csrf
                             @method('DELETE')

@@ -43,7 +43,7 @@ class DeviceController extends Controller
             'type_id'=> 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
-            'last_calibration_date'=> 'required',
+            'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
 
@@ -58,6 +58,11 @@ class DeviceController extends Controller
     public function show(Device $device)
     {
         return view('devices.show', compact('device'));
+    }
+
+    public function qrCode(Device $device)
+    {
+        return view('devices.details', compact('device'));
     }
 
     /**
