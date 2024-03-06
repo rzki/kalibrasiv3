@@ -32,10 +32,11 @@ class DeviceTypeController extends Controller
     public function store(Request $request)
     {
         $validation = $this->validate($request, [
+            'brand_id' => 'required',
             'code' => 'required',
             'name' => 'required',
         ]);
-        
+
         DeviceType::create($validation);
 
         return to_route('device_types.index');
@@ -64,6 +65,7 @@ class DeviceTypeController extends Controller
     public function update(Request $request, DeviceType $type)
     {
         $validation = $this->validate($request, [
+            'brand_id' => 'required',
             'code' => 'required',
             'name' => 'required',
         ]);

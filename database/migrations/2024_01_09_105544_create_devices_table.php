@@ -25,8 +25,8 @@ return new class extends Migration
             // $table->string('status');
             // $table->string('image');
             $table->string('name');
-            $table->string('brand');
-            $table->string('type');
+            $table->foreignId('brand_id')->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('type_id')->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('serial_number');
             $table->date('calibration_date');
             $table->date('next_calibration_date');

@@ -21,8 +21,8 @@
             @csrf
 
             <div class="mb-3">
-                <label for="brands_id" class="form-label">Brands</label>
-                <select name="brands_id" id="brands_id" class="form-control">
+                <label for="brand_id" class="form-label">Brands</label>
+                <select name="brand_id" id="brand_id" class="form-control">
                     @foreach ($brands as $brand)
                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach

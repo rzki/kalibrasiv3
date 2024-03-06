@@ -15,8 +15,9 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
-                <th scope="col">Code</th>
                 <th scope="col">Name</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Code</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -24,8 +25,9 @@
             @foreach ($types as $type)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $type->code }}</td>
                 <td>{{ $type->name }}</td>
+                <td>{{ $type->brands->name }}</td>
+                <td>{{ $type->code }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
                         <a href="{{ route('device_types.edit', $type->id) }}" class="btn btn-primary mr-lg-2"><i

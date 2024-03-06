@@ -10,12 +10,12 @@ class Device extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    public function categories()
+    public function brands()
     {
-        return $this->belongsTo(DeviceCategory::class, 'device_category_id');
+        return $this->belongsTo(DeviceBrand::class, 'device_brand_id');
     }
-    public function locations()
+    public function types()
     {
-        return $this->belongsTo(DeviceLocation::class,'device_location_id');
+        return $this->belongsTo(DeviceType::class,'device_type_id');
     }
 }

@@ -11,6 +11,6 @@ class DeviceType extends Model
     protected $guarded = ['id'];
     public function brands()
     {
-        return $this->belongsTo(DeviceBrand::class);
+        return $this->belongsTo(DeviceBrand::class, 'brand_id');
     }
 }

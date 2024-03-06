@@ -15,6 +15,6 @@ class DeviceBrand extends Model
     }
     public function deviceTypes()
     {
-        return $this->hasMany(DeviceType::class);
+        return $this->hasOne(DeviceType::class);
     }
 }

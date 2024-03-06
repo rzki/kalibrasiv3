@@ -27,8 +27,32 @@
                         <input type="text" name="name" id="name" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="brand" class="form-label">Brand</label>
-                        <input type="text" name="brand" id="brand" class="form-control">
+                        <label for="brand_id" class="form-label">Brand</label>
+                        <select name="brand_id" id="brand_id" class="form-control">
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type_id" class="form-label">Type</label>
+                        <select name="type_id" id="type_id" class="form-control">
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serial_number" class="form-label">Serial Number</label>
+                        <input type="text" name="serial_number" id="serial_number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="calibration_date" class="form-label">Last Calibration Date</label>
+                        <input type="date" name="calibration_date" id="calibration_date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="next_calibration_date" class="form-label">Last Calibration Date</label>
+                        <input type="date" name="next_calibration_date" id="next_calibration_date" class="form-control">
                     </div>
                 </div>
             </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\DeviceType;
+use App\Models\DeviceBrand;
 use Illuminate\Http\Request;
 use App\Models\DeviceCategory;
 use App\Models\DeviceLocation;
@@ -24,13 +26,10 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        $categories = DeviceCategory::all();
-        $locations = DeviceLocation::all();
-        $vendors = ['Supplier', 'Vendor'];
-        $conditions = ['Sangat Buruk', 'Buruk', 'Baik', 'Sangat Baik'];
-        $riskLevel = ['Rendah', 'Menengah', 'Tinggi'];
-        $status = ['Aktif', 'Tidak Aktif'];
-        return view('devices.create', compact('categories', 'locations', 'vendors', 'conditions', 'riskLevel', 'status'));
+        $brands = DeviceBrand::all();
+        $types = DeviceType::all();
+        $status = ['Laik Pakai', 'Tidak Laik Pakai'];
+        return view('devices.create', compact('brands', 'types', 'status'));
     }
 
     /**
@@ -39,17 +38,13 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         $validation = $this->validate($request, [
-            'barcode' => 'required',
             'name' => 'required',
-            'type' => 'required',
-            'manufacturer' => 'required',
+            'brand_id' => 'required',
+            'type_id'=> 'required',
             'serial_number' => 'required',
-            'device_category_id' => 'required',
-            'device_location_id' => 'required',
-            'condition' => 'required',
-            'risk_level' => 'required',
-            'vendor' => 'required',
-            'status' => 'required'
+            'calibration_date' => 'required',
+            'last_calibration_date'=> 'required',
+            'status'=> 'required',
         ]);
 
         Device::create($validation);
@@ -70,13 +65,10 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        $categories = DeviceCategory::all();
-        $locations = DeviceLocation::all();
-        $vendors = ['Supplier', 'Vendor'];
-        $conditions = ['Sangat Buruk', 'Buruk', 'Baik', 'Sangat Baik'];
-        $riskLevel = ['Rendah', 'Menengah', 'Tinggi'];
-        $status = ['Aktif', 'Tidak Aktif'];
-        return view('devices.edit', compact('device','categories', 'locations', 'vendors', 'conditions', 'riskLevel', 'status'));
+        $brands = DeviceBrand::all();
+        $types = DeviceType::all();
+        $status = ['Laik Pakai', 'Tidak Laik Pakai'];
+        return view('devices.edit', compact('device','brands', 'types', 'status'));
     }
 
     /**
@@ -85,17 +77,13 @@ class DeviceController extends Controller
     public function update(Request $request, Device $device)
     {
         $validation = $this->validate($request, [
-            'barcode' => 'required',
             'name' => 'required',
-            'type' => 'required',
-            'manufacturer' => 'required',
+            'brand_id' => 'required',
+            'type_id'=> 'required',
             'serial_number' => 'required',
-            'device_category_id' => 'required',
-            'device_location_id' => 'required',
-            'condition' => 'required',
-            'risk_level' => 'required',
-            'vendor' => 'required',
-            'status' => 'required'
+            'calibration_date' => 'required',
+            'last_calibration_date'=> 'required',
+            'status'=> 'required',
         ]);
 
         $device->where('id', $device->id)->update($validation);
