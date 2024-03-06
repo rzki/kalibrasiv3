@@ -23,6 +23,7 @@
             <div class="mb-3">
                 <label for="brand_id" class="form-label">Brands</label>
                 <select name="brand_id" id="brand_id" class="form-control">
+                    <option value="">Please select</option>
                     @foreach ($brands as $brand)
                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach

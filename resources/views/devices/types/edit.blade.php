@@ -22,6 +22,15 @@
             @method('PUT')
 
             <div class="mb-3">
+                <label for="brand_id" class="form-label">Brands</label>
+                <select name="brand_id" id="brand_id" class="form-control">
+                    <option value="">Please select</option>
+                    @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}"{{ old('brand_id', $type->brand_id) == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="code" class="form-label">Code</label>
                 <input type="text" class="form-control" id="code" name="code" aria-describedby="code" value="{{ old('code', $type->code) }}">
             </div>
