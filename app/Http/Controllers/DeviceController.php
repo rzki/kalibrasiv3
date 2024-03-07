@@ -62,7 +62,7 @@ class DeviceController extends Controller
 
     public function qrCode(Device $device)
     {
-        return view('devices.details', compact('device'));
+        return view('devices.public.details', compact('device'));
     }
 
     /**

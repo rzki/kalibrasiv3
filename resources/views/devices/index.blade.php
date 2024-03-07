@@ -39,7 +39,7 @@
                 <td>{{ $device->next_calibration_date }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('devices.show', $device->serial_number) }}"
+                        <a href="{{ route('devices.qr', $device->serial_number) }}"
                             class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
                         <a href="{{ route('devices.edit', $device->serial_number) }}"
                             class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
