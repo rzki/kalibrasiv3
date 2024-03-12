@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use Milon\Barcode\DNS2D;
 use App\Models\DeviceType;
 use App\Models\DeviceBrand;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\DeviceCategory;
 use App\Models\DeviceLocation;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DeviceController extends Controller
 {
@@ -38,6 +42,7 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         $validation = $this->validate($request, [
+            'barcode' => 'required',
             'name' => 'required',
             'brand_id' => 'required',
             'type_id'=> 'required',
@@ -47,7 +52,8 @@ class DeviceController extends Controller
             'status'=> 'required',
         ]);
 
-        Device::create($validation);
+        Device::create($request->all());
+
 
         return to_route('devices.index');
     }
@@ -91,7 +97,7 @@ class DeviceController extends Controller
             'status'=> 'required',
         ]);
 
-        $device->where('id', $device->id)->update($validation);
+        $device->where('serial_number', $device->serial_number)->update($validation);
 
         return to_route('devices.index');
     }
@@ -102,6 +108,28 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->where('id', $device->id)->delete();
+
+        return to_route('devices.index');
+    }
+
+    public function qrCodeGenerate(Device $device)
+    {
+        // store blank data first
+        Device::create([
+            'deviceId' => Str::uuid(),
+        ]);
+
+        // get newly created ID
+        // $url = route('devices.qr', $device->uuid);
+
+        // generate QR code with newly created ID as the data
+        // $qrCode = QrCode::generate($url);
+        // $qrName = $device->uuid.'.png';
+        // $qrPath  = Storage::disk('public')->put('qrcodes/' . $qrName, $qrCode);
+
+        // Device::create([
+        //     'barcode' => $qrPath
+        // ]);
 
         return to_route('devices.index');
     }

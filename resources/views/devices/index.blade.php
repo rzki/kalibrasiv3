@@ -9,8 +9,10 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row d-flex justify-content-end pb-3">
-        <a href="{{ route('devices.create') }}" class="btn btn-success text-right"><i class="fa fa-plus"
-                aria-hidden="true"></i> Create New</a>
+        <form action="{{ route('devices.generateQR') }}" method="post">
+        @csrf
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+        </form>
     </div>
     <table class="table table-bordered" id="devicesTable">
         <thead>
@@ -30,7 +32,7 @@
             @foreach ($devices as $device)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{!! DNS2D::getBarcodeSVG(route('devices.show', $device->serial_number), 'QRCODE') !!}</td>
+                <td>{{ $device->barcode }}</td>
                 <td>{{ $device->name }}</td>
                 <td>{{ $device->brands->name }}</td>
                 <td>{{ $device->types->name }}</td>

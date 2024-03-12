@@ -12,7 +12,7 @@ class Device extends Model
     protected $guarded = ['id'];
     public function getRouteKeyName()
     {
-        return 'serial_number';
+        return 'deviceId';
     }
     public function brands()
     {

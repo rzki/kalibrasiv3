@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+            $table->uuid('deviceId');
+            $table->string('name')->nullable();
+            $table->foreignId('brand_id')->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+            $table->foreignId('type_id')->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+            $table->string('serial_number')->nullable();
+            $table->date('calibration_date')->nullable();
+            $table->date('next_calibration_date')->nullable();
+            $table->text('barcode');
+            $table->timestamps();
             // $table->string('barcode');
             // $table->string('name');
             // $table->string('type');
@@ -23,14 +32,6 @@ return new class extends Migration
             // $table->string('risk_level');
             // $table->string('vendor');
             // $table->string('status');
-            // $table->string('image');
-            $table->string('name');
-            $table->foreignId('brand_id')->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('type_id')->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('serial_number');
-            $table->date('calibration_date');
-            $table->date('next_calibration_date');
-            $table->timestamps();
         });
     }
 
