@@ -32,7 +32,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::resource('users', UserController::class)->names('users');
 Route::controller(EmployeeController::class)->group(function() {
@@ -46,8 +47,14 @@ Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
-Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');
-Route::post('devices/all', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
+Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
+Route::get('devices/all/qr-generate', [DeviceController::class,'qrCodeGeneratePage'])->name('devices.generateQrPage');
+Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
 Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
+});
 
+Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');
+Route::get('/phpinfo', function(){
+    phpinfo();
+});

@@ -103,8 +103,9 @@
 </div> --}}
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('devices.store') }}" method="post" class="pt-5">
+        <form action="{{ route('devices.update', $device->deviceId) }}" method="post" class="pt-5">
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="col">
@@ -151,7 +152,7 @@
                         <label for="status" class="form-label">Status</label>
                         <select name="status" id="status" class="form-control">
                             @foreach ($status as $st)
-                            <option value="{{ $st }}"{{ old('status', $device->status) == $st ? 'selected' : '' }}>{{ $st }}</option>
+                                <option value="{{ $st }}"{{ old('status', $device->status) == $st ? 'selected' : '' }}>{{ $st }}</option>
                             @endforeach
                         </select>
                     </div>

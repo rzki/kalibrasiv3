@@ -79,7 +79,7 @@ class DeviceController extends Controller
         $brands = DeviceBrand::all();
         $types = DeviceType::all();
         $status = ['Laik Pakai', 'Tidak Laik Pakai'];
-        return view('devices.edit', compact('device','brands', 'types', 'status'));
+        return view('devices.edit', compact('device', 'brands', 'types', 'status'));
     }
 
     /**
@@ -88,17 +88,18 @@ class DeviceController extends Controller
     public function update(Request $request, Device $device)
     {
         $validation = $this->validate($request, [
+            'barcode' => $device->barcode,
             'name' => 'required',
             'brand_id' => 'required',
             'type_id'=> 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
-            'last_calibration_date'=> 'required',
+            'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
 
-        $device->where('serial_number', $device->serial_number)->update($validation);
-
+        $device->where('deviceId',$device->deviceId)->update($validation);
+        // dd($validation);
         return to_route('devices.index');
     }
 
@@ -112,24 +113,25 @@ class DeviceController extends Controller
         return to_route('devices.index');
     }
 
+    public function generateQrPage()
+    {
+        return view('devices.generatePage');
+    }
     public function qrCodeGenerate(Device $device)
     {
-        // store blank data first
+
+        $deviceID = Str::uuid();
+
+        $qr = QrCode::format('png')
+                ->size(200)
+                ->generate(route('devices.qr', $deviceID));
+        $path = 'img/qr-codes/'. $deviceID .'.png';
+        Storage::disk('public')->put($path, $qr);
+
         Device::create([
-            'deviceId' => Str::uuid(),
+            'deviceId' => $deviceID,
+            'barcode' => $path
         ]);
-
-        // get newly created ID
-        // $url = route('devices.qr', $device->uuid);
-
-        // generate QR code with newly created ID as the data
-        // $qrCode = QrCode::generate($url);
-        // $qrName = $device->uuid.'.png';
-        // $qrPath  = Storage::disk('public')->put('qrcodes/' . $qrName, $qrCode);
-
-        // Device::create([
-        //     'barcode' => $qrPath
-        // ]);
 
         return to_route('devices.index');
     }
