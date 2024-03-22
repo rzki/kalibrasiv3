@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('deviceId');
             $table->string('name')->nullable();
-            $table->foreignId('brand_id')->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
-            $table->foreignId('type_id')->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+            $table->foreignId('brand_id')->nullable()->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('type_id')->nullable()->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('serial_number')->nullable();
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();

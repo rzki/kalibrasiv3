@@ -49,7 +49,7 @@
 
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
-<link href="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.css" rel="stylesheet">
 
 
     {{-- Favicon --}}

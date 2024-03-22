@@ -299,41 +299,28 @@ return [
             'url'   => 'dashboard',
             'icon'  => 'fas fa-house',
         ],
-        // Employee Menu
-        [
-            'header' => 'EMPLOYEES',
-            'classes' => 'text-bold'],
-        [
-            'text'  => 'Employees',
-            'url'   => 'employees',
-            'icon'  => 'fas fa-fw fa-address-card',
-            'submenu' => [
-                [
-                    'text'  => 'All Employees',
-                    'url'   => 'employees/all',
-                ],
-                [
-                    'text'  => 'Departments',
-                    'url'   => 'employees/depts',
-                ],
-                [
-                    'text'  => 'Positions',
-                    'url'   => 'employees/positions',
-                ],
-            ]
-        ],
-        [
-            'header' => 'WORK ORDERS',
-            'classes' => 'text-bold'
-        ],
-        [
-            'text'  => 'Work Orders',
-            'url'   => 'work-orders',
-            'icon'  => 'fas fa-fw fa-clipboard-check'
-        ],
+        // [
+        //     'header' => 'WORK ORDERS',
+        //     'classes' => 'text-bold'
+        // ],
+        // [
+        //     'text'  => 'Work Orders',
+        //     'url'   => 'work-orders',
+        //     'icon'  => 'fas fa-fw fa-clipboard-check'
+        // ],
         [
             'header' => 'INVENTORY',
             'classes' => 'text-bold'
+        ],
+        [
+            'text' => 'Hospital',
+            'route' => 'hospitals.index',
+            'icon' => 'fas fa-fw fa-hospital'
+        ],
+        [
+            'text' => 'VCard',
+            'route' => 'vcards.index',
+            'icon' => 'fas fa-fw fa-address-card'
         ],
         [
             'text'  => 'Devices',
@@ -359,15 +346,15 @@ return [
             'url'   => 'spare-parts',
             'icon'  => 'fas fa-fw fa-puzzle-piece'
         ],
-        [
-            'header' => 'FINANCE',
-            'classes' => 'text-bold'
-        ],
-        [
-            'text'  => 'Depreciations',
-            'url'   => 'depreciations',
-            'icon'  => 'fas fa-fw fa-arrow-trend-down'
-        ],
+        // [
+        //     'header' => 'FINANCE',
+        //     'classes' => 'text-bold'
+        // ],
+        // [
+        //     'text'  => 'Depreciations',
+        //     'url'   => 'depreciations',
+        //     'icon'  => 'fas fa-fw fa-arrow-trend-down'
+        // ],
         [
             'header' => 'DATA',
             'classes' => 'text-bold'
@@ -405,6 +392,25 @@ return [
             'text'  => 'References',
             'url'   => 'references',
             'icon'  => 'fas fa-fw fa-file-lines'
+        ],
+        [
+            'text'  => 'Employees',
+            'url'   => 'employees',
+            'icon'  => 'fas fa-fw fa-address-card',
+            'submenu' => [
+                [
+                    'text'  => 'All Employees',
+                    'url'   => 'employees/all',
+                ],
+                [
+                    'text'  => 'Departments',
+                    'url'   => 'employees/depts',
+                ],
+                [
+                    'text'  => 'Positions',
+                    'url'   => 'employees/positions',
+                ],
+            ]
         ],
         [
             'text'  => 'Users',

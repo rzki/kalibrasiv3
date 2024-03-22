@@ -12,8 +12,10 @@ use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\EmployeePositionController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PartnerCategoryController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\VCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,8 @@ Route::get('devices/all/qr-generate', [DeviceController::class,'qrCodeGeneratePa
 Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
 Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
+Route::resource('hospitals', HospitalController::class)->names('hospitals');
+Route::resource('vcards', VCardController::class)->names('vcards');
 });
 
 Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');

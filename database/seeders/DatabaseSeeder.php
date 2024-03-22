@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Superadmin',
             'username' => 'superadmin',
             'email' => 'sadmin@kalv3.com',
-            'password' => Hash::make('Sadmin2004!')
+            'password' => Hash::make('Kalibrasi')
         ]);
     }
 }
