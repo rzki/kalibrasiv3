@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Create vCard')
+@section('title', 'Create New Hospital')
 
 @section('content_header')
-    <h1>Create vCard</h1>
+<h1>Create New Hospital</h1>
 @stop
 
 @section('content')
 <div class="container-fluid px-3">
     <div class="row pt-3">
-        <a href="{{ route('vcards.index') }}" class="btn btn-info text-right">
+        <a href="{{ route('hospitals.index') }}" class="btn btn-info text-right">
             <i class="fas fa-arrow-left pr-2"></i>
             Back
         </a>
@@ -17,7 +17,7 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('vcards.store') }}" method="post" class="pt-5">
+        <form action="{{ route('hospitals.store') }}" method="post" class="pt-5">
             @csrf
 
             <div class="row">

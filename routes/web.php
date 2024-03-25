@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DeviceBrandController;
 use App\Http\Controllers\DeviceTypeController;
+use App\Http\Controllers\DownloadQRController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -52,10 +53,10 @@ Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' 
 Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
 Route::get('devices/all/qr-generate', [DeviceController::class,'qrCodeGeneratePage'])->name('devices.generateQrPage');
 Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
+Route::get('devices/all/qr-print/{device}', [DeviceController::class, 'printQR'])->name('devices.print');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
 Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
 Route::resource('hospitals', HospitalController::class)->names('hospitals');
-Route::resource('vcards', VCardController::class)->names('vcards');
 });
 
 Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');

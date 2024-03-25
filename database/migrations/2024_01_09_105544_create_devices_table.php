@@ -21,17 +21,8 @@ return new class extends Migration
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->text('barcode');
+            
             $table->timestamps();
-            // $table->string('barcode');
-            // $table->string('name');
-            // $table->string('type');
-            // $table->string('manufacturer');
-            // $table->foreignId('device_category_id')->constrained('device_categories', 'id', 'device_category_id')->cascadeOnDelete()->cascadeOnUpdate();
-            // $table->foreignId('device_location_id')->constrained('device_locations', 'id', 'device_location_id')->cascadeOnDelete()->cascadeOnUpdate();
-            // $table->string('condition');
-            // $table->string('risk_level');
-            // $table->string('vendor');
-            // $table->string('status');
         });
     }
 

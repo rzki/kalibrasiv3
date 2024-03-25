@@ -51,8 +51,10 @@ class HospitalController extends Controller
         //     'address' => $request->address,
         //     'barcode' => $path
         // ]);
-        
+
         Hospital::create($validation);
+
+        return to_route('hospitals.index');
     }
 
     /**
@@ -68,7 +70,7 @@ class HospitalController extends Controller
      */
     public function edit(Hospital $hospital)
     {
-        //
+        return view('hospitals.edit', compact('hospital'));
     }
 
     /**
@@ -76,7 +78,16 @@ class HospitalController extends Controller
      */
     public function update(Request $request, Hospital $hospital)
     {
-        //
+        $validation = $this->validate($request, [
+            'name' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $hospital->where('id', $hospital->id)->update($validation);
+
+        return to_route('hospitals.index');
     }
 
     /**
@@ -84,11 +95,8 @@ class HospitalController extends Controller
      */
     public function destroy(Hospital $hospital)
     {
-        //
-    }
+        $hospital->delete();
 
-    public function printQR (Hospital $hospital)
-    {
-
+        return to_route('hospitals.index');
     }
 }

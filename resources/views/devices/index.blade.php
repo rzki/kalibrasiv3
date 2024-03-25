@@ -34,7 +34,7 @@
             @foreach ($devices as $device)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td><img src="{{ asset('storage/'.$device->barcode) }}" alt=""></td>
+                <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="200" height="200"></td>
                 <td>{{ $device->name }}</td>
                 <td>{{ $device->brands->name ?? '' }}</td>
                 <td>{{ $device->types->name ?? '' }}</td>
@@ -48,6 +48,7 @@
                             class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
                         <a href="{{ route('devices.edit', $device->deviceId) }}"
                             class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-lg-2" target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
                         <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
                             class="delete-form">
                             @csrf

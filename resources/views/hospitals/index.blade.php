@@ -32,6 +32,17 @@
                     <td>{{ $hospital->phone_number}}</td>
                     <td>{{ $hospital->email }}</td>
                     <td>{{ $hospital->address }}</td>
+                    <td>
+                        <a href="{{ route('hospitals.show', $hospital->id) }}" class="btn btn-info mr-lg-2"><i class="fas fa-info-circle"></i></a>
+                        <a href="{{ route('hospitals.edit', $hospital->id) }}" class="btn btn-primary mr-lg-2"><i class="fas fa-edit"></i></a>
+                        <form action="{{ route('hospitals.destroy', $hospital->id) }}" method="post"
+                            class="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

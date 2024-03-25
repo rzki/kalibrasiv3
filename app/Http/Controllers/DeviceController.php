@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
-use Milon\Barcode\DNS2D;
 use App\Models\DeviceType;
 use App\Models\DeviceBrand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\DeviceCategory;
-use App\Models\DeviceLocation;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -123,7 +122,7 @@ class DeviceController extends Controller
         $deviceID = Str::uuid();
 
         $qr = QrCode::format('png')
-                ->size(200)
+                ->size(285)
                 ->generate(route('devices.qr', $deviceID));
         $path = 'img/qr-codes/'. $deviceID .'.png';
         Storage::disk('public')->put($path, $qr);
@@ -134,5 +133,11 @@ class DeviceController extends Controller
         ]);
 
         return to_route('devices.index');
+    }
+    public function printQR(Device $device)
+    {
+        $customSize = array(0,0,317.49,283.47);
+        $pdf = Pdf::loadView('device_pdf', compact('device'))->setPaper($customSize, 'landscape');
+        return $pdf->stream($device->deviceId.'.pdf')->header('Content-Type','application/pdf');
     }
 }

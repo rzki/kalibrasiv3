@@ -318,11 +318,6 @@ return [
             'icon' => 'fas fa-fw fa-hospital'
         ],
         [
-            'text' => 'VCard',
-            'route' => 'vcards.index',
-            'icon' => 'fas fa-fw fa-address-card'
-        ],
-        [
             'text'  => 'Devices',
             'url'   => 'devices',
             'icon'  => 'fas fa-fw fa-screwdriver-wrench',
