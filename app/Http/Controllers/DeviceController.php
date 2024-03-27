@@ -132,7 +132,7 @@ class DeviceController extends Controller
         }
 
         for ($i = 0; $i < $numberOfDevices; $i++) {
-            $deviceID = Str::random(8);
+            $deviceID = Str::uuid();
             // Create device data
             $devices[] = [
                 'deviceId' => $deviceID,

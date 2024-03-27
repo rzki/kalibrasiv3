@@ -33,7 +33,7 @@ class GenerateQRJob implements ShouldQueue
         foreach ($this->devices as $device){
             // Generate QR code and path
             $qr = QrCode::format('png')
-            ->size(100)
+            ->size(75)
             ->generate(route('devices.qr', $device['deviceId']));
             $path = 'img/qr-codes/' . $device['deviceId'] . '.png';
             Storage::disk('public')->put($path, $qr);
