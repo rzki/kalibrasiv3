@@ -13,4 +13,9 @@ class Hospital extends Model
     // {
     //     return 'name';
     // }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }

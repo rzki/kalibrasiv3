@@ -50,13 +50,14 @@ Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
-Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
-Route::get('devices/all/qr-generate', [DeviceController::class,'qrCodeGeneratePage'])->name('devices.generateQrPage');
-Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
-Route::get('devices/all/qr-print/{device}', [DeviceController::class, 'printQR'])->name('devices.print');
 Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
 Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
 Route::resource('hospitals', HospitalController::class)->names('hospitals');
+Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
+Route::get('devices/create-qr', [DeviceController::class,'createQR'])->name('devices.createQR');
+Route::post('devices/qr-store', [DeviceController::class, 'storeQR'])->name('devices.storeQR');
+// Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
+Route::get('devices/all/qr-print/{device}', [DeviceController::class, 'printQR'])->name('devices.print');
 });
 
 Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');

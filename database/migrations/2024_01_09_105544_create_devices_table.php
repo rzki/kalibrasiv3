@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->uuid('deviceId');
+            $table->string('deviceId');
             $table->string('name')->nullable();
             $table->foreignId('brand_id')->nullable()->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('type_id')->nullable()->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('serial_number')->nullable();
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
-            $table->text('barcode');
-            
+            $table->text('barcode')->nullable();
+
             $table->timestamps();
         });
     }

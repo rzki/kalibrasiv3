@@ -39,6 +39,10 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="mb-4">
+                        <h4 class="font-weight-bolder">Location</h4>
+                        <p>{{ $device->hospitals->name ?? '' }}</p>
+                    </div>
                     @if (Auth::guest() && $device->name == null)
                     <a href="{{ route('devices.edit', $device->deviceId) }}" class="btn btn-danger btn-block">Login to Update Data</a>
                     <script>

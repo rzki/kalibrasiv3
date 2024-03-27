@@ -8,12 +8,11 @@
 
 @section('content')
 <div class="container-fluid px-3">
-    <div class="row d-flex justify-content-end pb-3">
-        <form action="{{ route('devices.generateQR') }}" method="post">
-        @csrf
-            <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Generate QR</button>
-        </form>
-        <a href="{{ route('devices.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus" aria-hidden="true"></i>Create New</a>
+    <div class="row">
+        <div class="col d-flex justify-content-end pb-3">
+           <a href="{{ route('devices.createQR') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Generate QR</a>
+            <a href="{{ route('devices.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus" aria-hidden="true"></i>Create New</a>
+        </div>
     </div>
     <table class="table table-bordered" id="devicesTable">
         <thead>

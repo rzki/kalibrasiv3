@@ -111,11 +111,12 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $device->name) }}">
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $device->name) }}" placeholder="Name...">
                     </div>
                     <div class="mb-3">
                         <label for="brand_id" class="form-label">Brand</label>
                         <select name="brand_id" id="brand_id" class="form-control">
+                            <option value="">Select Brand...</option>
                             @foreach ($brands as $brand)
                             <option value="{{ $brand->id }}"{{ old('brand_id', $device->brand_id) == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
@@ -124,6 +125,7 @@
                     <div class="mb-3">
                         <label for="type_id" class="form-label">Type</label>
                         <select name="type_id" id="type_id" class="form-control">
+                            <option value="">Select Type...</option>
                             @foreach ($types as $type)
                             <option value="{{ $type->id }}"{{ old('type_id', $device->type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
@@ -131,7 +133,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="serial_number" class="form-label">Serial Number</label>
-                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{ old('serial_number', $device->serial_number) }}">
+                        <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{ old('serial_number', $device->serial_number) }}" placeholder="Serial Number...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="hospital_id" class="form-label">Location</label>
+                        <select name="hospital_id" id="hospital_id" class="form-control">
+                            <option value="">Select Location...</option>
+                            @foreach ($hospitals as $hospital)
+                                <option value="{{ $hospital->id }}"{{ old('hospital_id', $device->hospital_id) == $hospital->id ? 'selected' : '' }}>{{ $hospital->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">

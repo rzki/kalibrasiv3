@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Device;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
 
@@ -62,7 +63,8 @@ class HospitalController extends Controller
      */
     public function show(Hospital $hospital)
     {
-        //
+        $devices = Device::where('hospital_id', $hospital->id)->get();
+        return view('hospitals.show', compact('hospital', 'devices'));
     }
 
     /**

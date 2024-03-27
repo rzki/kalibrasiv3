@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Hospital;
 use App\Models\DeviceType;
+use App\Jobs\GenerateQRJob;
 use App\Models\DeviceBrand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -31,8 +34,9 @@ class DeviceController extends Controller
     {
         $brands = DeviceBrand::all();
         $types = DeviceType::all();
+        $hospitals = Hospital::all();
         $status = ['Laik Pakai', 'Tidak Laik Pakai'];
-        return view('devices.create', compact('brands', 'types', 'status'));
+        return view('devices.create', compact('brands', 'types', 'hospitals', 'status'));
     }
 
     /**
@@ -45,18 +49,18 @@ class DeviceController extends Controller
             'name' => 'required',
             'brand_id' => 'required',
             'type_id'=> 'required',
+            'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
             'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
 
-        Device::create($request->all());
+        Device::create($validation);
 
 
         return to_route('devices.index');
     }
-
     /**
      * Display the specified resource.
      */
@@ -77,8 +81,9 @@ class DeviceController extends Controller
     {
         $brands = DeviceBrand::all();
         $types = DeviceType::all();
+        $hospitals = Hospital::all();
         $status = ['Laik Pakai', 'Tidak Laik Pakai'];
-        return view('devices.edit', compact('device', 'brands', 'types', 'status'));
+        return view('devices.edit', compact('device', 'brands', 'types', 'hospitals', 'status'));
     }
 
     /**
@@ -91,6 +96,7 @@ class DeviceController extends Controller
             'name' => 'required',
             'brand_id' => 'required',
             'type_id'=> 'required',
+            'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
             'next_calibration_date'=> 'required',
@@ -112,13 +118,34 @@ class DeviceController extends Controller
         return to_route('devices.index');
     }
 
-    public function generateQrPage()
+    public function createQR()
     {
-        return view('devices.generatePage');
+        return view('devices.createQR');
     }
-    public function qrCodeGenerate(Device $device)
+    public function storeQR(Request $request)
     {
+        DB::disableQueryLog();
 
+        $numberOfDevices = (int) $request->input('number');
+        if ($numberOfDevices <= 0) {
+            return back()->withErrors(['number' => 'Please enter a valid number of devices.']);
+        }
+
+        for ($i = 0; $i < $numberOfDevices; $i++) {
+            $deviceID = Str::random(8);
+            // Create device data
+            $devices[] = [
+                'deviceId' => $deviceID,
+            ];
+        }
+
+        GenerateQRJob::dispatch($devices);
+        // DB::table('devices')->insert($devices);
+
+        return to_route('devices.index');
+    }
+    public function qrCodeGenerate(Request $request, Device $device)
+    {
         $deviceID = Str::uuid();
 
         $qr = QrCode::format('png')
@@ -136,8 +163,8 @@ class DeviceController extends Controller
     }
     public function printQR(Device $device)
     {
-        $customSize = array(0,0,317.49,283.47);
-        $pdf = Pdf::loadView('device_pdf', compact('device'))->setPaper($customSize, 'landscape');
+        $customSize = array(0,0,226.77,170.08);
+        $pdf = Pdf::loadView('devices.device_pdf', compact('device'))->setPaper($customSize);
         return $pdf->stream($device->deviceId.'.pdf')->header('Content-Type','application/pdf');
     }
 }

@@ -50,6 +50,7 @@
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
     <link href="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap-5.3.3/css/bootstrap.min.css') }}">
 
 
     {{-- Favicon --}}
@@ -106,6 +107,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+    <script src="{{ asset('assets/bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}"></script>
 
 {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/70f3726b28.js" crossorigin="anonymous"></script>

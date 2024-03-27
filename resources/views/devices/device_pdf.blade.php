@@ -8,7 +8,9 @@
 </head>
 <body>
     <div>
-        <img src="{{ public_path('storage/'.$device->barcode) }}" alt="">
+        <div class="barcode">
+            <img src="{{ public_path('storage/'.$device->barcode) }}" alt="" width="20%" height="40%" style="margin:auto;">
+        </div>
     </div>
 </body>
 </html>
