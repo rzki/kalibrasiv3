@@ -14,15 +14,10 @@ class Device extends Model
     {
         return 'deviceId';
     }
-    public function brands()
+    public function names()
     {
-        return $this->belongsTo(DeviceBrand::class, 'brand_id');
+        return $this->belongsTo(DeviceName::class, 'name_id');
     }
-    public function types()
-    {
-        return $this->belongsTo(DeviceType::class,'type_id');
-    }
-
     public function hospitals()
     {
         return $this->belongsTo(Hospital::class, 'hospital_id');

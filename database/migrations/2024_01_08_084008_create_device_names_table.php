@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
-            $table->string('status')->after('barcode')->nullable();
+        Schema::create('device_names', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('device_categories');
     }
 };

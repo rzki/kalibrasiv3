@@ -8,9 +8,11 @@
 </head>
 <body>
     <div>
-        <div class="barcode">
-            <img src="{{ public_path('storage/'.$device->barcode) }}" alt="" width="25%" height="40%" style="margin:auto;">
-        </div>
+        @foreach ($devices as $device)
+            <div class="barcode" style="page-break-after: always">
+                <img src="{{ public_path('storage/'.$device->barcode) }}" alt="" width="25%" height="40%">
+            </div>
+        @endforeach
     </div>
 </body>
 </html>

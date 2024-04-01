@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use App\Models\Hospital;
+use App\Models\DeviceName;
 use App\Models\DeviceType;
 use App\Jobs\GenerateQRJob;
 use App\Models\DeviceBrand;
@@ -32,11 +33,9 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        $brands = DeviceBrand::all();
-        $types = DeviceType::all();
         $hospitals = Hospital::all();
         $status = ['Laik Pakai', 'Tidak Laik Pakai'];
-        return view('devices.create', compact('brands', 'types', 'hospitals', 'status'));
+        return view('devices.create', compact('hospitals', 'status'));
     }
 
     /**
@@ -45,10 +44,9 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         $validation = $this->validate($request, [
-            'barcode' => 'required',
-            'name' => 'required',
-            'brand_id' => 'required',
-            'type_id'=> 'required',
+            'name_id' => 'required',
+            'brand' => 'required',
+            'type'=> 'required',
             'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
@@ -79,11 +77,10 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        $brands = DeviceBrand::all();
-        $types = DeviceType::all();
         $hospitals = Hospital::all();
+        $names = DeviceName::all();
         $status = ['Laik Pakai', 'Tidak Laik Pakai'];
-        return view('devices.edit', compact('device', 'brands', 'types', 'hospitals', 'status'));
+        return view('devices.edit', compact('device','names', 'hospitals', 'status'));
     }
 
     /**
@@ -93,18 +90,16 @@ class DeviceController extends Controller
     {
         $validation = $this->validate($request, [
             'barcode' => $device->barcode,
-            'name' => 'required',
-            'brand_id' => 'required',
-            'type_id'=> 'required',
+            'name_id' => 'required',
+            'brand' => 'required',
+            'type'=> 'required',
             'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
             'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
-
         $device->where('deviceId',$device->deviceId)->update($validation);
-        // dd($validation);
         return to_route('devices.index');
     }
 
@@ -121,8 +116,6 @@ class DeviceController extends Controller
     public function deleteSelected(Request $request)
     {
         $deviceIds = $request->devIds;
-        // dd($deviceIds);
-
 
         $deleteQR = Device::whereIn('deviceId',explode(",", $deviceIds))->get();
 

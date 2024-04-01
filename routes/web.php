@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\DeviceBrandController;
-use App\Http\Controllers\DeviceTypeController;
-use App\Http\Controllers\DownloadQRController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\VCardController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\DeviceNameController;
+use App\Http\Controllers\DeviceTypeController;
+use App\Http\Controllers\DownloadQRController;
+use App\Http\Controllers\DeviceBrandController;
 use App\Http\Controllers\EmployeeDeptController;
-use App\Http\Controllers\EmployeePositionController;
-use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PartnerCategoryController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\VCardController;
+use App\Http\Controllers\EmployeePositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ use App\Http\Controllers\VCardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('login');
 });
 
 Auth::routes();
@@ -50,15 +51,14 @@ Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
-Route::resource('devices/brands', DeviceBrandController::class)->names('device_brands');
-Route::resource('devices/types', DeviceTypeController::class)->names('device_types');
+Route::resource('devices/device-name', DeviceNameController::class)->names('devices_name');
 Route::resource('hospitals', HospitalController::class)->names('hospitals');
 Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
 Route::get('devices/create-qr', [DeviceController::class,'createQR'])->name('devices.createQR');
 Route::post('devices/qr-store', [DeviceController::class, 'storeQR'])->name('devices.storeQR');
 Route::delete('devices/delete-devices', [DeviceController::class,'deleteSelected'])->name('devices.deleteSelected');
-// Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
 Route::get('devices/all/qr-print/{device}', [DeviceController::class, 'printQR'])->name('devices.print');
+Route::get('devices/print-empty-qr', [DeviceController::class, 'printEmptyQR'])->name('devices.printEmptyQR');
 });
 
 Route::get('details/{device}', [DeviceController::class, 'qrCode'])->name('devices.qr');

@@ -16,59 +16,61 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-start pb-3">
-            <a href="#" class="btn btn-outline-dark" id="printSelectedData"><i class="fa fa-print"></i> Print Selected</a>
-            <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData"><i class="fa fa-trash"></i> Delete Selected</a>
+            <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
+            <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData" style="display: none;"><i class="fa fa-trash"></i> Delete Selected</a>
         </div>
     </div>
-    <table class="table table-bordered" id="devicesTable">
-        <thead>
-            <tr class="text-center">
-                <th scope="col">No</th>
-                <th scope="col">QR Code</th>
-                <th scope="col">Name</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Type</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Cal. Date</th>
-                <th scope="col">Next Cal.</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-                <th scope="col"><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($devices as $device)
-            <tr id="devId{{ $device->deviceId }}">
-                <td>{{ $loop->iteration }}</td>
-                <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td>
-                <td>{{ $device->name }}</td>
-                <td>{{ $device->brands->name ?? '' }}</td>
-                <td>{{ $device->types->name ?? '' }}</td>
-                <td>{{ $device->serial_number }}</td>
-                <td>{{ $device->calibration_date }}</td>
-                <td>{{ $device->next_calibration_date }}</td>
-                <td>{{ $device->status }}</td>
-                <td>
-                    <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('devices.qr', $device->deviceId) }}"
-                            class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
-                        <a href="{{ route('devices.edit', $device->deviceId) }}"
-                            class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-lg-2" target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-                        <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
-                            class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </td>
-                <td><input type="checkbox" name="deviceIds" class="checkboxClass" data-id="{{ $device->deviceId }}"></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="pb-3">
+        <table class="table table-bordered" id="devicesTable">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">No</th>
+                    <th scope="col">QR Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Serial Number</th>
+                    <th scope="col">Cal. Date</th>
+                    <th scope="col">Next Cal.</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                    <th scope="col"><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($devices as $device)
+                <tr id="devId{{ $device->deviceId }}">
+                    <td>{{ $loop->iteration }}</td>
+                    <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td>
+                    <td>{{ $device->names->name ?? '' }}</td>
+                    <td>{{ $device->brands}}</td>
+                    <td>{{ $device->types}}</td>
+                    <td>{{ $device->serial_number }}</td>
+                    <td>{{ $device->calibration_date }}</td>
+                    <td>{{ $device->next_calibration_date }}</td>
+                    <td>{{ $device->status }}</td>
+                    <td>
+                        <div class="action-form d-flex justify-content-center">
+                            <a href="{{ route('devices.qr', $device->deviceId) }}"
+                                class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
+                            <a href="{{ route('devices.edit', $device->deviceId) }}"
+                                class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                            <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-lg-2" target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                            <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" name="deviceIds" class="checkboxClass" data-id="{{ $device->deviceId }}"></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @stop
 
@@ -91,8 +93,10 @@
         $('#checkboxAll').on('click', function(e){
             if($(this).is(':checked', true)){
                 $('.checkboxClass').prop('checked', true);
+                document.getElementById("deleteSelectedData").style.display = "";
             }else{
                 $('.checkboxClass').prop('checked', false);
+                document.getElementById("deleteSelectedData").style.display = "none";
             }
         });
 
@@ -140,7 +144,7 @@
                     });
                 }
             }
-        })
+        });
     })
 </script>
 @stop

@@ -327,13 +327,9 @@ return [
                     'url' => 'devices/all'
                 ],
                 [
-                    'text' => 'Device Brands',
-                    'url' => 'devices/brands',
+                    'text' => 'Device Name',
+                    'route' => 'devices_name.index',
                 ],
-                [
-                    'text' => 'Device Types',
-                    'url' => 'devices/types'
-                ]
             ]
         ],
         [

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('deviceId');
-            $table->string('name')->nullable();
-            $table->foreignId('brand_id')->nullable()->constrained('device_brands', 'id', 'brand_id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('type_id')->nullable()->constrained('device_types', 'id', 'type_id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('name_id')->nullable()->constrained('device_names', 'id', 'name_id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('brand')->nullable();
+            $table->string('type')->nullable();
             $table->string('serial_number')->nullable();
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->text('barcode')->nullable();
-
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
