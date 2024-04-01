@@ -118,6 +118,25 @@ class DeviceController extends Controller
         return to_route('devices.index');
     }
 
+    public function deleteSelected(Request $request)
+    {
+        $deviceIds = $request->devIds;
+        // dd($deviceIds);
+
+
+        $deleteQR = Device::whereIn('deviceId',explode(",", $deviceIds))->get();
+
+        foreach($deleteQR as $qr){
+            $path = $qr->barcode;
+            if(Storage::disk('public')->exists($path)){
+                Storage::disk('public')->delete($path);
+            }
+        }
+
+        Device::whereIn('deviceId',explode(",", $deviceIds))->delete();
+        return response()->json(['status'=>true, 'message' => "Selected devices successfully deleted!"]);
+    }
+
     public function createQR()
     {
         return view('devices.createQR');

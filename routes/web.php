@@ -56,6 +56,7 @@ Route::resource('hospitals', HospitalController::class)->names('hospitals');
 Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
 Route::get('devices/create-qr', [DeviceController::class,'createQR'])->name('devices.createQR');
 Route::post('devices/qr-store', [DeviceController::class, 'storeQR'])->name('devices.storeQR');
+Route::delete('devices/delete-devices', [DeviceController::class,'deleteSelected'])->name('devices.deleteSelected');
 // Route::post('devices/all/qr-generate', [DeviceController::class,'qrCodeGenerate'])->name('devices.generateQR');
 Route::get('devices/all/qr-print/{device}', [DeviceController::class, 'printQR'])->name('devices.print');
 });

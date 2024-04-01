@@ -14,6 +14,12 @@
             <a href="{{ route('devices.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus" aria-hidden="true"></i>Create New</a>
         </div>
     </div>
+    <div class="row">
+        <div class="col d-flex justify-content-start pb-3">
+            <a href="#" class="btn btn-outline-dark" id="printSelectedData"><i class="fa fa-print"></i> Print Selected</a>
+            <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData"><i class="fa fa-trash"></i> Delete Selected</a>
+        </div>
+    </div>
     <table class="table table-bordered" id="devicesTable">
         <thead>
             <tr class="text-center">
@@ -27,13 +33,14 @@
                 <th scope="col">Next Cal.</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
+                <th scope="col"><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($devices as $device)
-            <tr>
+            <tr id="devId{{ $device->deviceId }}">
                 <td>{{ $loop->iteration }}</td>
-                <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="200" height="200"></td>
+                <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td>
                 <td>{{ $device->name }}</td>
                 <td>{{ $device->brands->name ?? '' }}</td>
                 <td>{{ $device->types->name ?? '' }}</td>
@@ -57,6 +64,7 @@
                         </form>
                     </div>
                 </td>
+                <td><input type="checkbox" name="deviceIds" class="checkboxClass" data-id="{{ $device->deviceId }}"></td>
             </tr>
             @endforeach
         </tbody>
@@ -73,9 +81,66 @@
     $(document).ready( function () {
         $('#devicesTable').DataTable({
             columnDefs: [
-                {className : 'text-center', targets: '_all'
-            }]
+                {className : 'text-center', targets: '_all'},
+                {orderable : false, target: 10}],
         });
     });
+</script>
+<script>
+    $(document).ready(function(){
+        $('#checkboxAll').on('click', function(e){
+            if($(this).is(':checked', true)){
+                $('.checkboxClass').prop('checked', true);
+            }else{
+                $('.checkboxClass').prop('checked', false);
+            }
+        });
+
+        $('.checkboxClass').on('click', function() {
+            if($('.checkboxClass:checked').length == $('.checkboxClass').length){
+                $('#checkboxAll').prop('checked', true);
+            }else{
+                $('#checkboxAll').prop('checked', false);
+            }
+        });
+
+        $('#deleteSelectedData').on('click', function(e){
+            var deviceIdArr = [];
+            $(".checkboxClass:checked").each(function(){
+                deviceIdArr.push($(this).attr('data-id'));
+            });
+            if(deviceIdArr.length <= 0){
+                alert("Pilih data yang ingin dihapus");
+            }else{
+                if(confirm("Yakin ingin menghapus data yang dipilih?")){
+                    var devIds = deviceIdArr.join(",");
+                    $.ajax({
+                        url: "{{ route('devices.deleteSelected') }}",
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: 'devIds='+devIds,
+                        success: function(data){
+                            if(data['status'] == true){
+                                $('.checkboxClass:checked').each(function(){
+                                    $(this).parents("devId").remove();
+                                });
+                                alert(data['message']);
+                                setTimeout(function(){// wait for 5 secs(2)
+                                    location.reload(); // then reload the page.(3)
+                                }, 1000);
+                            }else{
+                                alert('Terjadi error.');
+                            }
+                        },
+                        error: function(data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        })
+    })
 </script>
 @stop
