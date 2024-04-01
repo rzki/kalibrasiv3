@@ -109,7 +109,7 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->where('id', $device->id)->delete();
-
+        Storage::disk('public')->delete($device->barcode);
         return to_route('devices.index');
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->string('type')->nullable();
             $table->string('serial_number')->nullable();
+            $table->string('location')->nullable();
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->text('barcode')->nullable();

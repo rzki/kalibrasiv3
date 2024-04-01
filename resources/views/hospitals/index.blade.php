@@ -8,10 +8,12 @@
 
 @section('content')
 <div class="container-fluid px-3">
-    <div class="row d-flex justify-content-end pb-3">
-        <a href="{{ route('hospitals.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus"
-                aria-hidden="true"></i>Create New
-        </a>
+    <div class="row">
+        <div class="col d-flex justify-content-end pb-3">
+            <a href="{{ route('hospitals.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus"
+                    aria-hidden="true"></i>Create New
+            </a>
+        </div>
     </div>
     <table class="table table-bordered" id="hospitalsTable">
         <thead>

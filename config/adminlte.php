@@ -299,53 +299,20 @@ return [
             'url'   => 'dashboard',
             'icon'  => 'fas fa-house',
         ],
-        // [
-        //     'header' => 'WORK ORDERS',
-        //     'classes' => 'text-bold'
-        // ],
-        // [
-        //     'text'  => 'Work Orders',
-        //     'url'   => 'work-orders',
-        //     'icon'  => 'fas fa-fw fa-clipboard-check'
-        // ],
         [
             'header' => 'INVENTORY',
             'classes' => 'text-bold'
         ],
         [
-            'text' => 'Hospital',
-            'route' => 'hospitals.index',
-            'icon' => 'fas fa-fw fa-hospital'
-        ],
-        [
             'text'  => 'Devices',
-            'url'   => 'devices',
+            'url'   => 'devices.index',
             'icon'  => 'fas fa-fw fa-screwdriver-wrench',
-            'submenu' => [
-                [
-                    'text' => 'All Devices',
-                    'url' => 'devices/all'
-                ],
-                [
-                    'text' => 'Device Name',
-                    'route' => 'devices_name.index',
-                ],
-            ]
         ],
         [
             'text'  => 'Spare Parts',
             'url'   => 'spare-parts',
             'icon'  => 'fas fa-fw fa-puzzle-piece'
         ],
-        // [
-        //     'header' => 'FINANCE',
-        //     'classes' => 'text-bold'
-        // ],
-        // [
-        //     'text'  => 'Depreciations',
-        //     'url'   => 'depreciations',
-        //     'icon'  => 'fas fa-fw fa-arrow-trend-down'
-        // ],
         [
             'header' => 'DATA',
             'classes' => 'text-bold'
@@ -369,6 +336,16 @@ return [
                     'url' => 'partners/categories',
                 ]
             ]
+        ],
+        [
+            'text' => 'Device Name',
+            'route' => 'devices_name.index',
+            'icon' => 'fas fa-fw fa-screwdriver-wrench'
+        ],
+        [
+            'text' => 'Hospital',
+            'route' => 'hospitals.index',
+            'icon' => 'fas fa-fw fa-hospital'
         ],
         [
             'header' => 'SYSTEM SETTINGS',

@@ -16,7 +16,9 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-start pb-3">
-            <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
+            @if (!$devices->isEmpty())
+                <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
+            @endif
             <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData" style="display: none;"><i class="fa fa-trash"></i> Delete Selected</a>
         </div>
     </div>
