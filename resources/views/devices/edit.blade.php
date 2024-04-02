@@ -22,8 +22,8 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <select name="name" id="name" class="form-control">
+                        <label for="name_id" class="form-label">Name</label>
+                        <select name="name_id" id="name_id" class="form-control">
                             <option value="">Pilih Salah Satu...</option>
                             @foreach ($names as $name)
                                 <option value="{{ $name->id }}"{{ old('name_id', $device->name_id) == $name->id ? 'selected' : '' }}>{{ $name->name }}</option>

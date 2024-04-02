@@ -305,7 +305,7 @@ return [
         ],
         [
             'text'  => 'Devices',
-            'url'   => 'devices.index',
+            'route'   => 'devices.index',
             'icon'  => 'fas fa-fw fa-screwdriver-wrench',
         ],
         [

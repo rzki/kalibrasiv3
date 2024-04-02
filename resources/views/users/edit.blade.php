@@ -9,10 +9,12 @@
 @section('content')
 <div class="container-fluid px-3">
     <div class="row pt-3">
-        <a href="{{ route('users.index') }}" class="btn btn-info text-right">
-            <i class="fas fa-arrow-left pr-2"></i>
-            Back
-        </a>
+        <div class="col pt-3">
+            <a href="{{ route('users.index') }}" class="btn btn-info text-right">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Back
+            </a>
+        </div>
     </div>
 </div>
 <div class="container-fluid px-3">

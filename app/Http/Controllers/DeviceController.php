@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Device;
 use App\Models\Hospital;
 use App\Models\DeviceName;
@@ -47,7 +48,7 @@ class DeviceController extends Controller
             'name_id' => 'required',
             'brand' => 'required',
             'type'=> 'required',
-            'hospital_id' => 'required',
+            // 'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
             'next_calibration_date'=> 'required',
@@ -93,10 +94,10 @@ class DeviceController extends Controller
             'name_id' => 'required',
             'brand' => 'required',
             'type'=> 'required',
-            'hospital_id' => 'required',
+            // 'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
-            'next_calibration_date'=> 'required',
+            // 'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
         $device->where('deviceId',$device->deviceId)->update($validation);
@@ -178,5 +179,13 @@ class DeviceController extends Controller
         $customSize = array(0,0,226.77,170.08);
         $pdf = Pdf::loadView('devices.device_pdf', compact('device'))->setPaper($customSize);
         return $pdf->stream($device->deviceId.'.pdf')->header('Content-Type','application/pdf');
+    }
+
+    public function printEmptyQR()
+    {
+        $devices = Device::whereNull('name_id')->get();
+        $customSize = array(0,0,226.77,170.08);
+        $pdf = Pdf::loadView('devices.device_pdf', compact('devices'))->setPaper($customSize);
+        return $pdf->stream('QR_'.Carbon::today().'.pdf')->header('Content-Type','application/pdf');
     }
 }

@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VCardController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PartnerController;
@@ -12,9 +11,6 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\DeviceNameController;
-use App\Http\Controllers\DeviceTypeController;
-use App\Http\Controllers\DownloadQRController;
-use App\Http\Controllers\DeviceBrandController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\PartnerCategoryController;
 use App\Http\Controllers\EmployeePositionController;
