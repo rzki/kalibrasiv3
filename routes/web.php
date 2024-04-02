@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -46,9 +47,12 @@ Route::resource('companies', CompanyController::class)->names('companies');
 Route::resource('item_units', ItemUnitController::class)->names('item_units');
 Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
 Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
+Route::resource('hospitals', HospitalController::class)->names('hospitals');
+Route::resource('inventories', InventoryController::class)->names('inventories');
+
+// Device
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
 Route::resource('devices/device-name', DeviceNameController::class)->names('devices_name');
-Route::resource('hospitals', HospitalController::class)->names('hospitals');
 Route::post('devices/all/', [DeviceController::class, 'store'])->name('devices.store');
 Route::get('devices/create-qr', [DeviceController::class,'createQR'])->name('devices.createQR');
 Route::post('devices/qr-store', [DeviceController::class, 'storeQR'])->name('devices.storeQR');
