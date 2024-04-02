@@ -19,7 +19,7 @@
             <x-adminlte-info-box title="Users" icon="fas fa-fw fa-users" text="{{ $users->count() }}" url="{{ route('users.index') }}"></x-adminlte-info-box>
         </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <h3 class="font-weight-bolder">Work Orders</h3>
     </div>
     <div class="row">
@@ -33,7 +33,7 @@
             <x-adminlte-info-box title="Completed" icon="fas fa-fw fa-clipboard-check" text="{{ $devices->count() }}" url=""></x-adminlte-info-box>
 
         </div>
-    </div>
+    </div> --}}
 </div>
 @stop
 
