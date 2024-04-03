@@ -329,11 +329,6 @@ return [
             'classes' => 'text-bold'
         ],
         [
-            'text'  => 'Companies',
-            'url'   => 'companies',
-            'icon'  => 'fas fa-fw fa-building'
-        ],
-        [
             'text'  => 'Users',
             'url'   => 'users',
             'icon'  => 'fas fa-fw fa-users'
