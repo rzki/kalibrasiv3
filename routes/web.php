@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -10,6 +9,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ItemUnitController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\DeviceNameController;
 use App\Http\Controllers\EmployeeDeptController;

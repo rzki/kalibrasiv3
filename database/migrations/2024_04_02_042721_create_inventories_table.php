@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->string('device_name');
+            $table->uuid('inv_id');
+            $table->foreignId('device_name')->nullable()->constrained('device_names', 'id', 'device_name')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('brand');
             $table->string('type');
             $table->string('sn');
-            $table->date('procurement_year');
-            $table->string('inv_number');
-            $table->date('last_calibrated_date');
-            $table->string('pic');
-            $table->string('location');
+            $table->year('procurement_year');
+            $table->string('inv_number')->nullable();
+            $table->date('last_calibrated_date')->nullable();
+            $table->date('next_calibrated_date')->nullable();
+            $table->string('pic')->nullable();
+            $table->string('location')->nullable();
             $table->string('status');
             $table->timestamps();
         });

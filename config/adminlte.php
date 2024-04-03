@@ -300,57 +300,25 @@ return [
             'icon'  => 'fas fa-house',
         ],
         [
-            'header' => 'INVENTORY MANAGEMENT',
-            'classes' => 'text-bold'
-        ],
-        [
             'text'    => 'Inventory',
             'route'   => 'inventories.index',
             'icon'    => 'fas fa-boxes-stacked'
         ],
-        // [
-        //     'text'  => 'Spare Parts',
-        //     'url'   => 'spare-parts',
-        //     'icon'  => 'fas fa-fw fa-puzzle-piece'
-        // ],
-        [
-            'header' => 'DATA',
-            'classes' => 'text-bold'
-        ],
-        // [
-        //     'text'  => 'Item Units',
-        //     'url'   => 'item_units',
-        //     'icon'  => 'fas fa-fw fa-list'
-        // ],
-        // [
-        //     'text'  => 'Partners',
-        //     'url'   => 'partners',
-        //     'icon'  => 'fas fa-fw fa-users',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'All Partners',
-        //             'url' => 'partners/all',
-        //         ],
-        //         [
-        //             'text' => 'Categories',
-        //             'url' => 'partners/categories',
-        //         ]
-        //     ]
-        // ],
         [
             'text'    => 'Devices',
             'route'   => 'devices.index',
             'icon'    => 'fas fa-fw fa-screwdriver-wrench',
             'submenu' => [
                     [
+                        'text' => 'All Devices',
+                        'route' => 'devices.index'
+                    ],
+                    [
                         'text' => 'Device Name',
                         'route' => 'devices_name.index',
                     ]
                 ]
         ],
-        // [
-        //     'icon' => 'fas fa-fw fa-screwdriver-wrench'
-        // ],
         [
             'text' => 'Hospital',
             'route' => 'hospitals.index',
@@ -365,30 +333,6 @@ return [
             'url'   => 'companies',
             'icon'  => 'fas fa-fw fa-building'
         ],
-        // [
-        //     'text'  => 'References',
-        //     'url'   => 'references',
-        //     'icon'  => 'fas fa-fw fa-file-lines'
-        // ],
-        // [
-        //     'text'  => 'Employees',
-        //     'url'   => 'employees',
-        //     'icon'  => 'fas fa-fw fa-address-card',
-        //     'submenu' => [
-        //         [
-        //             'text'  => 'All Employees',
-        //             'url'   => 'employees/all',
-        //         ],
-        //         [
-        //             'text'  => 'Departments',
-        //             'url'   => 'employees/depts',
-        //         ],
-        //         [
-        //             'text'  => 'Positions',
-        //             'url'   => 'employees/positions',
-        //         ],
-        //     ]
-        // ],
         [
             'text'  => 'Users',
             'url'   => 'users',

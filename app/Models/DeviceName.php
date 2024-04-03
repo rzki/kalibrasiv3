@@ -13,4 +13,8 @@ class DeviceName extends Model
     {
         return $this->hasMany(Device::class);
     }
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }
