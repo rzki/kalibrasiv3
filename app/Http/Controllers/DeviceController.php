@@ -6,14 +6,11 @@ use Carbon\Carbon;
 use App\Models\Device;
 use App\Models\Hospital;
 use App\Models\DeviceName;
-use App\Models\DeviceType;
 use App\Jobs\GenerateQRJob;
-use App\Models\DeviceBrand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -24,7 +21,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $devices = Device::orderBy('created_at', 'desc')->get();
+        $devices = Device::orderBy('created_at', 'desc')->paginate(100);
 
         return view('devices.index', compact('devices'));
     }
@@ -48,10 +45,9 @@ class DeviceController extends Controller
             'name_id' => 'required',
             'brand' => 'required',
             'type'=> 'required',
-            // 'hospital_id' => 'required',
+            'hospital_id' => 'required',
             'serial_number' => 'required',
             'calibration_date' => 'required',
-            'next_calibration_date'=> 'required',
             'status'=> 'required',
         ]);
 
@@ -89,18 +85,31 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        $validation = $this->validate($request, [
+        // $validation = $this->validate($request, [
+        //     'barcode' => $device->barcode,
+        //     'name_id' => 'required',
+        //     'brand' => 'required',
+        //     'type'=> 'required',
+        //     'hospital_id' => 'required',
+        //     'serial_number' => 'required',
+        //     'calibration_date' => 'required',
+        //     'status'=> 'required',
+        // ]);
+
+        $nextCal = Carbon::parse($request->calibration_date)->addYear();
+
+        $device->where('deviceId',$device->deviceId)->update([
             'barcode' => $device->barcode,
-            'name_id' => 'required',
-            'brand' => 'required',
-            'type'=> 'required',
-            // 'hospital_id' => 'required',
-            'serial_number' => 'required',
-            'calibration_date' => 'required',
-            // 'next_calibration_date'=> 'required',
-            'status'=> 'required',
+            'name_id' => $request->name_id,
+            'brand' => $request->brand,
+            'type'=> $request->type,
+            'hospital_id' => $request->hospital_id,
+            'serial_number' => $request->serial_number,
+            'location' => $request->location,
+            'calibration_date' => $request->calibration_date,
+            'next_calibration_date' => $nextCal,
+            'status'=> $request->status,
         ]);
-        $device->where('deviceId',$device->deviceId)->update($validation);
         return to_route('devices.index');
     }
 
@@ -137,7 +146,7 @@ class DeviceController extends Controller
     }
     public function storeQR(Request $request)
     {
-        DB::disableQueryLog();
+        // DB::disableQueryLog();
 
         $numberOfDevices = (int) $request->input('number');
         if ($numberOfDevices <= 0) {
@@ -157,23 +166,23 @@ class DeviceController extends Controller
 
         return to_route('devices.index');
     }
-    public function qrCodeGenerate(Request $request, Device $device)
-    {
-        $deviceID = Str::uuid();
+    // public function qrCodeGenerate(Request $request, Device $device)
+    // {
+    //     $deviceID = Str::uuid();
 
-        $qr = QrCode::format('png')
-                ->size(285)
-                ->generate(route('devices.qr', $deviceID));
-        $path = 'img/qr-codes/'. $deviceID .'.png';
-        Storage::disk('public')->put($path, $qr);
+    //     $qr = QrCode::format('png')
+    //             ->size(285)
+    //             ->generate(route('devices.qr', $deviceID));
+    //     $path = 'img/qr-codes/'. $deviceID .'.png';
+    //     Storage::disk('public')->put($path, $qr);
 
-        Device::create([
-            'deviceId' => $deviceID,
-            'barcode' => $path
-        ]);
+    //     Device::create([
+    //         'deviceId' => $deviceID,
+    //         'barcode' => $path
+    //     ]);
 
-        return to_route('devices.index');
-    }
+    //     return to_route('devices.index');
+    // }
     public function printQR(Device $device)
     {
         $customSize = array(0,0,226.77,170.08);

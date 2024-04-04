@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Milon\Barcode\DNS2D;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\SerializesModels;
@@ -32,9 +33,8 @@ class GenerateQRJob implements ShouldQueue
         $devices = [];
         foreach ($this->devices as $device){
             // Generate QR code and path
-            $qr = QrCode::format('png')
-            ->size(75)
-            ->generate(route('devices.qr', $device['deviceId']));
+            $qr = new DNS2D();
+            $qr = base64_decode($qr->getBarcodePNG(route('devices.qr', $device['deviceId']), "QRCODE"));
             $path = 'img/qr-codes/' . $device['deviceId'] . '.png';
             Storage::disk('public')->put($path, $qr);
 

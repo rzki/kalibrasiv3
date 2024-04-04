@@ -29,12 +29,16 @@
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" id="username" aria-describedby="username">
-                    </div>
-                    <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="text" class="form-control" name="email" id="email" aria-describedby="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role</label>
+                        <select name="role_id" id="role_id" class="form-control">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->roleId }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

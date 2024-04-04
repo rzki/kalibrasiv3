@@ -23,17 +23,14 @@
         </div>
     </div>
     <div class="pb-3">
-        <table class="table table-bordered" id="devicesTable">
+        <table class="table table-bordered table-hover" id="deviceTable">
             <thead>
                 <tr class="text-center">
                     <th scope="col">No</th>
                     <th scope="col">QR Code</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Type</th>
                     <th scope="col">Serial Number</th>
                     <th scope="col">Cal. Date</th>
-                    <th scope="col">Next Cal.</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                     <th scope="col"><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
@@ -43,13 +40,10 @@
                 @foreach ($devices as $device)
                 <tr id="devId{{ $device->deviceId }}">
                     <td>{{ $loop->iteration }}</td>
-                    <td><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td>
+                    <td class="w-50"><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td>
                     <td>{{ $device->names->name ?? '' }}</td>
-                    <td>{{ $device->brands}}</td>
-                    <td>{{ $device->types}}</td>
                     <td>{{ $device->serial_number }}</td>
                     <td>{{ $device->calibration_date }}</td>
-                    <td>{{ $device->next_calibration_date }}</td>
                     <td>{{ $device->status }}</td>
                     <td>
                         <div class="action-form d-flex justify-content-center">
@@ -67,11 +61,12 @@
                             </form>
                         </div>
                     </td>
-                    <td><input type="checkbox" name="deviceIds" class="checkboxClass" data-id="{{ $device->deviceId }}"></td>
+                    <td class="text-center"><input type="checkbox" name="deviceIds" class="checkboxClass" data-id="{{ $device->deviceId }}"></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $devices->links() }}
     </div>
 </div>
 @stop

@@ -1,39 +1,35 @@
 @extends('adminlte::page')
 
-@section('title', 'Users')
+@section('title', 'Roles')
 
 @section('content_header')
-<h1>Users</h1>
+<h1>Roles</h1>
 @stop
 
 @section('content')
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
-            <a href="{{ route('users.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
         </div>
     </div>
-    <table class="table table-bordered" id="usersTable">
+    <table class="table table-bordered" id="rolesTable">
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($roles as $role)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->roles->name }}</td>
+                    <td>{{ $role->name }}</td>
                     <td>
                         <div class="action-form d-flex justify-content-center">
-                            <a href="{{ route('users.edit', $user->userId) }}" class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                            <form action="{{ route('users.destroy', $user->userId) }}" method="post" class="delete-form">
+                            <a href="{{ route('roles.edit', $role->roleId) }}" class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                            <form action="{{ route('roles.destroy', $role->roleId) }}" method="post" class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -54,7 +50,7 @@
 @section('js')
 <script>
     $(document).ready( function () {
-        $('#usersTable').DataTable({
+        $('#rolesTable').DataTable({
             columnDefs: [
             {className : 'text-center', targets: '_all'
             }]

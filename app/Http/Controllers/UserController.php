@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -33,15 +36,15 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'username' => 'required|max:16',
             'email' => 'required|email'
         ]);
 
         User::create([
+            'userId' => Str::uuid(),
             'name' => $request['name'],
-            'username' => $request['username'],
             'email' => $request['email'],
-            'password' => Hash::make('Calibration24!')
+            'password' => Hash::make('Calibration24!'),
+            'role_id' => $request['role_id']
         ]);
 
         return to_route('users.index');
@@ -60,7 +63,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -68,16 +72,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
+            'userId' => Str::uuid(),
             'name' => 'required',
-            'username' => 'required|max:16',
             'email' => 'required|email'
         ]);
 
-        $users = User::find($user);
-        $users->update($request->all());
+        $user->where('userId', $user->userId)->update($validation);
 
-        return to_route('users.update');
+        return to_route('users.index');
     }
 
     /**
@@ -85,8 +88,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $users = $user;
-        $users->delete();
+        $user->where('userId', $user->userId)->delete();
 
         return to_route('users.index');
     }

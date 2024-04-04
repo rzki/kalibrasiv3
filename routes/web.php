@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CompanyController;
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::resource('users', UserController::class)->names('users');
+Route::resource('roles', RoleController::class)->names('roles');
 Route::controller(EmployeeController::class)->group(function() {
     Route::resource('employees/all', EmployeeController::class)->names('employees');
 });

@@ -35,7 +35,7 @@
                         <input type="text" name="brand" id="brand" class="form-control" placeholder="Brand...">
                     </div>
                     <div class="mb-3">
-                        <label for="type_id" class="form-label">Type</label>
+                        <label for="type" class="form-label">Type</label>
                         <input type="text" name="type" id="type" class="form-control" placeholder="Type...">
                     </div>
                     <div class="mb-3">
@@ -55,20 +55,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="calibration_date" class="form-label">Last Calibration Date</label>
-                                <input type="date" name="calibration_date" id="calibration_date" class="form-control" value="{{ old('calibration_date', $device->calibration_date) }}">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="next_calibration_date" class="form-label">Next Calibration Date</label>
-                                <input type="date" name="next_calibration_date" id="next_calibration_date"
-                                    class="form-control" value="{{ old('next_calibration_date', $device->next_calibration_date) }}">
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="calibration_date" class="form-label">Last Calibration Date</label>
+                        <input type="date" name="calibration_date" id="calibration_date" class="form-control" value="{{ old('calibration_date', $device->calibration_date) }}">
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -91,5 +80,9 @@
 @stop
 
 @section('js')
-
+    <script>
+        $(document).ready(function() {
+            $('#name_id').select2();
+        });
+    </script>
 @stop

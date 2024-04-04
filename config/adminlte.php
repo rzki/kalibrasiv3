@@ -333,6 +333,11 @@ return [
             'url'   => 'users',
             'icon'  => 'fas fa-fw fa-users'
         ],
+        [
+            'text' => 'Roles',
+            'route' => 'roles.index',
+            'icon' => 'fas fa-fw fa-arrow-rotate'
+        ]
     ],
 
     /*
