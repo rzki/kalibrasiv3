@@ -185,6 +185,7 @@ class DeviceController extends Controller
     // }
     public function printQR(Device $device)
     {
+        // dd($device);
         $customSize = array(0,0,226.77,170.08);
         $pdf = Pdf::loadView('devices.device_pdf', compact('device'))->setPaper($customSize);
         return $pdf->stream($device->deviceId.'.pdf')->header('Content-Type','application/pdf');
@@ -192,10 +193,10 @@ class DeviceController extends Controller
 
     public function printEmptyQR()
     {
-        $devices = DB::table('devices')->get();
+        $devices = DB::table('devices')->where('name_id', '=', null)->get();
         // dd($devices);
         $customSize = array(0,0,226.77,170.08);
-        $pdf = Pdf::loadView('devices.device_pdf', compact('devices'))->setPaper($customSize);
-        return $pdf->download('QR_'.Carbon::today().'.pdf')->header('Content-Type','application/pdf');
+        $pdf = Pdf::loadView('devices.empty_multi_qr', compact('devices'))->setPaper($customSize);
+        return $pdf->stream('QR_'.Carbon::today().'.pdf')->header('Content-Type','application/pdf');
     }
 }
