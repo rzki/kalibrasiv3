@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'SIMAK',
+    'title' => 'Kalibrasi',
     'title_prefix' => '',
-    'title_postfix' => '- SIMAK',
+    'title_postfix' => '- Kalibrasi',
 
     /*
     |--------------------------------------------------------------------------
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>SIMAK</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>KALIBRASI</b>',
+    'logo_img' => 'assets/images/logos/Medquest_circle.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'assets/images/logos/Medquest_circle.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
