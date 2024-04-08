@@ -13,7 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::orderByDesc('created_at')->get();
+        $roles = Role::orderByDesc('created_at')->where('code','!=','superadmin')->get();
+
         return view('roles.index', compact('roles'));
     }
 

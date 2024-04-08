@@ -7,13 +7,12 @@ namespace App\Models;
 use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,11 +44,8 @@ class User extends Authenticatable
     {
         return 'userId';
     }
-    protected $primaryKey = 'userId';
     public function roles()
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
-    protected $keyType = 'string';
-    public $incrementing = false;
 }

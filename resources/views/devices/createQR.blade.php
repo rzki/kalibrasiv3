@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="number" class="form-label">Number</label>
+                        <label for="number" class="form-label">Jumlah QR yang ingin dibuat</label>
                         <input type="number" name="number" id="number" class="form-control">
                     </div>
                 </div>

@@ -10,7 +10,7 @@
     <div>
         @foreach ($devices as $device)
             <div class="barcode" style="page-break-after: always">
-                <img src="{{ DNS2D::getBarcodePNGPath(route('devices.qr',$device->deviceId), 'QRCODE') }}" alt="" width="25%" height="40%">
+                <img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="25%" height="40%">
             </div>
         @endforeach
     </div>

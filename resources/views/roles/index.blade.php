@@ -13,6 +13,8 @@
             <a href="{{ route('roles.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
         </div>
     </div>
+</div>
+<div class="table-responsive">
     <table class="table table-bordered" id="rolesTable">
         <thead>
             <tr class="text-center">
@@ -23,20 +25,22 @@
         </thead>
         <tbody>
             @foreach ($roles as $role)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $role->name }}</td>
-                    <td>
-                        <div class="action-form d-flex justify-content-center">
-                            <a href="{{ route('roles.edit', $role->roleId) }}" class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                            <form action="{{ route('roles.destroy', $role->roleId) }}" method="post" class="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $role->name }}</td>
+                <td>
+                    <div class="action-form d-flex justify-content-center">
+                        <a href="{{ route('roles.edit', $role->roleId) }}" class="btn btn-primary mr-2"><i
+                                class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <form action="{{ route('roles.destroy', $role->roleId) }}" method="post" class="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>
@@ -51,6 +55,7 @@
 <script>
     $(document).ready( function () {
         $('#rolesTable').DataTable({
+            autoWidth: true,
             columnDefs: [
             {className : 'text-center', targets: '_all'
             }]
