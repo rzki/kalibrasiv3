@@ -15,59 +15,56 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-start pb-3">
-            @if (!$devices->isEmpty())
-                <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
-            @endif
+            <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
             <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData" style="display: none;"><i class="fa fa-trash"></i> Delete Selected</a>
         </div>
     </div>
 </div>
 <div class="table-responsive pb-3">
-    <table class="table table-bordered table-hover" id="devicesTable">
+    <table class="table table-bordered table-hover devicesTable text-center" id="devicesTable">
         <thead>
             <tr class="text-center">
-                <th scope="col">No</th>
-                {{-- <th scope="col">QR Code</th> --}}
-                <th scope="col">Name</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Cal. Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-                <th scope="col"><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
+                <th>No</th>
+                <th>Name</th>
+                <th>Serial Number</th>
+                <th>Cal. Date</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($devices as $device)
-            <tr id="devId{{ $device->deviceId }}">
-                <td>{{ $loop->iteration }}</td>
-                {{-- <td class="w-50"><img src="{{ asset('storage/'.$device->barcode) }}" alt="" width="100" height="100"></td> --}}
-                <td>{{ $device->names->name ?? '' }}</td>
-                <td>{{ $device->serial_number }}</td>
-                <td>{{ $device->calibration_date }}</td>
-                <td>{{ $device->status }}</td>
-                <td>
-                    <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('devices.qr', $device->deviceId) }}" class="btn btn-info mr-2"><i
-                                class="fa fa-circle-info" aria-hidden="true"></i></a>
-                        <a href="{{ route('devices.edit', $device->deviceId) }}" class="btn btn-primary mr-2"><i
-                                class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-2"
-                            target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-                        <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
-                            class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </td>
-                <td class="text-center"><input type="checkbox" name="deviceIds" class="checkboxClass"
-                        data-id="{{ $device->deviceId }}"></td>
-            </tr>
-            @endforeach
+            {{-- @foreach ($devices as $device)
+                <tr id="devId{{ $device->deviceId }}">
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $device->names->name ?? '' }}</td>
+                    <td>{{ $device->serial_number }}</td>
+                    <td>{{ $device->calibration_date }}</td>
+                    <td>{{ $device->status }}</td>
+                    <td>
+                        <div class="action-form d-flex justify-content-center">
+                            <a href="{{ route('devices.qr', $device->deviceId) }}" class="btn btn-info mr-2"><i
+                                    class="fa fa-circle-info" aria-hidden="true"></i></a>
+                            <a href="{{ route('devices.edit', $device->deviceId) }}" class="btn btn-primary mr-2"><i
+                                    class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                            <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-2"
+                                target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                            <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                    <td class="text-center"><input type="checkbox" name="deviceIds" class="checkboxClass"
+                            data-id="{{ $device->deviceId }}"></td>
+                </tr>
+            @endforeach --}}
         </tbody>
     </table>
+    {{-- {{ $dataTable->table(['class' => 'table table-bordered table-hover text-center']) }} --}}
 </div>
 @stop
 
@@ -76,17 +73,103 @@
 @stop
 
 @section('js')
-<script>
+{{-- <script>
     $(document).ready( function () {
         $('#devicesTable').DataTable({
             autoWidth: true,
             columnDefs: [
-                {className : 'text-center', targets: '_all'},
-                {orderable : false, target: 6}],
+                    {className : 'text-center', targets: '_all'},
+                    {orderable : false, target: 6}
+                ],
+            lengthMenu: [
+                [10, 25, 50, 100, 250, 500, -1],
+                [10, 25, 50, 100, 250, 500, 'All']
+            ],
         });
     });
-</script>
+</script> --}}
 <script>
+    $(document).ready(function () {
+        $('.devicesTable').DataTable({
+            autoWidth: true,
+            lengthMenu: [
+                [10, 25, 50, 100, 250, 500, -1],
+                [10, 25, 50, 100, 250, 500, 'All']
+            ],
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('devices.index') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'no', orderable: false, searchable: false},
+                {data: 'name_id', name: 'name'},
+                {data: 'serial_number', name: 'serial_number'},
+                {data: 'calibration_date', name: 'calibration_date'},
+                {data: 'status', name: 'status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false}
+            ]
+        });
+
+        $('#checkboxAll').on('click', function(e){
+            if($(this).is(':checked', true)){
+                $('.checkboxClass').prop('checked', true);
+                document.getElementById("deleteSelectedData").style.display = "";
+            }else{
+                $('.checkboxClass').prop('checked', false);
+                    document.getElementById("deleteSelectedData").style.display = "none";
+                }
+        });
+
+        $('.checkboxClass').on('click', function() {
+            if($('.checkboxClass:checked').length == $('.checkboxClass').length){
+                $('#checkboxAll').prop('checked', true);
+            }else{
+                $('#checkboxAll').prop('checked', false);
+            }
+        });
+
+        $('#deleteSelectedData').on('click', function(e){
+            var deviceIdArr = [];
+            $(".checkboxClass:checked").each(function(){
+                deviceIdArr.push($(this).attr('data-id'));
+            });
+
+            if(deviceIdArr.length <= 0){
+                alert("Pilih data yang ingin dihapus");
+            }else{
+                if(confirm("Yakin ingin menghapus data yang dipilih?")){
+                    var devIds = deviceIdArr.join(",");
+                    $.ajax({
+                        url: "{{ route('devices.deleteSelected') }}",
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: 'devIds='+devIds,
+                        success: function(data){
+                            if(data['status'] == true){
+                                $('.checkboxClass:checked').each(function(){
+                                    $(this).parents("devId").remove();
+                                });
+                                alert(data['message']);
+                                setTimeout(function(){// wait for 5 secs(2)
+                                    location.reload(); // then reload the page.(3)
+                                }, 500);
+                            }else{
+                                alert('Terjadi error.');
+                            }
+                        },
+                        error: function(data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+
+  });
+</script>
+{{-- <script>
     $(document).ready(function(){
         $('#checkboxAll').on('click', function(e){
             if($(this).is(':checked', true)){
@@ -144,5 +227,7 @@
             }
         });
     })
-</script>
+</script> --}}
+{{-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} --}}
+
 @stop

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DevicesDataTable;
 use Carbon\Carbon;
 use App\Models\Device;
 use App\Models\Hospital;
@@ -13,17 +14,52 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Yajra\DataTables\Facades\DataTables;
 
 class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $devices = Device::orderBy('created_at', 'desc')->paginate(100);
+        // $devices = Device::orderBy('created_at', 'desc')->get();
+        // $devices = Device::with('names')->orderBy('created_at', 'desc')->get();
 
-        return view('devices.index', compact('devices'));
+        // return view('devices.index', compact('devices'));
+        // return $dataTable->ajax();
+        if($request->ajax()){
+            $devices = Device::with('names')->orderBy('created_at', 'desc')->get();
+            return DataTables::of($devices)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                    <div class="action-form d-flex justify-content-center">
+                        <a href="' . route('devices.qr', ['device' => $row->deviceId]) . '" class="btn btn-info mr-2"><i
+                                class="fa fa-circle-info" aria-hidden="true"></i></a>
+                        <a href="' . route('devices.edit', ['device' => $row->deviceId]) . '" class="btn btn-primary mr-2"><i
+                                class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <a href="' . route('devices.print', ['device' => $row->deviceId]) . '" class="btn btn-secondary mr-2"
+                            target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                        <form action="' . route('devices.destroy', ['device' => $row->deviceId]) . '" method="post"
+                            class="delete-form">
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </div>';
+                    return $actionBtn;
+                })
+                ->addColumn('checkbox', function ($item) {
+                    $item = '<input type="checkbox" name="deviceIds" class="checkboxClass" data-id="'.$item->deviceId.'"/>';
+                    return $item;
+                })
+                ->rawColumns(['action', 'checkbox'])
+                ->make(true);
+        }
+        return view('devices.index');
+        // return $devicesDataTable->render('devices.index');
     }
 
     /**
@@ -119,6 +155,12 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->where('id', $device->id)->delete();
+        Storage::disk('public')->delete($device->barcode);
+        return to_route('devices.index');
+    }
+    public function destroyAll(Device $device)
+    {
+        $device->where('id', $device->id)->where('name_id')->delete();
         Storage::disk('public')->delete($device->barcode);
         return to_route('devices.index');
     }

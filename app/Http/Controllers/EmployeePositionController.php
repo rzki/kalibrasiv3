@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\EmployeePositionDataTable;
-use App\Models\EmployeePosition;
 use Illuminate\Http\Request;
+use App\Models\EmployeePosition;
+use App\DataTables\EmployeePositionDataTable;
+use App\Http\Requests\EmployeePositionRequest;
 
 class EmployeePositionController extends Controller
 {
@@ -29,15 +30,13 @@ class EmployeePositionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeePositionRequest $r)
     {
-        $validation = $this->validate($request, [
-            'code' => 'required|max:6',
-            'name' => 'required|max:50',
-            'status' => 'required'
+        EmployeePosition::create([
+            'code' => $r->code,
+            'name' => $r->name,
+            'status' => $r->status
         ]);
-
-        EmployeePosition::create($validation);
 
         return to_route('employee_positions.index')->with(['success' => 'Employee Position successfully created!']);
     }
@@ -61,15 +60,13 @@ class EmployeePositionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EmployeePosition $position)
+    public function update(EmployeePositionRequest $r, EmployeePosition $position)
     {
-        $validation = $this->validate($request, [
-            'code' => 'required|min:2|max:6',
-            'name' => 'required|min:3|max:50',
-            'status' => 'required'
+        $position->where('id', $position->id)->update([
+            'code' => $r->code,
+            'name' => $r->name,
+            'status' => $r->status
         ]);
-
-        $position->where('id', $position->id)->update($validation);
 
         return to_route('employee_positions.index');
     }

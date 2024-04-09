@@ -7,6 +7,7 @@ use App\Models\EmployeeDept;
 use Illuminate\Http\Request;
 use App\Models\EmployeePosition;
 use App\DataTables\EmployeesDataTable;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -35,20 +36,19 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $r)
     {
-        $validation = $this->validate($request, [
-            'name' => 'required',
-            'nid' => 'required',
-            'type' => 'required',
-            'status' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-            'employee_dept_id' => 'required|integer',
-            'employee_position_id' => 'required|integer'
-        ]);
 
-        Employee::create($validation);
+        Employee::create([
+            'name' => $r->name,
+            'nid' => $r->nid,
+            'type' => $r->type,
+            'status' => $r->status,
+            'email' => $r->email,
+            'phone_number' => $r->phone_number,
+            'employee_dept_id' => $r->employee_dept_id,
+            'employee_position_id' => $r->employee_position_id
+        ]);
 
         return to_route('employees.index')->with(['success', 'Employee successfully created!']);
     }
@@ -75,20 +75,18 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeRequest $r, Employee $employee)
     {
-        $validation = $this->validate($request, [
-            'name' => 'required',
-            'nid' => 'required',
-            'type' => 'required',
-            'status' => 'required',
-            'employee_dept_id' => 'required',
-            'employee_position_id' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
+        $employee->where('id', $employee->id)->update([
+            'name' => $r->name,
+            'nid' => $r->nid,
+            'type' => $r->type,
+            'status' => $r->status,
+            'email' => $r->email,
+            'phone_number' => $r->phone_number,
+            'employee_dept_id' => $r->employee_dept_id,
+            'employee_position_id' => $r->employee_position_i
         ]);
-
-        $employee->where('id', $employee->id)->update($validation);
 
         // dd($employees);
         return to_route('employees.index')->with(['success', 'Employee successfully updated!']);

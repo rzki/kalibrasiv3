@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\EmployeeDeptDataTable;
+use App\Http\Requests\EmployeeDeptRequest;
 use App\Models\EmployeeDept;
-use Illuminate\Http\Request;
 
 class EmployeeDeptController extends Controller
 {
@@ -29,15 +29,13 @@ class EmployeeDeptController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeDeptRequest $r)
     {
-        $validation = $this->validate($request, [
-            'code' => 'required|min:2|max:6',
-            'name' => 'required|min:3|max:50',
-            'status' => 'required'
+        EmployeeDept::create([
+            'code' => $r->code,
+            'name' => $r->name,
+            'status' => $r->status
         ]);
-
-        EmployeeDept::create($validation);
 
         return to_route('employee_depts.index')->with(['success', 'Employee Department successfully created!']);
     }
@@ -61,15 +59,13 @@ class EmployeeDeptController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EmployeeDept $dept)
+    public function update(EmployeeDeptRequest $r, EmployeeDept $dept)
     {
-        $validation = $this->validate($request, [
-            'code' => 'required|min:2|max:6',
-            'name' => 'required|min:3|max:50',
-            'status' => 'required'
+        $dept->where('id', $dept->id)->update([
+            'code' => $r->code,
+            'name' => $r->name,
+            'status' => $r->status
         ]);
-
-        $dept->where('id', $dept->id)->update($validation);
 
         return to_route('employee_depts.index');
     }

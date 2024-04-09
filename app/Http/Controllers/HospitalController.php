@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HospitalRequest;
 use App\Models\Device;
 use App\Models\Hospital;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class HospitalController extends Controller
@@ -28,32 +30,15 @@ class HospitalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HospitalRequest $r)
     {
-        $validation = $this->validate($request, [
-            'name' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-            'email' => 'required|email',
+        Hospital::create([
+            'hospitalId' => Str::uuid(),
+            'name' => $r->name,
+            'phone_number' => $r->phone_number,
+            'email' => $r->email,
+            'address' => $r->address
         ]);
-
-        // $vCard = "BEGIN:VCARD\nVERSION:4.0\nFN:$request->name\nTEL;TYPE:cell:$request->phone_number\nEMAIL:$request->email\nEND:VCARD";
-        // $qr = QrCode::format('png')
-        //         ->size(200)
-        //         ->generate($vCard);
-        // $path = 'img/vcard/'.$request->name.'.png';
-        // Storage::disk('public')->put($path, $qr);
-
-
-        // VCard::create([
-        //     'name'=> $request->name,
-        //     'phone_number' => $request->phone_number,
-        //     'email' => $request->email,
-        //     'address' => $request->address,
-        //     'barcode' => $path
-        // ]);
-
-        Hospital::create($validation);
 
         return to_route('hospitals.index');
     }
@@ -78,16 +63,14 @@ class HospitalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hospital $hospital)
+    public function update(HospitalRequest $r, Hospital $hospital)
     {
-        $validation = $this->validate($request, [
-            'name' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-            'email' => 'required|email',
+        $hospital->where('hospitalId', $hospital->hospitalId)->update([
+            'name' => $r->name,
+            'phone_number' => $r->phone_number,
+            'email' => $r->email,
+            'address' => $r->address
         ]);
-
-        $hospital->where('id', $hospital->id)->update($validation);
 
         return to_route('hospitals.index');
     }
@@ -97,7 +80,7 @@ class HospitalController extends Controller
      */
     public function destroy(Hospital $hospital)
     {
-        $hospital->delete();
+        $hospital->where('hospitalId', $hospital->hospitalId)->delete();
 
         return to_route('hospitals.index');
     }

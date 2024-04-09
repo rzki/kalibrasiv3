@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeviceNameRequest;
 use App\Models\DeviceName;
 use Illuminate\Http\Request;
 
@@ -28,13 +29,11 @@ class DeviceNameController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DeviceNameRequest $request)
     {
-        $validation = $this->validate($request,[
-            'name' => 'required'
+        DeviceName::create([
+            'name' => $request->name
         ]);
-
-        DeviceName::create($validation);
 
         return to_route('devices_name.index');
     }
@@ -58,13 +57,11 @@ class DeviceNameController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DeviceName $deviceName)
+    public function update(DeviceNameRequest $request, DeviceName $deviceName)
     {
-        $validation = $this->validate($request,[
-            'name' => 'required'
+        $deviceName->where('id',$deviceName->id)->update([
+            'name' => $request->name
         ]);
-
-        $deviceName->where('id',$deviceName->id)->update($validation);
 
         return to_route('devices_name.index');
     }
