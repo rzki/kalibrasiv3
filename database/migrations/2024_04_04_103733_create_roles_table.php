@@ -16,7 +16,6 @@ return new class extends Migration
             $table->uuid('roleId');
             $table->string('name')->unique();
             $table->string('code');
-            $table->foreignId('user_id')->nullable()->constrained('users', 'id', 'user_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
 
