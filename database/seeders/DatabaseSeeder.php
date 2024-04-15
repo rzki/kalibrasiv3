@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Galuh Kurniawan',
             'email' => 'galuh.kurniawan@medquest.co.id',
             'password' => Hash::make('Calibration24!'),
-            'role_id' => 1
+            'role_id' => 2
         ]);
 
         User::create([
