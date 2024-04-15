@@ -341,7 +341,7 @@ return [
         [
             'text' => 'Roles',
             'route' => 'roles.index',
-            'icon' => 'fas fa-fw fa-arrow-rotate',
+            'icon' => 'fas fa-fw fa-lock',
             'can' => 'superadmin-access'
         ]
     ],

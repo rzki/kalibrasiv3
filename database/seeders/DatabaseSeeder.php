@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'userId' => Str::orderedUuid(),
             'name' => 'Superadmin',
-            'email' => 'sadmin@kalv3.com',
-            'password' => Hash::make('Kalibrasi'),
+            'email' => 'superadmin@cal.medquest.co.id',
+            'password' => Hash::make('Calibration24!'),
             'role_id' => 1
         ]);
     }
