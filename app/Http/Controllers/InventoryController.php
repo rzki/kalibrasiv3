@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Inventory;
 use App\Models\DeviceName;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Requests\InventoryRequest;
 
 class InventoryController extends Controller
