@@ -302,7 +302,8 @@ return [
         [
             'text'    => 'Inventory',
             'route'   => 'inventories.index',
-            'icon'    => 'fas fa-boxes-stacked'
+            'icon'    => 'fas fa-boxes-stacked',
+            'can'     => 'admin-access'
         ],
         [
             'text'    => 'Devices',
@@ -311,32 +312,37 @@ return [
             'submenu' => [
                     [
                         'text' => 'All Devices',
-                        'route' => 'devices.index'
+                        'route' => 'devices.index',
                     ],
                     [
                         'text' => 'Device Name',
                         'route' => 'devices_name.index',
+                        'can' => ['superadmin-access', 'admin-access']
                     ]
                 ]
         ],
         [
             'text' => 'Hospital',
             'route' => 'hospitals.index',
-            'icon' => 'fas fa-fw fa-hospital'
+            'icon' => 'fas fa-fw fa-hospital',
+            'can' => 'admin-access'
         ],
         [
             'header' => 'SYSTEM SETTINGS',
-            'classes' => 'text-bold'
+            'classes' => 'text-bold',
+            'can' => ['admin-access', 'superadmin-access']
         ],
         [
             'text'  => 'Users',
             'url'   => 'users',
-            'icon'  => 'fas fa-fw fa-users'
+            'icon'  => 'fas fa-fw fa-users',
+            'can'   => 'admin-access'
         ],
         [
             'text' => 'Roles',
             'route' => 'roles.index',
-            'icon' => 'fas fa-fw fa-arrow-rotate'
+            'icon' => 'fas fa-fw fa-arrow-rotate',
+            'can' => 'superadmin-access'
         ]
     ],
 
