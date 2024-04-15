@@ -204,27 +204,9 @@ class DeviceController extends Controller
         }
 
         GenerateQRJob::dispatch($devices);
-        // DB::table('devices')->insert($devices);
 
         return to_route('devices.index');
     }
-    // public function qrCodeGenerate(Request $request, Device $device)
-    // {
-    //     $deviceID = Str::uuid();
-
-    //     $qr = QrCode::format('png')
-    //             ->size(285)
-    //             ->generate(route('devices.qr', $deviceID));
-    //     $path = 'img/qr-codes/'. $deviceID .'.png';
-    //     Storage::disk('public')->put($path, $qr);
-
-    //     Device::create([
-    //         'deviceId' => $deviceID,
-    //         'barcode' => $path
-    //     ]);
-
-    //     return to_route('devices.index');
-    // }
     public function printQR(Device $device)
     {
         // dd($device);
@@ -235,7 +217,7 @@ class DeviceController extends Controller
 
     public function printEmptyQR()
     {
-        $devices = DB::table('devices')->where('name_id', '=', null)->get();
+        $devices = DB::table('devices')->where('name_id', '=', null)->pluck('barcode');
         // dd($devices);
         $customSize = array(0,0,226.77,170.08);
         $pdf = Pdf::loadView('devices.empty_multi_qr', compact('devices'))->setPaper($customSize);

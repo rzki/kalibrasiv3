@@ -10,7 +10,7 @@
     <div>
         @foreach ($devices as $device)
             <div class="barcode" style="page-break-after: always">
-                <img src="{{ public_path('storage/'.$device->barcode) }}" alt="" width="25%" height="40%">
+                <img src="{{ public_path('storage/'.$device) }}" alt="" width="25%" height="40%">
             </div>
         @endforeach
     </div>
