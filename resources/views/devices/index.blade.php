@@ -14,13 +14,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col d-flex justify-content-start pb-3">
+        <div class="col d-flex justify-content-between pb-3">
             <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
             <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData" style="display: none;"><i class="fa fa-trash"></i> Delete Selected</a>
         </div>
     </div>
 </div>
-<div class="table-responsive pb-3">
+<div class="table-responsive py-3">
     <table class="table table-bordered table-hover devicesTable text-center" id="devicesTable">
         <thead>
             <tr class="text-center">
@@ -90,12 +90,13 @@
 </script> --}}
 <script>
     $(document).ready(function () {
-        $('.devicesTable').DataTable({
+        var table = $('.devicesTable').DataTable({
             autoWidth: true,
             lengthMenu: [
                 [10, 25, 50, 100, 250, 500, -1],
                 [10, 25, 50, 100, 250, 500, 'All']
             ],
+            pageLength: 100,
             processing: true,
             serverSide: true,
             ajax: "{{ route('devices.index') }}",
@@ -107,17 +108,19 @@
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
                 {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false}
-            ]
+            ],
         });
 
         $('#checkboxAll').on('click', function(e){
             if($(this).is(':checked', true)){
-                $('.checkboxClass').prop('checked', true);
+                $('.devicesTable tbody :checkbox').prop('checked', $(this).is(':checked'));
                 document.getElementById("deleteSelectedData").style.display = "";
+                e.stopImmediatePropagation();
             }else{
-                $('.checkboxClass').prop('checked', false);
-                    document.getElementById("deleteSelectedData").style.display = "none";
-                }
+                $('.devicesTable tbody :checkbox').prop('checked', $(this).is(''));
+                document.getElementById("deleteSelectedData").style.display = "none";
+                e.stopImmediatePropagation();
+            }
         });
 
         $('.checkboxClass').on('click', function() {
