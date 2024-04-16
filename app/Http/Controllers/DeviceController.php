@@ -209,7 +209,7 @@ class DeviceController extends Controller
     }
     public function printQR(Device $device)
     {
-        // dd($device);
+        dd($device);
         $customSize = array(0,0,226.77,170.08);
         $pdf = Pdf::loadView('devices.device_pdf', compact('device'))->setPaper($customSize);
         return $pdf->stream($device->deviceId.'.pdf')->header('Content-Type','application/pdf');

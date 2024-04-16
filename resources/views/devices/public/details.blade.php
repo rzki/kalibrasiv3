@@ -11,7 +11,7 @@
             <div class="col-lg-6">
                 <div class="row d-flex flex-column justify-content-center align-items-center p-5">
                     <div class="col-lg-3 text-center">
-                        <img src="{{ DNS2D::getBarcodePNGPath(route('devices.qr',$device->deviceId), 'QRCODE') }}" alt="">
+                        <img src="{{ asset('storage/'.$device->barcode) }}" alt="">
                     </div>
                     <div class="col-lg-9 text-center">
                         <div class="row py-3">
