@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row py-3">
-        <a href="{{ route('devices.index') }}" class="btn btn-info text-right">
+        <a href="{{ route('devices.index') }}" class="btn btn-primary text-right">
             <i class="fas fa-arrow-left pr-2"></i>
             Back
         </a>

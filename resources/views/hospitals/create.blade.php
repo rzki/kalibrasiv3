@@ -8,11 +8,13 @@
 
 @section('content')
 <div class="container-fluid px-3">
-    <div class="row pt-3">
-        <a href="{{ route('hospitals.index') }}" class="btn btn-info text-right">
-            <i class="fas fa-arrow-left pr-2"></i>
-            Back
-        </a>
+    <div class="row">
+        <div class="col pt-3">
+            <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Back
+            </a>
+        </div>
     </div>
 </div>
 <div class="container-fluid px-3">
@@ -40,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-block btn-primary my-3 text-center">Submit</button>
+            <button type="submit" class="btn btn-block btn-success my-3 text-center">Submit</button>
         </form>
     </div>
 </div>

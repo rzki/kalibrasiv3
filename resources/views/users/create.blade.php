@@ -10,7 +10,7 @@
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col pt-3">
-            <a href="{{ route('users.index') }}" class="btn btn-info text-right">
+            <a href="{{ route('users.index') }}" class="btn btn-primary text-right">
                 <i class="fas fa-arrow-left pr-2"></i>
                 Back
             </a>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-block btn-primary text-center">Submit</button>
+            <button type="submit" class="btn btn-block btn-success text-center">Submit</button>
         </form>
     </div>
 </div>

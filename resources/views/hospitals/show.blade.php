@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid pt-lg-5 px-lg-3">
     <div class="row pt-3">
-        <a href="{{ route('hospitals.index') }}" class="btn btn-info text-right">
+        <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
             <i class="fas fa-arrow-left pr-2"></i>
             Back
         </a>
@@ -86,7 +86,7 @@
                         <td>
                             <div class="action-form d-flex justify-content-center">
                                 <a href="{{ route('devices.qr', $dev->deviceId) }}"
-                                    class="btn btn-info mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
+                                    class="btn btn-primary mr-lg-2"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
                                 <a href="{{ route('devices.edit', $dev->deviceId) }}"
                                     class="btn btn-primary mr-lg-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
                                 <a href="{{ route('devices.print', $dev->deviceId) }}" class="btn btn-secondary mr-lg-2" target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>

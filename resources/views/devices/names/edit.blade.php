@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="pt-3">
-    <a href="{{ route('devices_name.index') }}" class="btn btn-info text-right">
+    <a href="{{ route('devices_name.index') }}" class="btn btn-primary text-right">
         <i class="fas fa-arrow-left pr-2"></i>
         Back
     </a>
