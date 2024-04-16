@@ -93,8 +93,8 @@
         var table = $('.devicesTable').DataTable({
             autoWidth: true,
             lengthMenu: [
-                [10, 25, 50, 100, 250, 500, -1],
-                [10, 25, 50, 100, 250, 500, 'All']
+                [10, 25, 50, 100, 250, 500, 1000, -1],
+                [10, 25, 50, 100, 250, 500, 1000, 'All']
             ],
             pageLength: 100,
             processing: true,
