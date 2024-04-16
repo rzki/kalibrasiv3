@@ -35,7 +35,7 @@ class DeviceController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                     <div class="action-form d-flex justify-content-center">
-                        <a href="' . route('devices.qr', ['device' => $row->deviceId]) . '" class="btn btn-info mr-2"><i
+                        <a href="' . route('devices.qr', ['device' => $row->deviceId]) . '" class="btn btn-info mr-2" target="__blank"><i
                                 class="fa fa-circle-info" aria-hidden="true"></i></a>
                         <a href="' . route('devices.edit', ['device' => $row->deviceId]) . '" class="btn btn-primary mr-2"><i
                                 class="fa fa-pen-to-square" aria-hidden="true"></i></a>
