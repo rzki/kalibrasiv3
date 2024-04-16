@@ -8,26 +8,29 @@
 
 @section('content')
 <div class="container-fluid pt-lg-5 px-lg-3">
-    <div class="row pt-3">
-        <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
-            <i class="fas fa-arrow-left pr-2"></i>
-            Back
-        </a>
+    <div class="row">
+        <div class="col pt-3">
+            <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Back
+            </a>
+        </div>
     </div>
-    <div class="row d-flex justify-content-end pb-lg-3 px-lg-3">
-        <a href="{{ route('hospitals.edit', $hospital->id) }}" class="btn btn-primary ml-3 mr-2"><i class="fa fa-edit"
-                aria-hidden="true"></i> Edit
-        </a>
-        <form action="{{ route('hospitals.destroy', $hospital->id) }}" method="post"
-            class="delete-form">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete
-            </button>
-        </form>
+    <div class="row">
+        <div class="col d-flex justify-content-end pb-lg-3 px-lg-3">
+            <a href="{{ route('hospitals.edit', $hospital->id) }}" class="btn btn-primary ml-3 mr-2"><i class="fa fa-edit" aria-hidden="true"></i> Edit
+            </a>
+            <form action="{{ route('hospitals.destroy', $hospital->id) }}" method="post"
+                class="delete-form">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete
+                </button>
+            </form>
+        </div>
     </div>
     <div class="row hospital-details">
-        <div class="col-lg-6">
+        <div class="col">
             <div class="row border border-dark border-3 py-lg-3">
                 <div class="col-lg-6 hospital-first-col text-center">
                     <div class="mb-lg-4">
@@ -60,13 +63,9 @@
                 <thead>
                     <tr class="text-center">
                         <th scope="col">No</th>
-                        <th scope="col">QR Code</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Type</th>
                         <th scope="col">Serial Number</th>
                         <th scope="col">Cal. Date</th>
-                        <th scope="col">Next Cal.</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -81,7 +80,6 @@
                         <td>{{ $dev->types->name ?? '' }}</td>
                         <td>{{ $dev->serial_number }}</td>
                         <td>{{ $dev->calibration_date }}</td>
-                        <td>{{ $dev->next_calibration_date }}</td>
                         <td>{{ $dev->status }}</td>
                         <td>
                             <div class="action-form d-flex justify-content-center">

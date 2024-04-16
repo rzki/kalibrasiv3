@@ -8,16 +8,18 @@
 
 @section('content')
 <div class="container-fluid px-3">
-    <div class="row pt-3">
-        <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
-            <i class="fas fa-arrow-left pr-2"></i>
-            Back
-        </a>
+    <div class="row">
+        <div class="col pt-3">
+            <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Back
+            </a>
+        </div>
     </div>
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('hospitals.update', $hospital->id) }}" method="post" class="pt-5">
+        <form action="{{ route('hospitals.update', $hospital->hospitalId) }}" method="post" class="pt-5">
             @csrf
             @method('PUT')
 

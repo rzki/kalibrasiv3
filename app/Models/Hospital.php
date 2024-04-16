@@ -9,10 +9,10 @@ class Hospital extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    // public function getRouteKeyName()
-    // {
-    //     return 'name';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'hospitalId';
+    }
 
     public function devices()
     {

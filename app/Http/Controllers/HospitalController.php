@@ -2,21 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\HospitalRequest;
 use App\Models\Device;
 use App\Models\Hospital;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\HospitalRequest;
+use Yajra\DataTables\Facades\DataTables;
 
 class HospitalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hospitals = Hospital::all();
-        return view('hospitals.index', compact('hospitals'));
+        if($request->ajax()){
+            $hospitals = Hospital::orderByDesc('created_at')->get();
+            // $inventories = Inventory::with('devnames')->orderByDesc('created_at')->get();
+            return DataTables::of($hospitals)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                    <div class="action-form d-flex justify-content-center">
+                        <a href="' . route('hospitals.edit', ['hospital' => $row->hospitalId]) . '" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <form action="' . route('hospitals.destroy', ['hospital' => $row->hospitalId]) . '" method="post"
+                            class="delete-form"  onsubmit="return confirm(`Apakah yakin ingin menghapus data ini?`)";>
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </div>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('hospitals.index');
     }
 
     /**

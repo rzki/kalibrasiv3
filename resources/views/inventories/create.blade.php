@@ -30,13 +30,19 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="brand" class="form-label">Brand</label>
-                        <input type="text" name="brand" id="brand" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="type" class="form-label">Type</label>
-                        <input type="text" name="type" id="type" class="form-control">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="brand" class="form-label">Brand</label>
+                                <input type="text" name="brand" id="brand" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type</label>
+                                <input type="text" name="type" id="type" class="form-control">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -56,19 +62,9 @@
                         <label for="inv_number" class="form-label">Inventory Number</label>
                         <input type="text" name="inv_number" id="inv_number" class="form-control">
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="last_calibrated_date" class="form-label">Last Calibration</label>
-                                <input type="date" name="last_calibrated_date" id="last_calibrated_date" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="next_calibrated_date" class="form-label">Next Calibration</label>
-                                <input type="date" name="next_calibrated_date" id="next_calibrated_date" class="form-control">
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="last_calibrated_date" class="form-label">Last Calibration</label>
+                        <input type="date" name="last_calibrated_date" id="last_calibrated_date" class="form-control">
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -106,5 +102,9 @@
 @stop
 
 @section('js')
-
+<script>
+    $(document).ready(function() {
+        $('#device_name').select2();
+    });
+</script>
 @stop

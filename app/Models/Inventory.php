@@ -11,7 +11,7 @@ class Inventory extends Model
     protected $guarded = ['id'];
     public function getRouteKeyName()
     {
-        return 'inv_id';
+        return 'inventoryId';
     }
     public function devnames()
     {

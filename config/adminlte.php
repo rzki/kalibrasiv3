@@ -300,7 +300,7 @@ return [
             'icon'  => 'fas fa-house',
         ],
         [
-            'text'    => 'Inventory',
+            'text'    => 'Inventories',
             'route'   => 'inventories.index',
             'icon'    => 'fas fa-boxes-stacked',
             'can'     => 'admin-access'
@@ -322,7 +322,7 @@ return [
                 ]
         ],
         [
-            'text' => 'Hospital',
+            'text' => 'Hospitals',
             'route' => 'hospitals.index',
             'icon' => 'fas fa-fw fa-hospital',
             'can' => 'admin-access'

@@ -29,7 +29,6 @@ class InventoryRequest extends FormRequest
             'inv_number'    => 'required',
             'procurement_year'=> 'required',
             'last_calibrated_date' => 'required',
-            'next_calibrated_date' => 'required',
             'pic'           => 'required',
             'location'      => 'required',
             'status'        => 'required'
