@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="number" class="form-label">Jumlah QR yang ingin dibuat (max. 5000 dalam satu sesi)</label>
-                        <input type="number" name="number" id="number" class="form-control" max="5000">
+                        <label for="number" class="form-label">Jumlah QR yang ingin dibuat (max. 1000 dalam sekali generate)</label>
+                        <input type="number" name="number" id="number" class="form-control" min="1" max="1000">
                     </div>
                 </div>
             </div>
