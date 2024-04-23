@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\PasswordRequest;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -91,5 +93,41 @@ class UserController extends Controller
         $user->where('userId', $user->userId)->delete();
 
         return to_route('users.index');
+    }
+
+    public function profile(User $user)
+    {
+        $user = auth()->user();
+        // dd($user);
+        return view('users.profile', compact('user'));
+    }
+
+    public function editProfile(User $user)
+    {
+        $user = auth()->user();
+        return view('users.profile_edit', compact('user'));
+    }
+
+    public function updateProfile(Request $r, User $user)
+    {
+        $validation = $this->validate($r, [
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $d = $user->where('userId', $user->userId)->update($validation);
+        dd($d);
+        return to_route('users.profile');
+    }
+
+    public function editPassword()
+    {
+        return view('users.password.edit');
+    }
+
+    public function updatePassword(PasswordRequest $request, User $user)
+    {
+        $user->where('userId', auth()->user()->userId)->update($request->all());
+        return view('users.profile');
     }
 }

@@ -102,7 +102,7 @@
             ajax: "{{ route('devices.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'no', orderable: false, searchable: false},
-                {data: 'name_id', name: 'names.name', defaultContent: ''},
+                {data: 'names.name', name: 'names.name'},
                 {data: 'serial_number', name: 'serial_number'},
                 {data: 'calibration_date', name: 'calibration_date'},
                 {data: 'status', name: 'status'},

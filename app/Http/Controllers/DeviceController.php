@@ -26,7 +26,7 @@ class DeviceController extends Controller
             return DataTables::of($devices)
                 ->addIndexColumn()
                 ->addColumn('name_id', function ($deviceName){
-                    return $deviceName->devnames ? $deviceName->devnames->name : '';
+                    return $deviceName->names ? $deviceName->names->name : '';
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
@@ -114,17 +114,6 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        // $validation = $this->validate($request, [
-        //     'barcode' => $device->barcode,
-        //     'name_id' => 'required',
-        //     'brand' => 'required',
-        //     'type'=> 'required',
-        //     'hospital_id' => 'required',
-        //     'serial_number' => 'required',
-        //     'calibration_date' => 'required',
-        //     'status'=> 'required',
-        // ]);
-
         $nextCal = Carbon::parse($request->calibration_date)->addYear();
 
         $device->where('deviceId',$device->deviceId)->update([
@@ -210,6 +199,15 @@ class DeviceController extends Controller
     {
         $devices = DB::table('devices')->where('name_id', '=', null)->pluck('barcode');
         // dd($devices);
+        $customSize = array(0,0,226.77,170.08);
+        $pdf = Pdf::loadView('devices.empty_multi_qr', compact('devices'))->setPaper($customSize);
+        return $pdf->stream('QR_Cal_'.Carbon::now()->format('d-m-Y').'_'.uniqid().'.pdf')->header('Content-Type','application/pdf');
+    }
+    public function printSelected(Request $request)
+    {
+        $deviceIds = $request->devIds;
+        $devices = Device::whereIn('deviceId',explode(",", $deviceIds))->pluck('barcode');
+
         $customSize = array(0,0,226.77,170.08);
         $pdf = Pdf::loadView('devices.empty_multi_qr', compact('devices'))->setPaper($customSize);
         return $pdf->stream('QR_Cal_'.Carbon::now()->format('d-m-Y').'_'.uniqid().'.pdf')->header('Content-Type','application/pdf');

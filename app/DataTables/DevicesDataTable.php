@@ -31,7 +31,7 @@ class DevicesDataTable extends DataTable
      */
     public function query(Device $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['names']);
     }
 
     /**

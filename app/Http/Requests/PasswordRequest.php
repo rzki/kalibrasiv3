@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class HospitalRequest extends FormRequest
+class PasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +23,8 @@ class HospitalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
+            'old_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
         ];
     }
 }
