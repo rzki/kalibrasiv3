@@ -33,10 +33,6 @@
                         <input type="tel" name="phone_number" id="phone_number" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" id="email" class="form-control">
-                    </div>
-                    <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
                         <textarea name="address" id="address" cols="30" rows="10" class="form-control"></textarea>
                     </div>

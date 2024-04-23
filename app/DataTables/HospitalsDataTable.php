@@ -77,7 +77,6 @@ class HospitalsDataTable extends DataTable
             Column::make('name'),
             Column::make('address'),
             Column::make('phone_number'),
-            Column::make('email'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
