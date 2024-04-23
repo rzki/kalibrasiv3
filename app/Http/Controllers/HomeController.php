@@ -27,7 +27,6 @@ class HomeController extends Controller
     public function index()
     {
         $devices = Device::all();
-        $employees = Employee::all();
         $users = User::where('name', '!=', 'Superadmin')->get();
         return view('home', compact('devices', 'employees', 'users'));
     }
