@@ -80,7 +80,11 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        $user->where('userId', $user->userId)->update($validation);
+        $user->where('userId', $user->userId)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role_id' => $request['role_id']
+        ]);
 
         return to_route('users.index');
     }
