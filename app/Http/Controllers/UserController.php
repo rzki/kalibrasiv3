@@ -98,7 +98,6 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $user = auth()->user();
-        // dd($user);
         return view('users.profile', compact('user'));
     }
 
@@ -115,8 +114,7 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        $d = $user->where('userId', $user->userId)->update($validation);
-        dd($d);
+        $user->where('userId', $user->userId)->update($validation);
         return to_route('users.profile');
     }
 
@@ -137,11 +135,6 @@ class UserController extends Controller
         $user->where('userId', $user->userId)->update([
             'password' => Hash::make('Calibration24!')
         ]);
-        // dd($u);
         return to_route('users.index');
     }
-    // public function resetPasswordPage(User $user)
-    // {
-    //     return view('users.password_reset', compact('user'));
-    // }
 }
