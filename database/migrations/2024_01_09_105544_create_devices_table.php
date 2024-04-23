@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('location')->nullable();
+            $table->foreignId('hospital_id')->after('location')->nullable()->constrained('hospitals', 'id', 'hospital_id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->text('barcode')->nullable();

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
-            $table->foreignId('hospital_id')->after('location')->nullable()->constrained('hospitals', 'id', 'hospital_id')->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::create('hospitals', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->text('address')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('hospitals');
     }
 };
