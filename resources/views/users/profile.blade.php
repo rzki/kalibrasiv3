@@ -32,7 +32,7 @@
             <div class="card-body text-center">
                 <h5 class="font-weight-bold">Change your password <br> by clicking button below</h5>
                 <br>
-                <a href="{{ route('users.profile.edit', $user->userId) }}" class="btn btn-block btn-primary"><i class="fas fa-fw fa-edit"></i> Update Password</a>
+                <a href="{{ route('users.profile.password.edit') }}" class="btn btn-block btn-primary"><i class="fas fa-fw fa-edit"></i> Update Password</a>
             </div>
         </div>
     </div>

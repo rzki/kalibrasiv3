@@ -23,7 +23,7 @@ class PasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'old_password' => ['required', 'current_password'],
+            // 'old_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
         ];
     }

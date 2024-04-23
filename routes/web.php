@@ -38,10 +38,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::resource('users', UserController::class)->names('users');
+Route::put('users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('users.password.reset');
 Route::get('profile', [UserController::class, 'profile'])->name('users.profile');
 Route::get('profile/edit/{user}', [UserController::class, 'editProfile'])->name('users.profile.edit');
 Route::put('profile/{user}', [UserController::class, 'updateProfile'])->name('users.profile.update');
-Route::put('password-reset', [UserController::class, 'resetPassword'])->name('users.profile.password.reset');
+Route::get('profile/password-reset/', [UserController::class, 'editPassword'])->name('users.profile.password.edit');
+Route::put('password-reset', [UserController::class, 'updatePassword'])->name('users.profile.password.reset');
 Route::resource('roles', RoleController::class)->names('roles');
 Route::controller(EmployeeController::class)->group(function() {
     Route::resource('employees/all', EmployeeController::class)->names('employees');

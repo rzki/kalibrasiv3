@@ -120,14 +120,28 @@ class UserController extends Controller
         return to_route('users.profile');
     }
 
-    public function editPassword()
+    public function editPassword(User $user)
     {
-        return view('users.password.edit');
+        return view('users.password_edit', compact('user'));
     }
 
     public function updatePassword(PasswordRequest $request, User $user)
     {
-        $user->where('userId', auth()->user()->userId)->update($request->all());
-        return view('users.profile');
+        $user->where('userId', auth()->user()->userId)->update([
+            'password' => Hash::make($request->password)
+        ]);
+        return to_route('users.profile');
     }
+    public function resetPassword(User $user)
+    {
+        $user->where('userId', $user->userId)->update([
+            'password' => Hash::make('Calibration24!')
+        ]);
+        // dd($u);
+        return to_route('users.index');
+    }
+    // public function resetPasswordPage(User $user)
+    // {
+    //     return view('users.password_reset', compact('user'));
+    // }
 }

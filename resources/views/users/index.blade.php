@@ -34,13 +34,16 @@
                 <td>{{ $user->roles->name }}</td>
                 <td>
                     <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('users.edit', $user->userId) }}" class="btn btn-primary mr-2"><i
-                                class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <a href="{{ route('users.edit', $user->userId) }}" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <form action="{{ route('users.password.reset', $user->userId) }}" method="post" class="mr-2">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-success"><i class="fas fa-fw fa-rotate-right"></i></button>
+                        </form> 
                         <form action="{{ route('users.destroy', $user->userId) }}" method="post" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </form>
                     </div>
                 </td>
