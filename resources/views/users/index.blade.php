@@ -39,7 +39,7 @@
                             @csrf
                             @method('PUT')
                             <button type="submit" class="btn btn-success"><i class="fas fa-fw fa-rotate-right"></i></button>
-                        </form> 
+                        </form>
                         <form action="{{ route('users.destroy', $user->userId) }}" method="post" class="delete-form">
                             @csrf
                             @method('DELETE')
