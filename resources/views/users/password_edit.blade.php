@@ -19,7 +19,7 @@
 </div>
 <div class="container-fluid px-3">
     <div class="row flex-column">
-        <form action="{{ route('users.password.reset', $user->userId) }}" method="post" class="pt-5">
+        <form action="{{ route('users.profile.password.update', $user->userId) }}" method="post" class="pt-5">
             @csrf
             @method('PUT')
 

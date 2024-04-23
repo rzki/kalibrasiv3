@@ -43,18 +43,8 @@ Route::get('profile', [UserController::class, 'profile'])->name('users.profile')
 Route::get('profile/edit/{user}', [UserController::class, 'editProfile'])->name('users.profile.edit');
 Route::put('profile/{user}', [UserController::class, 'updateProfile'])->name('users.profile.update');
 Route::get('profile/password-reset/', [UserController::class, 'editPassword'])->name('users.profile.password.edit');
-Route::put('password-reset', [UserController::class, 'updatePassword'])->name('users.profile.password.reset');
+Route::put('password-reset', [UserController::class, 'updatePassword'])->name('users.profile.password.update');
 Route::resource('roles', RoleController::class)->names('roles');
-Route::controller(EmployeeController::class)->group(function() {
-    Route::resource('employees/all', EmployeeController::class)->names('employees');
-});
-Route::resource('employees/depts', EmployeeDeptController::class)->names('employee_depts');
-Route::resource('employees/positions', EmployeePositionController::class)->names('employee_positions');
-Route::resource('references', ReferenceController::class)->names('references');
-Route::resource('companies', CompanyController::class)->names('companies');
-Route::resource('item_units', ItemUnitController::class)->names('item_units');
-Route::resource('partners/all', PartnerController::class, ['parameters' => ['all' => 'partner']])->names('partners');
-Route::resource('partners/categories', PartnerCategoryController::class)->names('partner_categories');
 Route::resource('hospitals', HospitalController::class)->names('hospitals');
 Route::resource('inventories', InventoryController::class)->names('inventories');
 
