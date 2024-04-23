@@ -23,48 +23,19 @@
 <div class="table-responsive py-3">
     <table class="table table-bordered table-hover devicesTable text-center" id="devicesTable">
         <thead>
-            <tr class="text-center">
-                <th>No</th>
-                <th>Name</th>
-                <th>Serial Number</th>
-                <th>Cal. Date</th>
-                <th>Status</th>
-                <th>Action</th>
+            <tr>
+                <th class="text-center">No</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Serial Number</th>
+                <th class="text-center">Cal. Date</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
                 <th><input type="checkbox" name="checkboxAll" id="checkboxAll"></th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($devices as $device)
-                <tr id="devId{{ $device->deviceId }}">
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $device->names->name ?? '' }}</td>
-                    <td>{{ $device->serial_number }}</td>
-                    <td>{{ $device->calibration_date }}</td>
-                    <td>{{ $device->status }}</td>
-                    <td>
-                        <div class="action-form d-flex justify-content-center">
-                            <a href="{{ route('devices.qr', $device->deviceId) }}" class="btn btn-info mr-2"><i
-                                    class="fa fa-circle-info" aria-hidden="true"></i></a>
-                            <a href="{{ route('devices.edit', $device->deviceId) }}" class="btn btn-primary mr-2"><i
-                                    class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                            <a href="{{ route('devices.print', $device->deviceId) }}" class="btn btn-secondary mr-2"
-                                target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-                            <form action="{{ route('devices.destroy', $device->deviceId) }}" method="post"
-                                class="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
-                                        aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </td>
-                    <td class="text-center"><input type="checkbox" name="deviceIds" class="checkboxClass"
-                            data-id="{{ $device->deviceId }}"></td>
-                </tr>
-            @endforeach --}}
         </tbody>
     </table>
-    {{-- {{ $dataTable->table(['class' => 'table table-bordered table-hover text-center']) }} --}}
 </div>
 @stop
 
@@ -73,21 +44,6 @@
 @stop
 
 @section('js')
-{{-- <script>
-    $(document).ready( function () {
-        $('#devicesTable').DataTable({
-            autoWidth: true,
-            columnDefs: [
-                    {className : 'text-center', targets: '_all'},
-                    {orderable : false, target: 6}
-                ],
-            lengthMenu: [
-                [10, 25, 50, 100, 250, 500, -1],
-                [10, 25, 50, 100, 250, 500, 'All']
-            ],
-        });
-    });
-</script> --}}
 <script>
     $(document).ready(function () {
         var table = $('.devicesTable').DataTable({
