@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::where('code', '!=', 'superadmin');
+        $roles = Role::where('code', '!=', 'superadmin')->get();
         return view('users.edit', compact('user', 'roles'));
     }
 
