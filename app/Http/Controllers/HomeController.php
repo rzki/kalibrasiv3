@@ -28,6 +28,6 @@ class HomeController extends Controller
     {
         $devices = Device::all();
         $users = User::where('name', '!=', 'Superadmin')->get();
-        return view('home', compact('devices', 'employees', 'users'));
+        return view('home', compact('devices', 'users'));
     }
 }
