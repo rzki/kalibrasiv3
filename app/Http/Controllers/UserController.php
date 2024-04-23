@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('name', '!=', 'Superadmin')->get();
+        $roles = Role::where('code', '!=', 'superadmin')->get();
         return view('users.create', compact('roles'));
     }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::where('code', '!=', 'superadmin');
         return view('users.edit', compact('user', 'roles'));
     }
 
