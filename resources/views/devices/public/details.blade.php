@@ -46,9 +46,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="mb-4">
-                                <h4 class="font-weight-bolder">Location</h4>
-                                <p>{{ $device->hospitals->name ?? '' }}</p>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <h4 class="font-weight-bolder">Hospital</h4>
+                                    <p>{{ $device->hospitals->name ?? '' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <h4 class="font-weight-bolder">Location</h4>
+                                    <p>{{ $device->location ?? '' }}</p>
+                                </div>
                             </div>
                         </div>
                         @if (Auth::guest() && $device->name == null)

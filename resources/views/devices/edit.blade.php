@@ -38,7 +38,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="brand" class="form-label">Brand</label>
-                        <input type="text" name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror" placeholder="Brand...">
+                        <input type="text" name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror" placeholder="Brand..." value="{{ old('brand', $device->brand) }}">
                         {{-- Error Messages --}}
                         @error('brand')
                             <div class="alert alert-danger mt-2">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
-                        <input type="text" name="type" id="type" class="form-control @error('type') @enderror" placeholder="Type...">
+                        <input type="text" name="type" id="type" class="form-control @error('type') @enderror" placeholder="Type..." value="{{ old('type', $device->type) }}">
                         {{-- Error Messages --}}
                         @error('type')
                             <div class="alert alert-danger mt-2">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" name="location" id="location" class="form-control @error('location') @enderror" placeholder="Location...">
+                        <input type="text" name="location" id="location" class="form-control @error('location') @enderror" placeholder="Location..." value="{{ old('location', $device->location)}}">
                         {{-- Error Messages --}}
                         @error('location')
                             <div class="alert alert-danger mt-2">

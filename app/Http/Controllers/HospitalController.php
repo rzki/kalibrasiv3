@@ -58,7 +58,6 @@ class HospitalController extends Controller
             'hospitalId' => Str::uuid(),
             'name' => $r->name,
             'phone_number' => $r->phone_number,
-            'email' => $r->email,
             'address' => $r->address
         ]);
 
@@ -90,7 +89,6 @@ class HospitalController extends Controller
         $hospital->where('hospitalId', $hospital->hospitalId)->update([
             'name' => $r->name,
             'phone_number' => $r->phone_number,
-            'email' => $r->email,
             'address' => $r->address
         ]);
 
