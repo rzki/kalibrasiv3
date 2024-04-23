@@ -33,6 +33,14 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="text" class="form-control" name="email" id="email" aria-describedby="email" value={{ old('email', $user->email) }}>
                     </div>
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role</label>
+                        <select name="role_id" id="role_id" class="form-control">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}" {{ old('role_id', $device->role_id) == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-block btn-success text-center">Submit</button>
