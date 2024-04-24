@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
             <a href="{{ route('users.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#importUser"><i class="fa-solid fa-upload"></i> Import</button>
+            <button type="button" class="btn btn-success btn-lg pl-3" data-toggle="modal" data-target="#importUser"><i class="fa-solid fa-upload"></i> Import</button>
         </div>
 
     </div>
