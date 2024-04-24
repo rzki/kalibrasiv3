@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         // $users = User::where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
         if($request->ajax()){
-            $users = User::with('roles')->where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
+            $users = User::with('roles')->where('name', '!=', 'Superadmin')->orderByDesc('created_at')->get();
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('role_id', function ($user){
@@ -81,7 +81,7 @@ class UserController extends Controller
             'role_id' => $request['role_id']
         ]);
 
-        Alert::toast('User Added Succesfully!', 'success');
+        Alert::toast('User Added Succesfully!', 'success')->showCloseButton('false')->autoClose(3000);
 
         return to_route('users.index');
     }
@@ -125,7 +125,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->where('userId', $user->userId)->delete();
-
+        Alert::toast('User Deleted Successfully!', 'success');
         return to_route('users.index');
     }
 
