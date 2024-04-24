@@ -20,9 +20,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
-        $title = 'Delete User?';
-        $message = "Are you sure want to delete this data?";
-        confirmDelete($title, $message);
         return view('users.index', compact('users'));
     }
 
