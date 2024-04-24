@@ -11,16 +11,47 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\PasswordRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
-        return view('users.index', compact('users'));
+        // $users = User::where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
+        if($request->ajax()){
+            $users = User::with('roles')->where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
+            return DataTables::of($users)
+                ->addIndexColumn()
+                ->addColumn('role_id', function ($user){
+                    return $user->roles ? $user->roles->name : '';
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                    <div class="action-form d-flex justify-content-center">
+                        <a href="' . route('users.edit', ['user' => $row->userId]) . '" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                       <form action="' . route('users.password.reset', ['user' => $row->userId]) . '" method="post"
+                            class="mr-2" onsubmit="return confirm(`Apakah yakin ingin mereset password user ini?`)";>
+                            ' . csrf_field() . '
+                            ' . method_field("PUT") . '
+                            <button type="submit" class="btn btn-success""><i class="fa fa-rotate-right"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                        <form action="' . route('users.destroy', ['user' => $row->userId]) . '" method="post"
+                            class="delete-form" onsubmit="return confirm(`Apakah yakin ingin menghapus user ini?`)";>
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit" class="btn btn-danger""><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                    </div>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('users.index');
     }
 
     /**

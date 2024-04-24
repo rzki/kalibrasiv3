@@ -17,7 +17,7 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-bordered" id="usersTable">
+    <table class="table table-bordered table-hover usersTable text-center" id="usersTable">
         <thead>
             <tr class="text-center">
                 <th scope="col">No</th>
@@ -28,29 +28,6 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->roles->name }}</td>
-                <td>
-                    <div class="action-form d-flex justify-content-center">
-                        <a href="{{ route('users.edit', $user->userId) }}" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
-                        <form action="{{ route('users.password.reset', $user->userId) }}" method="post" class="mr-2">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="btn btn-success"><i class="fas fa-fw fa-rotate-right"></i></button>
-                        </form>
-                        <form action="{{ route('users.destroy', $user->userId) }}" method="post" class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
         </tbody>
     </table>
 </div>
@@ -93,10 +70,22 @@
 <script>
     $(document).ready( function () {
         $('#usersTable').DataTable({
-            autoWidth: true,
-            columnDefs: [
-            {className : 'text-center', targets: '_all'
-            }]
+autoWidth: true,
+            lengthMenu: [
+            [10, 25, 50, 100, 250, -1],
+            [10, 25, 50, 100, 250, 'All']
+            ],
+            pageLength: 100,
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('users.index') }}",
+            columns: [
+            {data: 'DT_RowIndex', name: 'no', orderable: false, searchable: false},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'roles.name', name: 'roles.name', width:'30%'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            ],
         });
     } );
 </script>
