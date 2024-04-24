@@ -19,10 +19,10 @@ class UsersImport implements ToModel, WithHeadingRow
     {
         $user = User::create([
             'userId' => Str::orderedUuid(),
-            'name' => $row[0],
-            'email' => strtolower($row[1]),
+            'name' => $row['name'],
+            'email' => strtolower($row['email']),
             'password' => Hash::make('Calibration24!'),
-            'role_id' => $row[2]
+            'role_id' => $row['role_id']
         ]);
 
         return $user;
