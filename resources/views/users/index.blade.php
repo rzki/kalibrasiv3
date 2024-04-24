@@ -11,7 +11,9 @@
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
             <a href="{{ route('users.create') }}" class="btn btn-success text-right"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#importUser"><i class="fa-solid fa-upload"></i> Import</button>
         </div>
+
     </div>
 </div>
 <div class="table-responsive">
@@ -43,7 +45,7 @@
                         <form action="{{ route('users.destroy', $user->userId) }}" method="post" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-danger" data-confirm-delete="true"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </form>
                     </div>
                 </td>
@@ -51,6 +53,35 @@
             @endforeach
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="importUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" name="file">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <small class="text-muted ml-3">(Format file yang didukung : .xlsx, .xls, .pdf)</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-upload"></i> Import</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa-solid fa-xmark"></i>
+                        Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @stop
 

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\PasswordRequest;
-use Illuminate\Validation\Rules\Password;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -18,7 +20,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('name', '!=', 'Superadmin')->orderByDesc('updated_at')->get();
-
+        $title = 'Delete User?';
+        $message = "Are you sure want to delete this data?";
+        confirmDelete($title, $message);
         return view('users.index', compact('users'));
     }
 
@@ -42,12 +46,14 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'userId' => Str::uuid(),
+            'userId' => Str::orderedUuid(),
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make('Calibration24!'),
             'role_id' => $request['role_id']
         ]);
+
+        Alert::toast('User Added Succesfully!', 'success');
 
         return to_route('users.index');
     }
@@ -74,17 +80,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validation = $this->validate($request, [
-            'userId' => Str::uuid(),
-            'name' => 'required',
-            'email' => 'required|email'
-        ]);
-
         $user->where('userId', $user->userId)->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'role_id' => $request['role_id']
         ]);
+
+        Alert::toast('User Updated Successfully!', 'success');
 
         return to_route('users.index');
     }
@@ -118,6 +120,8 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
+        Alert::toast('Profile Updated Successfully!', 'success');
+
         $user->where('userId', $user->userId)->update($validation);
         return to_route('users.profile');
     }
@@ -132,6 +136,7 @@ class UserController extends Controller
         $user->where('userId', auth()->user()->userId)->update([
             'password' => Hash::make($request->password)
         ]);
+        Alert::toast('Password Updated Successfully!', 'success');
         return to_route('users.profile');
     }
     public function resetPassword(User $user)
@@ -139,6 +144,20 @@ class UserController extends Controller
         $user->where('userId', $user->userId)->update([
             'password' => Hash::make('Calibration24!')
         ]);
+        Alert::toast('Password Reset Successfully!', 'success');
+        return to_route('users.index');
+    }
+
+    public function userImport(Request $request)
+    {
+        $request->validate([
+            'file' => 'file|required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new UsersImport, $request->file('file'));
+
+        Alert::toast('User Imported Successfully!', 'success');
+
         return to_route('users.index');
     }
 }

@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 Route::resource('users', UserController::class)->names('users');
 Route::put('users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('users.password.reset');
+Route::post('users/import', [UserController::class, 'userImport'])->name('users.import');
 Route::get('profile', [UserController::class, 'profile'])->name('users.profile');
 Route::get('profile/edit/{user}', [UserController::class, 'editProfile'])->name('users.profile.edit');
 Route::put('profile/{user}', [UserController::class, 'updateProfile'])->name('users.profile.update');
