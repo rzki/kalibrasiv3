@@ -130,7 +130,9 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#name_id').select2();
+            $('#name_id').select2({
+                theme: 'bootstrap-5'
+            });
         });
     </script>
 @stop
