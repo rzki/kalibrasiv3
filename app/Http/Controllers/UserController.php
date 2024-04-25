@@ -81,7 +81,7 @@ class UserController extends Controller
             'role_id' => $request['role_id']
         ]);
 
-        Alert::toast('User Added Succesfully!', 'success')->showCloseButton('false')->autoClose(3000);
+        Alert::toast('User Added Succesfully!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('users.index');
     }
