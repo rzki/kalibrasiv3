@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class GenerateQRJob implements ShouldQueue
 {
@@ -40,7 +39,8 @@ class GenerateQRJob implements ShouldQueue
 
             $devices[] = [
                 'deviceId' => $device['deviceId'],
-                'barcode' => $path
+                'barcode' => $path,
+                'user_id' => auth()->user()->id
             ];
         }
         DB::table('devices')->insert($devices);
