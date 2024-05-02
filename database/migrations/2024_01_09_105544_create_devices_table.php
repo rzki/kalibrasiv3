@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('next_calibration_date')->nullable();
             $table->text('barcode')->nullable();
             $table->string('status')->nullable();
+            $table->foreignId('user_id')->constrained('users', 'id', 'user_id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

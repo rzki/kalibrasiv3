@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Device;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $devices = Device::all();
+        $devices = Device::where('user_id', auth()->user()->userId)->get();
         $users = User::where('name', '!=', 'Superadmin')->get();
         return view('home', compact('devices', 'users'));
     }

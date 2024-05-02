@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,7 +23,7 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $devices = Device::with('names')->orderBy('created_at', 'desc')->get();
+            $devices = Device::where('user_id', auth()->user()->userId)->with('names')->orderBy('created_at', 'desc')->get();
             return DataTables::of($devices)
                 ->addIndexColumn()
                 ->addColumn('name_id', function ($deviceName){
