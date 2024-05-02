@@ -23,7 +23,7 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $devices = Device::where('user_id', auth()->user()->userId)->with('names')->orderBy('created_at', 'desc')->get();
+            $devices = Device::where('user_id', auth()->user()->id)->with('names')->orderBy('created_at', 'desc')->get();
             return DataTables::of($devices)
                 ->addIndexColumn()
                 ->addColumn('name_id', function ($deviceName){
