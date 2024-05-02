@@ -81,7 +81,16 @@ class DeviceController extends Controller
             'status'=> 'required',
         ]);
 
-        Device::create($validation);
+        Device::create([
+            'name_id' => $request->name_id,
+            'brand' => $request->brand,
+            'type'=> $request->type,
+            'hospital_id' => $request->hospital_id,
+            'serial_number' => $request->serial_number,
+            'calibration_date' => $request->calibration_date,
+            'status' => $request->status,
+            'user_id' => auth()->user()->id
+        ]);
 
 
         return to_route('devices.index');
@@ -128,6 +137,7 @@ class DeviceController extends Controller
             'calibration_date' => $request->calibration_date,
             'next_calibration_date' => $nextCal,
             'status'=> $request->status,
+            'user_id' => auth()->user()->id
         ]);
         return to_route('devices.index');
     }
