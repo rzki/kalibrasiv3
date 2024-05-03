@@ -31,7 +31,7 @@ class DevicesDataTable extends DataTable
      */
     public function query(Device $model): QueryBuilder
     {
-        return $model->newQuery()->with(['names']);
+        return $model->newQuery()->with(['names', 'users']);
     }
 
     /**
@@ -79,6 +79,7 @@ class DevicesDataTable extends DataTable
             Column::make('serial_number'),
             Column::make('calibration_date'),
             Column::make('status'),
+            Column::make('uploader'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

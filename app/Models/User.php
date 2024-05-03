@@ -48,7 +48,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
-
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
     public function adminlte_profile_url()
     {
         return 'profile';

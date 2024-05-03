@@ -24,9 +24,9 @@ class DeviceController extends Controller
     {
         if($request->ajax()){
             if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2){
-                $devices = Device::with('names')->orderBy('created_at', 'desc')->get();
+                $devices = Device::with(['names', 'users'])->orderBy('created_at', 'desc')->get();
             }else{
-                $devices = Device::where('user_id', auth()->user()->id)->with('names')->orderBy('created_at', 'desc')->get();
+                $devices = Device::where('user_id', auth()->user()->id)->with(['names', 'users'])->orderBy('created_at', 'desc')->get();
             }
             return DataTables::of($devices)
                 ->addIndexColumn()
