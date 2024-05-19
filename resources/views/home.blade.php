@@ -23,9 +23,9 @@
 <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
-@section('js')
+{{-- @section('js')
 <script>
     console.log('Hi!');
 </script>
-@stop
+@stop --}}
 

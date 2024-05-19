@@ -297,13 +297,22 @@ return [
 [
             'text'  => 'Dashboard',
             'url'   => 'dashboard',
-            'icon'  => 'fas fa-house',
+            'icon'  => 'fas fa-fw fa-house',
         ],
         [
             'text'    => 'Inventories',
-            'route'   => 'inventories.index',
-            'icon'    => 'fas fa-boxes-stacked',
-            'can'     => 'admin-access'
+            'icon'    => 'fas fa-fw fa-boxes-stacked',
+            'can'     => 'admin-access',
+            'submenu' => [
+                [
+                    'text' => 'All Inventories',
+                    'route' => 'inventories.index'
+                ],
+                [
+                    'text' => 'Logbook',
+                    'url' => '#'
+                ]
+            ]
         ],
         [
             'text'    => 'Devices',
