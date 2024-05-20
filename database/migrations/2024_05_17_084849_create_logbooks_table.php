@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logbook', function (Blueprint $table) {
+        Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
+            $table->uuid('logId');
+            $table->foreignId('inventory_id')->nullable()->constrained('inventories', 'id', 'inventory_id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->date('tanggal_mulai_pinjam');
+            $table->date('tanggal_selesai_pinjam');
+            $table->string('lokasi_pinjam');
+            $table->string('status');
             $table->timestamps();
         });
     }

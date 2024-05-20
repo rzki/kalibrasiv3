@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class LogBook extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+    protected $table = 'logbooks';
+    public function getRouteKeyName()
+    {
+        return 'logId';
+    }
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class, 'inventory_id');
+    }
 }

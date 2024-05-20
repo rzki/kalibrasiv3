@@ -13,6 +13,10 @@ class Inventory extends Model
     {
         return 'inventoryId';
     }
+    public function logbooks()
+    {
+        return $this->belongsTo(LogBook::class);
+    }
     public function devnames()
     {
         return $this->belongsTo(DeviceName::class, 'device_name');

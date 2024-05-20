@@ -310,7 +310,7 @@ return [
                 ],
                 [
                     'text' => 'Logbook',
-                    'url' => '#'
+                    'route' => 'logbooks.index'
                 ]
             ]
         ],

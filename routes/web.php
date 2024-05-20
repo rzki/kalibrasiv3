@@ -16,6 +16,7 @@ use App\Http\Controllers\DeviceNameController;
 use App\Http\Controllers\EmployeeDeptController;
 use App\Http\Controllers\PartnerCategoryController;
 use App\Http\Controllers\EmployeePositionController;
+use App\Http\Controllers\LogbookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::put('password-reset', [UserController::class, 'updatePassword'])->name('u
 Route::resource('roles', RoleController::class)->names('roles');
 Route::resource('hospitals', HospitalController::class)->names('hospitals');
 Route::resource('inventories', InventoryController::class)->names('inventories');
+Route::resource('logbooks', LogbookController::class)->names('logbooks');
 
 // Device
 Route::resource('devices/all', DeviceController::class, ['parameters' => ['all' => 'device']])->names('devices');
