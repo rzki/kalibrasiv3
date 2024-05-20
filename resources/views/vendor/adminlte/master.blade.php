@@ -56,7 +56,10 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap-5.3.3/css/bootstrap.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/regular.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css') }}">
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -117,9 +120,12 @@
     <script src="https://cdn.datatables.net/v/bs5/dt-2.0.0/b-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/datatables.min.js">
     </script>
     @include('sweetalert::alert')
-    
+
     {{-- Font Awesome --}}
-    <script src="https://kit.fontawesome.com/70f3726b28.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/fontawesome/js/fontawesome.min.js') }}"></script>
+    <script src="{{ asset('assets/fontawesome/js/brands.min.js') }}"></script>
+    <script src="{{ asset('assets/fontawesome/js/regular.min.js') }}"></script>
+    <script src="{{ asset('assets/fontawesome/js/solid.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
