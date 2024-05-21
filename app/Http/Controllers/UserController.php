@@ -81,7 +81,7 @@ class UserController extends Controller
             'role_id' => $request['role_id']
         ]);
 
-        Alert::toast('User Added Succesfully!', 'success')->hideCloseButton()->autoClose(3000);
+        Alert::toast('Pengguna berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('users.index');
     }
@@ -114,7 +114,7 @@ class UserController extends Controller
             'role_id' => $request['role_id']
         ]);
 
-        Alert::toast('User Updated Successfully!', 'success');
+        Alert::toast('Pengguna berhasil diperbarui!', 'success');
 
         return to_route('users.index');
     }
@@ -125,7 +125,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->where('userId', $user->userId)->delete();
-        Alert::toast('User Deleted Successfully!', 'success');
+        Alert::toast('Pengguna berhasil dihapus!', 'success');
         return to_route('users.index');
     }
 
@@ -148,7 +148,7 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        Alert::toast('Profile Updated Successfully!', 'success');
+        Alert::toast('Profil berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
 
         $user->where('userId', $user->userId)->update($validation);
         return to_route('users.profile');
@@ -164,7 +164,7 @@ class UserController extends Controller
         $user->where('userId', auth()->user()->userId)->update([
             'password' => Hash::make($request->password)
         ]);
-        Alert::toast('Password Updated Successfully!', 'success');
+        Alert::toast('Kata sandi berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('users.profile');
     }
     public function resetPassword(User $user)
@@ -172,7 +172,7 @@ class UserController extends Controller
         $user->where('userId', $user->userId)->update([
             'password' => Hash::make('Calibration24!')
         ]);
-        Alert::toast('Password Reset Successfully!', 'success');
+        Alert::toast('Kata sandi berhasil disetel ulang!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('users.index');
     }
 
@@ -184,7 +184,7 @@ class UserController extends Controller
 
         Excel::import(new UsersImport, $request->file('file'));
 
-        Alert::toast('User Imported Successfully!', 'success');
+        Alert::toast('Pengguna berhasil diimpor!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('users.index');
     }

@@ -10,8 +10,8 @@
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
-            <a href="{{ route('devices_name.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus"
-                    aria-hidden="true"></i>Create New</a>
+            <a href="{{ route('devices_name.create') }}" class="btn btn-success ml-3"><i class="fas fa-plus"
+                    aria-hidden="true"></i> Tambah</a>
         </div>
     </div>
     <div class="pb-3">
@@ -32,12 +32,12 @@
                     <td>
                         <div class="action-form d-flex justify-content-center">
                             <a href="{{ route('devices_name.edit', $name->id) }}" class="btn btn-primary mr-lg-2"><i
-                                    class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                                    class="fas fa-pen-to-square" aria-hidden="true"></i></a>
                             <form action="{{ route('devices_name.destroy', $name->id) }}" method="post"
                                 class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"
                                         aria-hidden="true"></i></button>
                             </form>
                         </div>

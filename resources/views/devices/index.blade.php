@@ -10,12 +10,12 @@
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
-           <a href="{{ route('devices.createQR') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Generate QR</a>
+           <a href="{{ route('devices.createQR') }}" class="btn btn-primary"><i class="fas fa-plus" aria-hidden="true"></i> Generate QR</a>
         </div>
     </div>
     <div class="row">
         <div class="col d-flex justify-content-between pb-3">
-            <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fa fa-print"></i> Print Empty QR</a>
+            <a href="{{ route('devices.printEmptyQR') }}" class="btn btn-outline-dark" id="printEmptyQRButton" target="_blank"><i class="fas fa-print"></i> Print Empty QR</a>
             <a href="#" class="btn btn-outline-danger ml-3" id="deleteSelectedData" style="display: none;"><i class="fa fa-trash"></i> Delete Selected</a>
         </div>
     </div>

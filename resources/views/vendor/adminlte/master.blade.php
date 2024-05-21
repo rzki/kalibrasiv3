@@ -60,6 +60,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/regular.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/select2-bs5/select2-bootstrap-5-theme.min.css') }}">
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />

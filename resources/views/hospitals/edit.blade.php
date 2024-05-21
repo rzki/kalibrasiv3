@@ -12,7 +12,7 @@
         <div class="col pt-3">
             <a href="{{ route('hospitals.index') }}" class="btn btn-primary text-right">
                 <i class="fas fa-arrow-left pr-2"></i>
-                Back
+                Kembali
             </a>
         </div>
     </div>

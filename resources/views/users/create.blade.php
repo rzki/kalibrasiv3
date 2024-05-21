@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New User')
+@section('title', 'Tambah User')
 
 @section('content_header')
-<h1>Create New User</h1>
+<h1>Tambah User</h1>
 @stop
 
 @section('content')

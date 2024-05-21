@@ -10,7 +10,7 @@
 <div class="pt-3">
     <a href="{{ route('devices.index') }}" class="btn btn-primary text-right">
         <i class="fas fa-arrow-left pr-2"></i>
-        Back
+        Kembali
     </a>
 </div>
 <div class="container-fluid px-3">

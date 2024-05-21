@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DeviceNameRequest;
 use App\Models\DeviceName;
 use Illuminate\Http\Request;
+use App\Http\Requests\DeviceNameRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DeviceNameController extends Controller
 {
@@ -34,6 +35,7 @@ class DeviceNameController extends Controller
         DeviceName::create([
             'name' => $request->name
         ]);
+        Alert::toast('Nama Alat berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('devices_name.index');
     }

@@ -7,6 +7,7 @@ use App\Models\Hospital;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\HospitalRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class HospitalController extends Controller
@@ -60,7 +61,7 @@ class HospitalController extends Controller
             'phone_number' => $r->phone_number,
             'address' => $r->address
         ]);
-
+        Alert::toast('Rumah Sakit berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('hospitals.index');
     }
 
@@ -91,7 +92,7 @@ class HospitalController extends Controller
             'phone_number' => $r->phone_number,
             'address' => $r->address
         ]);
-
+        Alert::toast('Rumah Sakit berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('hospitals.index');
     }
 
@@ -101,7 +102,7 @@ class HospitalController extends Controller
     public function destroy(Hospital $hospital)
     {
         $hospital->where('hospitalId', $hospital->hospitalId)->delete();
-
+        Alert::toast('Rumah Sakit berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('hospitals.index');
     }
 }

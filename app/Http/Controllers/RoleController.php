@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
@@ -13,7 +14,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::orderByDesc('created_at')->where('code','!=','superadmin')->get();
+        $roles = Role::orderByDesc('created_at')->where('code', '!=', 'superadmin')->get();
 
         return view('roles.index', compact('roles'));
     }
@@ -34,9 +35,9 @@ class RoleController extends Controller
         Role::create([
             'roleId' => Str::uuid(),
             'name' => $request->name,
-            'code' => strtolower($request->name)
+            'code' => strtolower($request->name),
         ]);
-
+        Alert::toast('Role berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('roles.index');
     }
 
@@ -63,9 +64,9 @@ class RoleController extends Controller
     {
         $role->where('roleId', $role->roleId)->update([
             'name' => $request->name,
-            'code' => strtolower($request->name)
+            'code' => strtolower($request->name),
         ]);
-
+        Alert::toast('Role berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('roles.index');
     }
 
@@ -75,7 +76,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->where('roleId', $role->roleId)->delete();
-
+        Alert::toast('Role berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('roles.index');
     }
 }

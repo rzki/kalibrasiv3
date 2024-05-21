@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New Device Name')
+@section('title', 'Tambah Device Name')
 
 @section('content_header')
-<h1>Create New Device Name</h1>
+<h1>Tambah Device Name</h1>
 @stop
 
 @section('content')

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
             <a href="{{ route('hospitals.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Create New
+                    aria-hidden="true"></i> Tambah
             </a>
         </div>
     </div>

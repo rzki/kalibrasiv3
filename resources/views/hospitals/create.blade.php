@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New Hospital')
+@section('title', 'Tambah Hospital')
 
 @section('content_header')
-<h1>Create New Hospital</h1>
+<h1>Tambah Hospital</h1>
 @stop
 
 @section('content')

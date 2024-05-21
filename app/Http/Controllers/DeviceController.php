@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class DeviceController extends Controller
@@ -36,15 +37,15 @@ class DeviceController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                     <div class="action-form d-flex justify-content-center">
-                        <a href="' . route('devices.qr', ['device' => $row->deviceId]) . '" class="btn btn-info mr-2" target="__blank"><i class="fa fa-circle-info" aria-hidden="true"></i></a>
-                        <a href="' . route('devices.edit', ['device' => $row->deviceId]) . '" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <a href="' . route('devices.qr', ['device' => $row->deviceId]) . '" class="btn btn-info mr-2" target="__blank"><i class="fas fa-circle-info" aria-hidden="true"></i></a>
+                        <a href="' . route('devices.edit', ['device' => $row->deviceId]) . '" class="btn btn-primary mr-2"><i class="fas fa-pen-to-square" aria-hidden="true"></i></a>
                         <a href="' . route('devices.print', ['device' => $row->deviceId]) . '" class="btn btn-secondary mr-2"
-                            target="__blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                            target="__blank"><i class="fas fa-print" aria-hidden="true"></i></a>
                         <form action="' . route('devices.destroy', ['device' => $row->deviceId]) . '" method="post"
                             class="delete-form" onsubmit="return confirm(`Apakah yakin ingin menghapus data ini?`)";>
                             ' . csrf_field() . '
                             ' . method_field("DELETE") . '
-                            <button type="submit" class="btn btn-danger""><i class="fa fa-trash"
+                            <button type="submit" class="btn btn-danger""><i class="fas fa-trash"
                                     aria-hidden="true"></i></button>
                         </form>
                     </div>';
@@ -95,7 +96,7 @@ class DeviceController extends Controller
             'status' => $request->status,
             'user_id' => auth()->user()->id
         ]);
-
+        Alert::toast('Alat berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('devices.index');
     }
@@ -143,6 +144,8 @@ class DeviceController extends Controller
             'status'=> $request->status,
             'user_id' => auth()->user()->id
         ]);
+        Alert::toast('Alat berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
+
         return to_route('devices.index');
     }
 
@@ -153,12 +156,16 @@ class DeviceController extends Controller
     {
         $device->where('id', $device->id)->delete();
         Storage::disk('public')->delete($device->barcode);
+        Alert::toast('Alat berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
+
         return to_route('devices.index');
     }
     public function destroyAll(Device $device)
     {
         $device->where('id', $device->id)->where('name_id')->delete();
         Storage::disk('public')->delete($device->barcode);
+        Alert::toast('Alat berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
+
         return to_route('devices.index');
     }
 
@@ -199,6 +206,7 @@ class DeviceController extends Controller
         }
 
         GenerateQRJob::dispatch($devices);
+        Alert::toast('QR Alat berhasil dibuat!', 'success')->hideCloseButton()->autoClose(3000);
 
         return to_route('devices.index');
     }
