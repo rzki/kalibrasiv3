@@ -15,7 +15,7 @@ class Inventory extends Model
     }
     public function logbooks()
     {
-        return $this->belongsTo(LogBook::class);
+        return $this->hasMany(LogBook::class);
     }
     public function devnames()
     {

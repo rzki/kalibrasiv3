@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\LogBook;
 use App\Models\Inventory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class LogbookController extends Controller
@@ -18,20 +20,26 @@ class LogbookController extends Controller
             $logbooks = LogBook::with('inventories')->orderByDesc('created_at')->get();
             return DataTables::of($logbooks)
                 ->addIndexColumn()
-                ->addColumn('name', function($inventory){
-                    return $inventory->inventories ? $inventory->inventories->name : '';
+                ->addColumn('name', function ($inventory) {
+                    return $inventory->inventories ? $inventory->inventories->devnames->name : '';
                 })
-                ->addColumn('brand', function($inventory){
+                ->addColumn('brand', function ($inventory) {
                     return $inventory->inventories ? $inventory->inventories->brand : '';
                 })
-                ->addColumn('type', function($inventory){
+                ->addColumn('type', function ($inventory) {
                     return $inventory->inventories ? $inventory->inventories->type : '';
                 })
-                ->addColumn('sn', function($inventory){
+                ->addColumn('sn', function ($inventory) {
                     return $inventory->inventories ? $inventory->inventories->sn : '';
                 })
-                ->addColumn('inv_number', function($inventory){
+                ->addColumn('inv_number', function ($inventory) {
                     return $inventory->inventories ? $inventory->inventories->inv_number : '';
+                })
+                ->addColumn('tanggal_pinjam', function ($data) {
+                    return $data->tanggal_mulai_pinjam . ' - ' . $data->tanggal_selesai_pinjam;
+                })
+                ->addColumn('pic', function ($data) {
+                    return $data->pic;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
@@ -58,8 +66,9 @@ class LogbookController extends Controller
      */
     public function create()
     {
-        $inventories = Inventory::all();
-        return view('logbook.create', compact('inventories'));
+        $inventories = Inventory::with('devnames')->get();
+        $status = ['Tidak Tersedia', 'Tersedia'];
+        return view('logbook.create', compact('inventories', 'status'));
     }
 
     /**
@@ -67,13 +76,23 @@ class LogbookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        LogBook::create([
+            'logId' => Str::orderedUuid(),
+            'inventory_id' => $request->inventory_id,
+            'tanggal_mulai_pinjam' => $request->tanggal_mulai_pinjam,
+            'tanggal_selesai_pinjam' => $request->tanggal_selesai_pinjam,
+            'lokasi_pinjam' => $request->lokasi_pinjam,
+            'pic' => $request->pic,
+            'status' => $request->status
+        ]);
+        Alert::toast('Log berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
+        return to_route('logbooks.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(LogBook $logBook)
+    public function show(LogBook $logbook)
     {
         //
     }
@@ -81,24 +100,38 @@ class LogbookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LogBook $logBook)
+    public function edit(LogBook $logbook)
     {
-        //
+        $inventories = Inventory::with('devnames')->get();
+        $status = ['Tidak Tersedia', 'Tersedia'];
+        return view('logbook.edit', compact('inventories', 'logbook', 'status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LogBook $logBook)
+    public function update(Request $request, LogBook $logbook)
     {
-        //
+        LogBook::where('logId', $logbook->logId)->update([
+            'logId' => Str::orderedUuid(),
+            'inventory_id' => $request->inventory_id,
+            'tanggal_mulai_pinjam' => $request->tanggal_mulai_pinjam,
+            'tanggal_selesai_pinjam' => $request->tanggal_selesai_pinjam,
+            'lokasi_pinjam' => $request->lokasi_pinjam,
+            'pic' => $request->pic,
+            'status' => $request->status
+        ]);
+        Alert::toast('Log berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
+        return to_route('logbooks.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LogBook $logBook)
+    public function destroy(LogBook $logbook)
     {
-        //
+        $logbook->where('logId', $logbook->logId)->delete();
+        Alert::toast('Log berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
+        return to_route('logbooks.index');
     }
 }

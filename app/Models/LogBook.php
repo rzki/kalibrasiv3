@@ -16,6 +16,6 @@ class LogBook extends Model
     }
     public function inventories()
     {
-        return $this->hasMany(Inventory::class, 'inventory_id');
+        return $this->belongsTo(Inventory::class, 'inventory_id');
     }
 }

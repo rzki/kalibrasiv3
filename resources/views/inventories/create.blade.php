@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New Inventory')
+@section('title', 'Tambah Inventory')
 
 @section('content_header')
-<h1>Create New Inventory</h1>
+<h1>Tambah Inventory</h1>
 @stop
 
 @section('content')
@@ -104,7 +104,10 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#device_name').select2();
+        $('#device_name').select2({
+            theme: "bootstrap-5",
+            width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style'
+        });
     });
 </script>
 @stop

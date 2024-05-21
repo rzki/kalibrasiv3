@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\LogBook;
 use App\Models\Inventory;
 use App\Models\DeviceName;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\InventoryRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class InventoryController extends Controller
@@ -28,12 +30,13 @@ class InventoryController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                     <div class="action-form d-flex justify-content-center">
-                        <a href="' . route('inventories.edit', ['inventory' => $row->inventoryId]) . '" class="btn btn-primary mr-2"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                        <a href="' . route('inventories.show', ['inventory' => $row->inventoryId]) . '" class="btn btn-info mr-2"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                        <a href="' . route('inventories.edit', ['inventory' => $row->inventoryId]) . '" class="btn btn-primary mr-2"><i class="fas fa-pen-to-square" aria-hidden="true"></i></a>
                         <form action="' . route('inventories.destroy', ['inventory' => $row->inventoryId]) . '" method="post"
                             class="delete-form"  onsubmit="return confirm(`Apakah yakin ingin menghapus data ini?`)";>
                             ' . csrf_field() . '
                             ' . method_field("DELETE") . '
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"
                                     aria-hidden="true"></i></button>
                         </form>
                     </div>';
@@ -77,6 +80,7 @@ class InventoryController extends Controller
             'location'      => $request->location,
             'status'        => $request->status
         ]);
+        Alert::toast('Inventaris berhasil ditambahkan!', 'success')->hideCloseButton()->autoClose(3000);
 
         // dd($inv);
         return to_route('inventories.index');
@@ -87,7 +91,8 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        return view('inventories.show', compact('inventory'));
+        $logbooks = LogBook::where('inventory_id', $inventory->id)->with('inventories')->get();
+        return view('inventories.details', compact('inventory', 'logbooks'));
     }
 
     /**
@@ -121,7 +126,7 @@ class InventoryController extends Controller
             'location'      => $request->location,
             'status'        => $request->status
         ]);
-
+        Alert::toast('Inventaris berhasil diperbarui!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('inventories.index');
     }
 
@@ -131,6 +136,7 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
         $inventory->where('inventoryId', $inventory->inventoryId)->delete();
+        Alert::toast('Inventaris berhasil dihapus!', 'success')->hideCloseButton()->autoClose(3000);
         return to_route('inventories.index');
     }
 }

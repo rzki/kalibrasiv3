@@ -10,7 +10,7 @@
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col pt-3">
-            <a href="{{ route('inventories.index') }}" class="btn btn-primary text-right"><i class="fas fa-arrow-left pr-2"></i>Back</a>
+            <a href="{{ route('inventories.index') }}" class="btn btn-primary text-right"><i class="fas fa-arrow-left pr-2"></i>Kembali</a>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
                             <div class="mb-3">
                                 <label for="type" class="form-label">Type</label>
                                 <input type="text" name="type" id="type" class="form-control" value="{{ old('type', $inventory->type) }}">
-                            </div>  
+                            </div>
                         </div>
                     </div>
                     <div class="row">

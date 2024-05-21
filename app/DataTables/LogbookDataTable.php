@@ -79,8 +79,8 @@ class LogbookDataTable extends DataTable
             Column::make('type'),
             Column::make('sn'),
             Column::make('inv_number'),
-            Column::make('lokasi_peminjaman'),
-            Column::make('tanggal_peminjaman'),
+            Column::make('lokasi_pinjam'),
+            Column::make('tanggal_pinjam'),
             Column::make('pic'),
             Column::make('status'),
             Column::computed('action')

@@ -10,8 +10,8 @@
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col d-flex justify-content-end pb-3">
-            <a href="{{ route('inventories.create') }}" class="btn btn-success ml-3"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Create New</a>
+            <a href="{{ route('inventories.create') }}" class="btn btn-success ml-3"><i class="fas fa-plus"
+                    aria-hidden="true"></i> Tambah</a>
         </div>
     </div>
     <div class="table-responsive pb-3">

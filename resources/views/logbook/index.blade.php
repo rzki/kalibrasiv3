@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col d-flex justify-content-end pb-3">
                 <a href="{{ route('logbooks.create') }}" class="btn btn-success ml-3"><i class="fas fa-plus"
-                        aria-hidden="true"></i> Create New</a>
+                        aria-hidden="true"></i> Tambah</a>
             </div>
         </div>
         <div class="table-responsive pb-3">
@@ -57,32 +57,32 @@
                         searchable: false
                     },
                     {
-                        data: 'inventories.name',
+                        data: 'name',
                         name: 'inventories.name'
                     },
                     {
-                        data: 'inventories.brand',
+                        data: 'brand',
                         name: 'inventories.brand'
                     },
                     {
-                        data: 'inventories.type',
+                        data: 'type',
                         name: 'inventories.type'
                     },
                     {
-                        data: 'inventories.sn',
+                        data: 'sn',
                         name: 'inventories.sn'
                     },
                     {
-                        data: 'inventories.inv_number',
+                        data: 'inv_number',
                         name: 'inventories.inv_number'
                     },
                     {
-                        data: 'lokasi_peminjaman',
-                        name: 'lokasi_peminjaman'
+                        data: 'lokasi_pinjam',
+                        name: 'lokasi_pinjam'
                     },
                     {
-                        data: 'tanggal_peminjaman',
-                        name: 'tanggal_peminjaman'
+                        data: 'tanggal_pinjam',
+                        name: 'tanggal_pinjam'
                     },
                     {
                         data: 'pic',
