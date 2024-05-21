@@ -24,20 +24,20 @@ class InventoryController extends Controller
             $inventories = Inventory::with('devnames')->orderByDesc('created_at')->get();
             return DataTables::of($inventories)
                 ->addIndexColumn()
-                ->addColumn('device_name', function($invNames){
+                ->addColumn('device_name', function ($invNames) {
                     return $invNames->devnames ? $invNames->devnames->name : '';
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                     <div class="action-form d-flex justify-content-center">
                         <a href="' . route('inventories.show', ['inventory' => $row->inventoryId]) . '" class="btn btn-info mr-2"><i class="fas fa-eye" aria-hidden="true"></i></a>
+
                         <a href="' . route('inventories.edit', ['inventory' => $row->inventoryId]) . '" class="btn btn-primary mr-2"><i class="fas fa-pen-to-square" aria-hidden="true"></i></a>
-                        <form action="' . route('inventories.destroy', ['inventory' => $row->inventoryId]) . '" method="post"
-                            class="delete-form"  onsubmit="return confirm(`Apakah yakin ingin menghapus data ini?`)";>
+
+                        <form action="' . route('inventories.destroy', ['inventory' => $row->inventoryId]) . '" method="post" id="delete-inventory">
                             ' . csrf_field() . '
                             ' . method_field("DELETE") . '
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"
-                                    aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-danger" onsubmit="confirmDelete()"><i class="fas fa-trash" aria-hidden="true"></i></button>
                         </form>
                     </div>';
                     return $actionBtn;
@@ -45,6 +45,9 @@ class InventoryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        // $title = 'Apakah anda yakin ingin menghapus data ini?';
+        // $text = "Data akan terhapus permanen!";
+        // confirmDelete($title, $text);
         return view('inventories.index');
     }
 

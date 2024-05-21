@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Inventory')
+@section('title', 'Tambah Inventaris')
 
 @section('content_header')
-<h1>Tambah Inventory</h1>
+<h1>Tambah Inventaris</h1>
 @stop
 
 @section('content')
 <div class="container-fluid px-3">
     <div class="row">
         <div class="col pt-3">
-            <a href="{{ route('inventories.index') }}" class="btn btn-primary text-right"><i class="fas fa-arrow-left pr-2"></i>Back</a>
+            <a href="{{ route('inventories.index') }}" class="btn btn-primary text-right"><i class="fas fa-arrow-left pr-2"></i> Kembali</a>
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="device_name" class="form-label">Device Name</label>
+                        <label for="device_name" class="form-label">Nama Alat</label>
                         <select name="device_name" id="device_name" class="form-control">
                             <option value="">Pilih Salah Satu...</option>
                             @foreach ($names as $name)
@@ -33,13 +33,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="brand" class="form-label">Brand</label>
+                                <label for="brand" class="form-label">Merk</label>
                                 <input type="text" name="brand" id="brand" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="type" class="form-label">Type</label>
+                                <label for="type" class="form-label">Tipe</label>
                                 <input type="text" name="type" id="type" class="form-control">
                             </div>
                         </div>
@@ -53,17 +53,17 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="procurement_year" class="form-label">Procurement Year</label>
+                                <label for="procurement_year" class="form-label">Tahun Pengadaan</label>
                                 <input type="text" name="procurement_year" id="procurement_year" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="inv_number" class="form-label">Inventory Number</label>
+                        <label for="inv_number" class="form-label">No. Inventaris</label>
                         <input type="text" name="inv_number" id="inv_number" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="last_calibrated_date" class="form-label">Last Calibration</label>
+                        <label for="last_calibrated_date" class="form-label">Kalibrasi Terakhir</label>
                         <input type="date" name="last_calibrated_date" id="last_calibrated_date" class="form-control">
                     </div>
                     <div class="row">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="location" class="form-label">Location</label>
+                                <label for="location" class="form-label">Lokasi</label>
                                 <input type="text" name="location" id="location" class="form-control">
                             </div>
                         </div>

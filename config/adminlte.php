@@ -295,17 +295,17 @@ return [
 
     'menu' => [
 [
-            'text'  => 'Dashboard',
+            'text'  => 'Dasbor',
             'url'   => 'dashboard',
             'icon'  => 'fas fa-fw fa-house',
         ],
         [
-            'text'    => 'Inventories',
+            'text'    => 'Inventaris',
             'icon'    => 'fas fa-fw fa-boxes-stacked',
             'can'     => 'admin-access',
             'submenu' => [
                 [
-                    'text' => 'All Inventories',
+                    'text' => 'Semua Inventaris',
                     'route' => 'inventories.index'
                 ],
                 [
@@ -315,34 +315,34 @@ return [
             ]
         ],
         [
-            'text'    => 'Devices',
+            'text'    => 'Alat',
             'route'   => 'devices.index',
             'icon'    => 'fas fa-fw fa-screwdriver-wrench',
             'submenu' => [
                     [
-                        'text' => 'All Devices',
+                        'text' => 'QR Alat',
                         'route' => 'devices.index',
                     ],
                     [
-                        'text' => 'Device Name',
+                        'text' => 'Nama Alat',
                         'route' => 'devices_name.index',
                         'can' => ['superadmin-access', 'admin-access']
                     ]
                 ]
         ],
         [
-            'text' => 'Hospitals',
+            'text' => 'Rumah Sakit',
             'route' => 'hospitals.index',
             'icon' => 'fas fa-fw fa-hospital',
             'can' => 'admin-access'
         ],
         [
-            'header' => 'SYSTEM SETTINGS',
+            'header' => 'PENGATURAN SISTEM',
             'classes' => 'text-bold',
             'can' => ['admin-access', 'superadmin-access']
         ],
         [
-            'text'  => 'Users',
+            'text'  => 'Pengguna',
             'url'   => 'users',
             'icon'  => 'fas fa-fw fa-users',
             'can'   => 'admin-access'
@@ -507,5 +507,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
